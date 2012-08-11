@@ -1,0 +1,10 @@
+/*.suo
+/_ReSharper.TopCoder
+/TopCoder.Analysis.Data/obj
+/TopCoder.Analysis.Data/bin
+/TopCoder.Analysis.Web/obj
+/TopCoder.Analysis.Web/bin
+/TopCoder.DataDownload/obj
+/TopCoder.DataDownload/bin
+/TopCoder.Tools.EloRunner/obj
+/TopCoder.Tools.EloRunner/bin
