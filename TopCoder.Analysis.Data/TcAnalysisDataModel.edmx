@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Coders" EntityType="Model.Store.Coders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RoundResults" EntityType="Model.Store.RoundResults" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Rounds" EntityType="Model.Store.Rounds" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CoderId" Association="Model.Store.FK_CoderId">
+            <End Role="Coders" EntitySet="Coders" />
+            <End Role="RoundResults" EntitySet="RoundResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirstRoundId" Association="Model.Store.FK_FirstRoundId">
+            <End Role="Rounds" EntitySet="Rounds" />
+            <End Role="Coders" EntitySet="Coders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LastRoundId" Association="Model.Store.FK_LastRoundId">
+            <End Role="Rounds" EntitySet="Rounds" />
+            <End Role="Coders" EntitySet="Coders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoundId" Association="Model.Store.FK_RoundId">
+            <End Role="Rounds" EntitySet="Rounds" />
+            <End Role="RoundResults" EntitySet="RoundResults" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Coders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Handle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FirstRoundId" Type="int" Nullable="false" />
+          <Property Name="LastRoundId" Type="int" Nullable="false" />
+          <Property Name="RoundsCount" Type="int" Nullable="false" />
+          <Property Name="Tc_Rating" Type="int" Nullable="false" />
+          <Property Name="Tc_Volatility" Type="int" Nullable="false" />
+          <Property Name="Elo_Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoundResults">
+          <Key>
+            <PropertyRef Name="RoundId" />
+            <PropertyRef Name="CoderId" />
+          </Key>
+          <Property Name="RoundId" Type="int" Nullable="false" />
+          <Property Name="CoderId" Type="int" Nullable="false" />
+          <Property Name="Division" Type="int" Nullable="false" />
+          <Property Name="DivisionPlace" Type="int" Nullable="false" />
+          <Property Name="Points" Type="float" Nullable="false" />
+          <Property Name="Tc_OldRating" Type="int" Nullable="false" />
+          <Property Name="Tc_NewRating" Type="int" Nullable="false" />
+          <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
+          <Property Name="NumberOfRatings" Type="int" Nullable="false" />
+          <Property Name="IsRated" Type="bit" Nullable="false" />
+          <Property Name="Elo_OldRating" Type="int" Nullable="false" />
+          <Property Name="Elo_NewRating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rounds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="TotalCodersCount" Type="int" Nullable="false" />
+          <Property Name="DivOneCodersCount" Type="int" Nullable="false" />
+          <Property Name="DivTwoCodersCount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CoderId">
+          <End Role="Coders" Type="Model.Store.Coders" Multiplicity="1" />
+          <End Role="RoundResults" Type="Model.Store.RoundResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoundResults">
+              <PropertyRef Name="CoderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirstRoundId">
+          <End Role="Rounds" Type="Model.Store.Rounds" Multiplicity="1" />
+          <End Role="Coders" Type="Model.Store.Coders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rounds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coders">
+              <PropertyRef Name="FirstRoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LastRoundId">
+          <End Role="Rounds" Type="Model.Store.Rounds" Multiplicity="1" />
+          <End Role="Coders" Type="Model.Store.Coders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rounds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coders">
+              <PropertyRef Name="LastRoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoundId">
+          <End Role="Rounds" Type="Model.Store.Rounds" Multiplicity="1" />
+          <End Role="RoundResults" Type="Model.Store.RoundResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rounds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoundResults">
+              <PropertyRef Name="RoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TcAnalysisDataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Coders" EntityType="Model.Coder" />
+          <EntitySet Name="RoundResults" EntityType="Model.RoundResult" />
+          <EntitySet Name="Rounds" EntityType="Model.Round" />
+          <AssociationSet Name="FK_CoderId" Association="Model.FK_CoderId">
+            <End Role="Coders" EntitySet="Coders" />
+            <End Role="RoundResults" EntitySet="RoundResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoundId" Association="Model.FK_RoundId">
+            <End Role="Rounds" EntitySet="Rounds" />
+            <End Role="RoundResults" EntitySet="RoundResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FirstRoundId" Association="Model.FK_FirstRoundId">
+            <End Role="Round" EntitySet="Rounds" />
+            <End Role="Coder" EntitySet="Coders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LastRoundId" Association="Model.FK_LastRoundId">
+            <End Role="Round" EntitySet="Rounds" />
+            <End Role="Coder" EntitySet="Coders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Coder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Handle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="RoundResults" Relationship="Model.FK_CoderId" FromRole="Coders" ToRole="RoundResults" />
+          <Property Type="Int32" Name="FirstRoundId" Nullable="false" />
+          <Property Type="Int32" Name="LastRoundId" Nullable="false" />
+          <Property Type="Int32" Name="RoundsCount" Nullable="false" />
+          <Property Type="Int32" Name="Tc_Rating" Nullable="false" />
+          <Property Type="Int32" Name="Tc_Volatility" Nullable="false" />
+          <Property Type="Int32" Name="Elo_Rating" Nullable="false" />
+          <NavigationProperty Name="FirstRound" Relationship="Model.FK_FirstRoundId" FromRole="Coder" ToRole="Round" />
+          <NavigationProperty Name="LastRound" Relationship="Model.FK_LastRoundId" FromRole="Coder" ToRole="Round" />
+        </EntityType>
+        <EntityType Name="RoundResult">
+          <Key>
+            <PropertyRef Name="RoundId" />
+            <PropertyRef Name="CoderId" />
+          </Key>
+          <Property Name="RoundId" Type="Int32" Nullable="false" />
+          <Property Name="CoderId" Type="Int32" Nullable="false" />
+          <Property Name="Division" Type="Int32" Nullable="false" />
+          <Property Name="DivisionPlace" Type="Int32" Nullable="false" />
+          <Property Name="Points" Type="Double" Nullable="false" />
+          <Property Name="Tc_OldRating" Type="Int32" Nullable="false" />
+          <Property Name="Tc_NewRating" Type="Int32" Nullable="false" />
+          <Property Name="Tc_NewVolatility" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfRatings" Type="Int32" Nullable="false" />
+          <Property Name="IsRated" Type="Boolean" Nullable="false" />
+          <Property Name="Elo_OldRating" Type="Int32" Nullable="false" />
+          <Property Name="Elo_NewRating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coder" Relationship="Model.FK_CoderId" FromRole="RoundResults" ToRole="Coders" />
+          <NavigationProperty Name="Round" Relationship="Model.FK_RoundId" FromRole="RoundResults" ToRole="Rounds" />
+        </EntityType>
+        <EntityType Name="Round">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="RoundResults" Relationship="Model.FK_RoundId" FromRole="Rounds" ToRole="RoundResults" />
+          <Property Type="Int32" Name="TotalCodersCount" Nullable="false" />
+          <Property Type="Int32" Name="DivOneCodersCount" Nullable="false" />
+          <Property Type="Int32" Name="DivTwoCodersCount" Nullable="false" />
+          <NavigationProperty Name="Coders" Relationship="Model.FK_FirstRoundId" FromRole="Round" ToRole="Coder" />
+          <NavigationProperty Name="Coders1" Relationship="Model.FK_LastRoundId" FromRole="Round" ToRole="Coder" />
+        </EntityType>
+        <Association Name="FK_CoderId">
+          <End Role="Coders" Type="Model.Coder" Multiplicity="1" />
+          <End Role="RoundResults" Type="Model.RoundResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoundResults">
+              <PropertyRef Name="CoderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoundId">
+          <End Role="Rounds" Type="Model.Round" Multiplicity="1" />
+          <End Role="RoundResults" Type="Model.RoundResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rounds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoundResults">
+              <PropertyRef Name="RoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FirstRoundId">
+          <End Type="Model.Round" Role="Round" Multiplicity="1" />
+          <End Type="Model.Coder" Role="Coder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Round">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coder">
+              <PropertyRef Name="FirstRoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LastRoundId">
+          <End Type="Model.Round" Role="Round" Multiplicity="1" />
+          <End Type="Model.Coder" Role="Coder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Round">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coder">
+              <PropertyRef Name="LastRoundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="TcAnalysisDataModel">
+          <EntitySetMapping Name="Coders">
+            <EntityTypeMapping TypeName="Model.Coder">
+              <MappingFragment StoreEntitySet="Coders">
+                <ScalarProperty Name="Elo_Rating" ColumnName="Elo_Rating" />
+                <ScalarProperty Name="Tc_Volatility" ColumnName="Tc_Volatility" />
+                <ScalarProperty Name="Tc_Rating" ColumnName="Tc_Rating" />
+                <ScalarProperty Name="RoundsCount" ColumnName="RoundsCount" />
+                <ScalarProperty Name="LastRoundId" ColumnName="LastRoundId" />
+                <ScalarProperty Name="FirstRoundId" ColumnName="FirstRoundId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Handle" ColumnName="Handle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoundResults">
+            <EntityTypeMapping TypeName="Model.RoundResult">
+              <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="RoundId" ColumnName="RoundId" />
+                <ScalarProperty Name="CoderId" ColumnName="CoderId" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="DivisionPlace" ColumnName="DivisionPlace" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Tc_OldRating" ColumnName="Tc_OldRating" />
+                <ScalarProperty Name="Tc_NewRating" ColumnName="Tc_NewRating" />
+                <ScalarProperty Name="Tc_NewVolatility" ColumnName="Tc_NewVolatility" />
+                <ScalarProperty Name="NumberOfRatings" ColumnName="NumberOfRatings" />
+                <ScalarProperty Name="IsRated" ColumnName="IsRated" />
+                <ScalarProperty Name="Elo_OldRating" ColumnName="Elo_OldRating" />
+                <ScalarProperty Name="Elo_NewRating" ColumnName="Elo_NewRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rounds">
+            <EntityTypeMapping TypeName="Model.Round">
+              <MappingFragment StoreEntitySet="Rounds">
+                <ScalarProperty Name="DivTwoCodersCount" ColumnName="DivTwoCodersCount" />
+                <ScalarProperty Name="DivOneCodersCount" ColumnName="DivOneCodersCount" />
+                <ScalarProperty Name="TotalCodersCount" ColumnName="TotalCodersCount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TcAnalysisDataModel">
+        <EntityTypeShape EntityType="Model.Coder" Width="2.25" PointX="2" PointY="2.625" Height="3.1340950520833326" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RoundResult" Width="2.25" PointX="5.75" PointY="4.75" Height="3.7109993489583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Round" Width="2.25" PointX="5.75" PointY="1.25" Height="2.7494921874999996" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_CoderId" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="5.2545475260416659" />
+          <ConnectorPoint PointX="5.75" PointY="5.2545475260416659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_RoundId" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.875" PointY="3.9994921874999996" />
+          <ConnectorPoint PointX="6.875" PointY="4.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_FirstRoundId" >
+          <ConnectorPoint PointX="5.75" PointY="3.31224609375" />
+          <ConnectorPoint PointX="4.25" PointY="3.31224609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_LastRoundId" >
+          <ConnectorPoint PointX="5.75" PointY="2.906123046875" />
+          <ConnectorPoint PointX="4.25" PointY="2.906123046875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

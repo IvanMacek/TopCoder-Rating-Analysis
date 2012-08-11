@@ -1,0 +1,38 @@
+﻿@using TopCoder.Analysis.Data
+@model IEnumerable<Coder>
+
+@if (Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th> Coder handle </th>  
+                <th> TC Rating </th>  
+                <th> TC Volatility </th>  
+                <th> ELO Rating </th>  
+                <th> Rounds count </th>  
+                <th> First round </th>  
+                <th> Last round </th>  
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var coder in Model)
+        {
+            <tr>
+                <td> @coder.Handle </td>  
+                <td> @coder.Tc_Rating </td>  
+                <td> @coder.Tc_Volatility </td>  
+                <td> @coder.Elo_Rating </td>  
+                <td> @coder.RoundsCount </td>  
+                <td> @coder.FirstRound.Date.ToShortDateString() (@coder.FirstRound.Name) </td>  
+                <td> @coder.LastRound.Date.ToShortDateString() (@coder.LastRound.Name) </td>  
+            </tr>
+        }   
+        </tbody>
+    </table> 
+}
+else
+{
+    <p> List is empty. </p>
+}
