@@ -5,10 +5,14 @@
 
 <h2>Top 100 Coders</h2>
 
-<div style="width: 50%;">
-     @{ Html.RenderPartial("CodersTablePart", Model.TcTop100Coders); }
+<div style="width: 48%; float: right;">
+    <h3> ELO Ratings </h3>
+    @{ Html.RenderPartial("CodersTablePart", Model.EloTop100Coders); }
 </div>
 
-<div style="width: 50%; float: right;">
-     @{ Html.RenderPartial("CodersTablePart", Model.EloTop100Coders); }
+<div style="width: 48%;">
+    <h3> TC Ratings </h3>
+    @{ Html.RenderPartial("CodersTablePart", Model.TcTop100Coders); }
 </div>
+
+

@@ -10,16 +10,18 @@ namespace TopCoder.Analysis.Web.Controllers
     {
         public ActionResult Search(string query)
         {
-            var model = Enumerable.Empty<Coder>();
+            var model = new SearchModel
+            {
+                SearchQuery = (query ?? string.Empty).Trim()
+            };
 
-            var searchQuery = (query ?? string.Empty).Trim();
-            if (searchQuery.Length > 0)
+            if (model.SearchQuery.Length > 0)
             {
                 using (var db = new TcAnalysisDataModel())
                 {
-                    model =
+                    model.Coders =
                         (from coder in db.Coders.Include("FirstRound").Include("LastRound")
-                         where coder.Handle.StartsWith(searchQuery)
+                         where coder.Handle.StartsWith(model.SearchQuery)
                          orderby coder.Handle
                          select coder
                         ).ToList();

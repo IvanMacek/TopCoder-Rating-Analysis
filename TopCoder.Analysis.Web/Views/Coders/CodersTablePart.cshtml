@@ -3,8 +3,13 @@
 
 @if (Model.Any())
 {
+    <p></p>
     <table>
         <thead>
+            <tr>
+                <th> Row count: </th>  
+                <th> @Model.Count() </th>  
+            </tr>
             <tr>
                 <th> Coder handle </th>  
                 <th> TC Rating </th>  
@@ -25,8 +30,8 @@
                 <td> @coder.Tc_Volatility </td>  
                 <td> @coder.Elo_Rating </td>  
                 <td> @coder.RoundsCount </td>  
-                <td> @coder.FirstRound.Date.ToShortDateString() (@coder.FirstRound.Name) </td>  
-                <td> @coder.LastRound.Date.ToShortDateString() (@coder.LastRound.Name) </td>  
+                <td> @coder.FirstRound.Name <br/> @coder.FirstRound.Date.ToShortDateString() </td>  
+                <td> @coder.LastRound.Name <br/> @coder.LastRound.Date.ToShortDateString() </td>  
             </tr>
         }   
         </tbody>

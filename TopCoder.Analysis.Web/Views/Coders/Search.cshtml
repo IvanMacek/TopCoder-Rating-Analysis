@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TopCoder.Analysis.Data.Coder>
+﻿@model TopCoder.Analysis.Web.Models.Coders.SearchModel
 @{
     ViewBag.Title = "Coder Search";
 }
@@ -6,8 +6,8 @@
 <h2>Coder Search</h2>
 
 <form action="@Url.Action("Search")" method="get">    
-    <input type="search" name="query" placeholder="Enter your search query here" />
+    <input type="search" name="query" placeholder="Enter your search query here" value="@Model.SearchQuery" />
     <input type="submit" value="Search" />
 </form>
 
-@{ Html.RenderPartial("CodersTablePart", Model); }
+@{ Html.RenderPartial("CodersTablePart", Model.Coders); }
