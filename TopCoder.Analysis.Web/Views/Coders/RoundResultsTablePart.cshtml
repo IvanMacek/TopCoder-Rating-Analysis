@@ -20,9 +20,13 @@
                 <th> Relative Rank </th>  
                 <th> Points </th>  
                 <th> Rated Rounds </th>  
-                <th> TC Rating </th>  
                 <th> TC Volatility </th>  
-                <th> ELO Rating </th>  
+                <th> TC Old </th>  
+                <th> TC New </th>  
+                <th> TC Diff </th>  
+                <th> ELO Old </th>  
+                <th> ELO New </th>  
+                <th> ELO Diff </th>  
             </tr>
         </thead>
 
@@ -41,9 +45,13 @@
                 <td> @relativePlace.ToString("0.##") % </td>
                 <td> @rr.Points </td>
                 <td> @rr.NumberOfRatings</td>
-                <td> @rr.Tc_NewRating </td>
-                <td> @rr.Tc_NewVolatility </td>
-                <td> @rr.Elo_NewRating </td>
+                <td class="rating"> @rr.Tc_NewVolatility </td>
+                <td class="rating"> @rr.Tc_OldRating </td>
+                <td class="rating"> @rr.Tc_NewRating </td>
+                <td class="@(rr.Tc_RatingDiff >= 0 ? "good" : "bad")"> @rr.Tc_RatingDiff </td>
+                <td class="rating"> @rr.Elo_OldRating </td>
+                <td class="rating"> @rr.Elo_NewRating </td>
+                <td class="@(rr.Elo_RatingDiff >= 0 ? "good" : "bad")"> @rr.Elo_RatingDiff </td>
 
             </tr>
         }   

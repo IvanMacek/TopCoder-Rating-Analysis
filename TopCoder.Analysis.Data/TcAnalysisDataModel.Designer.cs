@@ -781,7 +781,9 @@ namespace TopCoder.Analysis.Data
         /// <param name="isRated">Initial value of the IsRated property.</param>
         /// <param name="elo_OldRating">Initial value of the Elo_OldRating property.</param>
         /// <param name="elo_NewRating">Initial value of the Elo_NewRating property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating)
+        /// <param name="tc_RatingDiff">Initial value of the Tc_RatingDiff property.</param>
+        /// <param name="elo_RatingDiff">Initial value of the Elo_RatingDiff property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
@@ -796,6 +798,8 @@ namespace TopCoder.Analysis.Data
             roundResult.IsRated = isRated;
             roundResult.Elo_OldRating = elo_OldRating;
             roundResult.Elo_NewRating = elo_NewRating;
+            roundResult.Tc_RatingDiff = tc_RatingDiff;
+            roundResult.Elo_RatingDiff = elo_RatingDiff;
             return roundResult;
         }
 
@@ -1096,6 +1100,54 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Elo_NewRating;
         partial void OnElo_NewRatingChanging(global::System.Int32 value);
         partial void OnElo_NewRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc_RatingDiff
+        {
+            get
+            {
+                return _Tc_RatingDiff;
+            }
+            set
+            {
+                OnTc_RatingDiffChanging(value);
+                ReportPropertyChanging("Tc_RatingDiff");
+                _Tc_RatingDiff = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_RatingDiff");
+                OnTc_RatingDiffChanged();
+            }
+        }
+        private global::System.Int32 _Tc_RatingDiff;
+        partial void OnTc_RatingDiffChanging(global::System.Int32 value);
+        partial void OnTc_RatingDiffChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Elo_RatingDiff
+        {
+            get
+            {
+                return _Elo_RatingDiff;
+            }
+            set
+            {
+                OnElo_RatingDiffChanging(value);
+                ReportPropertyChanging("Elo_RatingDiff");
+                _Elo_RatingDiff = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Elo_RatingDiff");
+                OnElo_RatingDiffChanged();
+            }
+        }
+        private global::System.Int32 _Elo_RatingDiff;
+        partial void OnElo_RatingDiffChanging(global::System.Int32 value);
+        partial void OnElo_RatingDiffChanged();
 
         #endregion
 

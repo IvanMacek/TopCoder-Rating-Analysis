@@ -14,19 +14,34 @@
               filterColumnIndex: 0,
               ui: {
                 chartType: 'LineChart',
-                chartOptions: { pointSize: 3 },
+                chartOptions: { pointSize: 2 },
                 chartView: { columns: [0, 1, 2] },
                 minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
               }
             }
         });
 
-        var chart = new google.visualization.ChartWrapper({
+        var ratingsChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
-            containerId: 'chart',
-            options: { pointSize: 5 }
+            containerId: 'ratingsChart',
+            options: { pointSize: 4, title: 'TC vs ELO Ratings' },
+            view: { columns: [0, 1, 2]}
+        });
+        
+        var volatilityChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'volatilityChart',
+            options: { pointSize: 4, title: 'TC Volatility' },
+            view: { columns: [0, 5]}
         });
 
+        var ratingsDiffChart = new google.visualization.ChartWrapper({
+            chartType: 'AreaChart',
+            containerId: 'ratingsDiffChart',
+            options: { pointSize: 4, title: 'TC vs ELO Ratings Differences' },
+            view: { columns: [0, 3, 4]}
+        });
+        
         var parseDate = function(input) {
             var parts = input.match( /(\d+)/g );
             return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
@@ -36,14 +51,21 @@
         data.addColumn('date', 'Round');
         data.addColumn('number', 'TopCoder Rating');
         data.addColumn('number', 'ELO Rating');
+        data.addColumn('number', 'TopCoder Rating Diff');
+        data.addColumn('number', 'ELO Rating Diff');
+        data.addColumn('number', 'TopCoder Volatility');
         data.addRows([
             @foreach (var rr in Model.RoundResults)
             {
-                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.Tc_NewRating, @rr.Elo_NewRating] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
+                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.Tc_NewRating, @rr.Elo_NewRating, @rr.Tc_RatingDiff, @rr.Elo_RatingDiff, @rr.Tc_NewVolatility] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }
         ]);
 
-        dashboard.bind(control, chart);
+        dashboard
+            .bind(control, ratingsChart)
+            .bind(control, ratingsDiffChart)
+            .bind(control, volatilityChart);
+        
         dashboard.draw(data);
     });
 
@@ -57,8 +79,10 @@
 <h3>Coder's Timeline</h3>
 
 <div id="dashboard">
-    <div id="chart" style="height: 500px;"></div>
-    <div id="control" style="width: 50%; height: 100px;"></div>
+    <div id="ratingsChart" style="width: 70%; height: 400px;"></div>
+    <div id="volatilityChart" style="width: 70%; height: 400px;"></div>
+    <div id="ratingsDiffChart" style="width: 70%; height: 400px;"></div>
+    <div id="control" style="width: 40%; height: 100px;"></div>
 </div>
 
 <h3>Coder's Round Results</h3>

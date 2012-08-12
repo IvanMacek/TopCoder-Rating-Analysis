@@ -52,10 +52,12 @@
           <Property Name="Tc_OldRating" Type="int" Nullable="false" />
           <Property Name="Tc_NewRating" Type="int" Nullable="false" />
           <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
-          <Property Name="NumberOfRatings" Type="int" Nullable="false" />
-          <Property Name="IsRated" Type="bit" Nullable="false" />
+          <Property Name="Tc_RatingDiff" Type="int" Nullable="false" />
           <Property Name="Elo_OldRating" Type="int" Nullable="false" />
           <Property Name="Elo_NewRating" Type="int" Nullable="false" />
+          <Property Name="Elo_RatingDiff" Type="int" Nullable="false" />
+          <Property Name="NumberOfRatings" Type="int" Nullable="false" />
+          <Property Name="IsRated" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Rounds">
           <Key>
@@ -176,6 +178,8 @@
           <Property Name="Elo_NewRating" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Coder" Relationship="Model.FK_CoderId" FromRole="RoundResults" ToRole="Coders" />
           <NavigationProperty Name="Round" Relationship="Model.FK_RoundId" FromRole="RoundResults" ToRole="Rounds" />
+          <Property Type="Int32" Name="Tc_RatingDiff" Nullable="false" />
+          <Property Type="Int32" Name="Elo_RatingDiff" Nullable="false" />
         </EntityType>
         <EntityType Name="Round">
           <Key>
@@ -262,6 +266,8 @@
           <EntitySetMapping Name="RoundResults">
             <EntityTypeMapping TypeName="Model.RoundResult">
               <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="Elo_RatingDiff" ColumnName="Elo_RatingDiff" />
+                <ScalarProperty Name="Tc_RatingDiff" ColumnName="Tc_RatingDiff" />
                 <ScalarProperty Name="RoundId" ColumnName="RoundId" />
                 <ScalarProperty Name="CoderId" ColumnName="CoderId" />
                 <ScalarProperty Name="Division" ColumnName="Division" />
