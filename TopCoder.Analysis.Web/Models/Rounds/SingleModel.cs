@@ -2,11 +2,11 @@
 
 using TopCoder.Analysis.Data;
 
-namespace TopCoder.Analysis.Web.Models.Coders
+namespace TopCoder.Analysis.Web.Models.Rounds
 {
     public class SingleModel
     {
-        public Coder Coder { get; set; }
+        public Round Round { get; set; }
         public IList<RoundResult> RoundResults { get; set; }
 
         public SingleModel()

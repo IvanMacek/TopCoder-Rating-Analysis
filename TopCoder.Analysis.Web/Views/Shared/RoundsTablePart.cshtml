@@ -1,0 +1,38 @@
+﻿@using TopCoder.Analysis.Data
+@model IEnumerable<Round>
+
+@if (Model.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th> Row count: </th>  
+                <th> @Model.Count() </th>  
+            </tr>
+            <tr>
+                <th> Name </th>  
+                <th> Date </th>  
+                <th> Coders </th>  
+                <th> Div 1 Coders </th>  
+                <th> Div 2 Coders </th>  
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var round in Model)
+        {
+            <tr>
+                <td> @Html.ActionLink(round.Name, "Single", "Rounds", new { roundId = round.Id }, null) </td>  
+                <td> @round.Date.ToShortDateString() </td>  
+                <td> @round.TotalCodersCount </td>  
+                <td> @round.DivOneCodersCount </td>  
+                <td> @round.DivTwoCodersCount </td>  
+            </tr>
+        }   
+        </tbody>
+    </table> 
+}
+else
+{
+    <p> List is empty. </p>
+}

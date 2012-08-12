@@ -1,0 +1,24 @@
+﻿@model TopCoder.Analysis.Web.Models.Rounds.SingleModel
+@{
+    ViewBag.Title = "Round " + Model.Round.Name;
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('.round-col').remove();
+    });
+</script>
+
+<h2>Round @Model.Round.Name</h2>
+
+@{ Html.RenderPartial("RoundsTablePart", new [] { Model.Round }); }
+
+<div style="width: 49%; float: right;">
+    <h3>Div 2 Round Results</h3>
+    @{ Html.RenderPartial("RoundResultsTablePart", Model.RoundResults.Where(rr => rr.Division == 2)); }
+</div>
+
+<div style="width: 49%;">
+    <h3>Div 1 Round Results</h3>
+    @{ Html.RenderPartial("RoundResultsTablePart", Model.RoundResults.Where(rr => rr.Division == 1)); }
+</div>

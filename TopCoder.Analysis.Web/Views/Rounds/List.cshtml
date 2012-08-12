@@ -1,0 +1,60 @@
+﻿@model TopCoder.Analysis.Web.Models.Rounds.ListModel
+@{
+    ViewBag.Title = "Rounds List";
+}
+
+<script type="text/javascript">
+    $(function () {
+        var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
+
+        var control = new google.visualization.ControlWrapper({
+            controlType: 'ChartRangeFilter',
+            containerId: 'control',
+            options: {
+              filterColumnIndex: 0,
+              ui: {
+                chartType: 'AreaChart',
+                chartOptions: { pointSize: 1 },
+                chartView: { columns: [0, 1] },
+                minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
+              }
+            }
+        });
+
+        var codersChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'codersChart',
+            options: { pointSize: 4, title: 'Number of Coders Per Round' },
+            view: { columns: [0, 1]}
+        });
+
+        var parseDate = function(input) {
+            var parts = input.match( /(\d+)/g );
+            return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
+        };
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Round');
+        data.addColumn('number', 'Total Coders');
+        data.addRows([
+            @foreach (var r in Model.Rounds)
+            {
+                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount] </text>@(r != Model.Rounds.Last() ? "," : string.Empty)
+            }
+        ]);
+
+        dashboard.bind(control, codersChart);
+        dashboard.draw(data);
+    });
+</script>
+
+<h2>Rounds List</h2>
+
+<div id="dashboard" style="width: 64%; float: right;">
+    <div id="codersChart" style="height: 400px;"></div>
+    <div id="control" style=" width: 50%; height: 70px; margin: auto;"></div>
+</div>
+
+<div style="width: 35%;">
+    @{ Html.RenderPartial("RoundsTablePart", Model.Rounds); }
+</div>

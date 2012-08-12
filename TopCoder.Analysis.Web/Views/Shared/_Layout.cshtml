@@ -7,6 +7,9 @@
     <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load('visualization', '1.0', { 'packages': ['corechart', 'controls'] });
+    </script>
 </head>  
 <body>
     <div class="page">
@@ -17,8 +20,9 @@
             <nav>
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Coder Search", "Search", "Coders")</li>
+                    <li>@Html.ActionLink("Rounds List", "List", "Rounds")</li>
                     <li>@Html.ActionLink("Top 100 Coders", "Top100", "Coders")</li>
+                    <li>@Html.ActionLink("Coder Search", "Search", "Coders")</li>
                 </ul>
             </nav>
         </header>

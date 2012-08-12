@@ -3,7 +3,6 @@
 
 @if (Model.Any())
 {
-    <p></p>
     <table>
         <thead>
             <tr>
@@ -25,7 +24,7 @@
         @foreach (var coder in Model)
         {
             <tr>
-                <td> @Html.ActionLink(coder.Handle, "Single", new { handle = coder.Handle }) </td>  
+                <td> @Html.ActionLink(coder.Handle, "Single", "Coders", new { handle = coder.Handle }, null) </td>  
                 <td> @coder.Tc_Rating </td>  
                 <td> @coder.Tc_Volatility </td>  
                 <td> @coder.Elo_Rating </td>  

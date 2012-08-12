@@ -3,7 +3,6 @@
     ViewBag.Title = "Coder " + Model.Coder.Handle;
 }
 <script type="text/javascript">
-    google.load('visualization', '1.0', { 'packages': ['corechart', 'controls'] });
     $(function () {
         var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
 
@@ -11,13 +10,13 @@
             controlType: 'ChartRangeFilter',
             containerId: 'control',
             options: {
-              filterColumnIndex: 0,
-              ui: {
-                chartType: 'LineChart',
-                chartOptions: { pointSize: 2 },
-                chartView: { columns: [0, 1, 2] },
-                minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
-              }
+                filterColumnIndex: 0,
+                ui: {
+                    chartType: 'LineChart',
+                    chartOptions: { pointSize: 1 },
+                    chartView: { columns: [0, 1, 2] },
+                    minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
+                }
             }
         });
 
@@ -68,7 +67,12 @@
         
         dashboard.draw(data);
     });
+</script>
 
+<script type="text/javascript">
+    $(function () {
+        $('.coder-col').remove();
+    });
 </script>
 
 
@@ -79,10 +83,10 @@
 <h3>Coder's Timeline</h3>
 
 <div id="dashboard">
-    <div id="ratingsChart" style="width: 70%; height: 400px;"></div>
-    <div id="volatilityChart" style="width: 70%; height: 400px;"></div>
-    <div id="ratingsDiffChart" style="width: 70%; height: 400px;"></div>
-    <div id="control" style="width: 40%; height: 100px;"></div>
+    <div id="control" style="width: 50%; height: 70px; margin: auto;"></div>
+    <div id="volatilityChart" style="width: 50%; height: 400px; float: right;"></div>
+    <div id="ratingsChart" style="width: 50%; height: 400px;"></div>
+    <div id="ratingsDiffChart" style="width: 50%; height: 400px;"></div>
 </div>
 
 <h3>Coder's Round Results</h3>

@@ -68,7 +68,7 @@ namespace TopCoder.Analysis.Web.Controllers
                     ).Single();
 
                 model.RoundResults =
-                    (from rr in db.RoundResults.Include("Round")
+                    (from rr in db.RoundResults.Include("Round").Include("Coder")
                      where rr.CoderId == model.Coder.Id
                      orderby rr.Round.Date ascending
                      select rr
