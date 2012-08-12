@@ -188,8 +188,8 @@
           <Property Type="Int32" Name="TotalCodersCount" Nullable="false" />
           <Property Type="Int32" Name="DivOneCodersCount" Nullable="false" />
           <Property Type="Int32" Name="DivTwoCodersCount" Nullable="false" />
-          <NavigationProperty Name="Coders" Relationship="Model.FK_FirstRoundId" FromRole="Round" ToRole="Coder" />
-          <NavigationProperty Name="Coders1" Relationship="Model.FK_LastRoundId" FromRole="Round" ToRole="Coder" />
+          <NavigationProperty Name="FirstRoundCoders" Relationship="Model.FK_FirstRoundId" FromRole="Round" ToRole="Coder" />
+          <NavigationProperty Name="LastRoundCoders" Relationship="Model.FK_LastRoundId" FromRole="Round" ToRole="Coder" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Coder" Multiplicity="1" />

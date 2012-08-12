@@ -715,7 +715,7 @@ namespace TopCoder.Analysis.Data
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_FirstRoundId", "Coder")]
-        public EntityCollection<Coder> Coders
+        public EntityCollection<Coder> FirstRoundCoders
         {
             get
             {
@@ -737,7 +737,7 @@ namespace TopCoder.Analysis.Data
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Model", "FK_LastRoundId", "Coder")]
-        public EntityCollection<Coder> Coders1
+        public EntityCollection<Coder> LastRoundCoders
         {
             get
             {

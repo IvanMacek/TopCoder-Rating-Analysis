@@ -1,0 +1,56 @@
+﻿@using TopCoder.Analysis.Data
+@model IEnumerable<RoundResult>
+@{
+}
+
+@if (Model.Any())
+{
+    <p></p>
+    <table>
+        <thead>
+            <tr>
+                <th> Row count: </th>  
+                <th> @Model.Count() </th>  
+            </tr>
+            <tr>
+                <th> Round </th>  
+                <th> Div </th>  
+                <th> Div Coders </th>  
+                <th> Rank </th>  
+                <th> Relative Rank </th>  
+                <th> Points </th>  
+                <th> Rated Rounds </th>  
+                <th> TC Rating </th>  
+                <th> TC Volatility </th>  
+                <th> ELO Rating </th>  
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var rr in Model)
+        {
+            var divCodersCount = (rr.Division == 1) ? rr.Round.DivOneCodersCount : rr.Round.DivTwoCodersCount;
+            var relativePlace = 100.0 * rr.DivisionPlace / divCodersCount;
+                
+            <tr @(rr.IsRated ? string.Empty : @"class=""ui-state-disabled""")>
+                
+                <td> @rr.Round.Name <br /> @rr.Round.Date.ToShortDateString() </td>
+                <td> @rr.Division </td>
+                <td> @divCodersCount </td>
+                <td> @rr.DivisionPlace </td>
+                <td> @relativePlace.ToString("0.##") % </td>
+                <td> @rr.Points </td>
+                <td> @rr.NumberOfRatings</td>
+                <td> @rr.Tc_NewRating </td>
+                <td> @rr.Tc_NewVolatility </td>
+                <td> @rr.Elo_NewRating </td>
+
+            </tr>
+        }   
+        </tbody>
+    </table> 
+}
+else
+{
+    <p> List is empty. </p>
+}

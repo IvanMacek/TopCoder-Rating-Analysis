@@ -55,9 +55,27 @@ namespace TopCoder.Analysis.Web.Controllers
             return View(model);
         }
 
-        public ViewResult Single(string coderHandle)
+        public ViewResult Single(string handle)
         {
-            return View();
+            var model = new SingleModel();
+
+            using (var db = new TcAnalysisDataModel())
+            {
+                model.Coder = 
+                    (from coder in db.Coders.Include("FirstRound").Include("LastRound")
+                     where coder.Handle == handle
+                     select coder
+                    ).Single();
+
+                model.RoundResults =
+                    (from rr in db.RoundResults.Include("Round")
+                     where rr.CoderId == model.Coder.Id
+                     orderby rr.Round.Date ascending
+                     select rr
+                    ).ToList();
+            }
+
+            return View(model);
         }
     }
 }

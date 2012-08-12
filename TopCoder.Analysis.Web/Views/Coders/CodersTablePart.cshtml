@@ -25,7 +25,7 @@
         @foreach (var coder in Model)
         {
             <tr>
-                <td> @coder.Handle </td>  
+                <td> @Html.ActionLink(coder.Handle, "Single", new { handle = coder.Handle }) </td>  
                 <td> @coder.Tc_Rating </td>  
                 <td> @coder.Tc_Volatility </td>  
                 <td> @coder.Elo_Rating </td>  
