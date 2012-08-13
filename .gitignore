@@ -11,3 +11,5 @@
 /TopCoder.Analysis.Web/*.user
 /TopCoder.Analysis.Data/*.user
 /*.user
+/Tests/TopCoder.Tools.EloRunner.Tests/obj
+/Tests/TopCoder.Tools.EloRunner.Tests/bin
