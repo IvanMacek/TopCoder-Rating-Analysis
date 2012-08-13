@@ -42,15 +42,17 @@
                 <td> @divCodersCount </td>
                 <td> @rr.DivisionPlace </td>
                 <td> @relativePlace.ToString("0.##") % </td>
-                <td class="@(rr.Points < 0 ? "bad" : string.Empty)"> @rr.Points </td>
+                <td> @ColorCoding.GoodBad(rr.Points, 1) </td>
                 <td> @rr.NumberOfRatings</td>
+
                 <td class="rating"> @rr.Tc_NewVolatility </td>
-                <td class="rating"> @rr.Tc_OldRating </td>
-                <td class="rating"> @rr.Tc_NewRating </td>
-                <td class="@(rr.Tc_RatingDiff >= 0 ? "good" : "bad")"> @rr.Tc_RatingDiff </td>
-                <td class="rating"> @rr.Elo_OldRating </td>
-                <td class="rating"> @rr.Elo_NewRating </td>
-                <td class="@(rr.Elo_RatingDiff >= 0 ? "good" : "bad")"> @rr.Elo_RatingDiff </td>
+                <td class="rating"> @ColorCoding.RatingClass(rr.Tc_OldRating) </td>
+                <td class="rating"> @ColorCoding.RatingClass(rr.Tc_NewRating) </td>
+                <td> @ColorCoding.GoodBad(rr.Tc_RatingDiff, 0) </td>
+
+                <td class="rating"> @ColorCoding.RatingClass(rr.Elo_OldRating) </td>
+                <td class="rating"> @ColorCoding.RatingClass(rr.Elo_NewRating) </td>
+                <td> @ColorCoding.GoodBad(@rr.Elo_RatingDiff, 0) </td>
 
             </tr>
         }   

@@ -25,9 +25,9 @@
         {
             <tr>
                 <td> @Html.ActionLink(coder.Handle, "Single", "Coders", new { handle = coder.Handle }, null) </td>  
-                <td> @coder.Tc_Rating </td>  
+                <td> @ColorCoding.RatingClass(coder.Tc_Rating) </td>  
                 <td> @coder.Tc_Volatility </td>  
-                <td> @coder.Elo_Rating </td>  
+                <td> @ColorCoding.RatingClass(coder.Elo_Rating) </td>  
                 <td> @coder.RoundsCount </td>  
                 <td> @coder.FirstRound.Name <br/> @coder.FirstRound.Date.ToShortDateString() </td>  
                 <td> @coder.LastRound.Name <br/> @coder.LastRound.Date.ToShortDateString() </td>  

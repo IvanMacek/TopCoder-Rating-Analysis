@@ -327,17 +327,15 @@ div#title {
 /* Custom 
 ----------------------------------------------------------*/
 
-.good {
-    color: green;
-}
+.good { color: green; }
+.bad  { color: red; }
 
-.bad {
-    color: red;
-}
-
-.rating {
-    background-color: lavender;
-}
+.rating { background-color: lightsteelblue; }
+.rating-1 { color: gray; }
+.rating-2 { color: green; }
+.rating-3 { color: blue; }
+.rating-4 { color: yellow; }
+.rating-5 { color: red; }
 
 
 /* Clearfix
