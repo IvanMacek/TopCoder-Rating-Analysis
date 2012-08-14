@@ -47,7 +47,7 @@ namespace TopCoder.Tools.EloRunner.Elo
 
     public partial class EloAlgorithm
     {
-        private const double _DoubleEqualityEpsilon = double.Epsilon;
+        private const double _DoubleEqualityEpsilon = 0.000000000001;
         private const double _ScaleConstant = 400.0;
 
         public EloAlgorithm()
