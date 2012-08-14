@@ -23,7 +23,7 @@
         var ratingsChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'ratingsChart',
-            options: { pointSize: 4, title: 'TC vs ELO Ratings' },
+            options: { pointSize: 4, title: 'TC & ELO Ratings' },
             view: { columns: [0, 1, 2]}
         });
         
@@ -33,11 +33,18 @@
             options: { pointSize: 4, title: 'TC Volatility' },
             view: { columns: [0, 5]}
         });
+        
+         var kFactorChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'kFactorChart',
+            options: { pointSize: 4, title: 'ELO K-Factor' },
+            view: { columns: [0, 6]}
+        });
 
         var ratingsDiffChart = new google.visualization.ChartWrapper({
             chartType: 'AreaChart',
             containerId: 'ratingsDiffChart',
-            options: { pointSize: 4, title: 'TC vs ELO Ratings Differences' },
+            options: { pointSize: 4, title: 'TC & ELO Ratings Differences' },
             view: { columns: [0, 3, 4]}
         });
         
@@ -53,17 +60,19 @@
         data.addColumn('number', 'TopCoder Rating Diff');
         data.addColumn('number', 'ELO Rating Diff');
         data.addColumn('number', 'TopCoder Volatility');
+        data.addColumn('number', 'Elo K-Factor');
         data.addRows([
             @foreach (var rr in Model.RoundResults)
             {
-                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.Tc_NewRating, @rr.Elo_NewRating, @rr.Tc_RatingDiff, @rr.Elo_RatingDiff, @rr.Tc_NewVolatility] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
+                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.Tc_NewRating, @rr.Elo_NewRating, @rr.Tc_RatingDiff, @rr.Elo_RatingDiff, @rr.Tc_NewVolatility, @rr.Elo_NewKFactor] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }
         ]);
 
         dashboard
             .bind(control, ratingsChart)
             .bind(control, ratingsDiffChart)
-            .bind(control, volatilityChart);
+            .bind(control, volatilityChart)
+            .bind(control, kFactorChart);
         
         dashboard.draw(data);
     });
@@ -86,6 +95,7 @@
     <div id="control" style="width: 50%; height: 70px; margin: auto;"></div>
     <div id="volatilityChart" style="width: 50%; height: 400px; float: right;"></div>
     <div id="ratingsChart" style="width: 50%; height: 400px;"></div>
+    <div id="kFactorChart" style="width: 50%; height: 400px; float: right;"></div>
     <div id="ratingsDiffChart" style="width: 50%; height: 400px;"></div>
 </div>
 

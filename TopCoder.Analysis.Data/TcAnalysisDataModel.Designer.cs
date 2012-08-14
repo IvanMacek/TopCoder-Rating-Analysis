@@ -179,7 +179,8 @@ namespace TopCoder.Analysis.Data
         /// <param name="tc_Rating">Initial value of the Tc_Rating property.</param>
         /// <param name="tc_Volatility">Initial value of the Tc_Volatility property.</param>
         /// <param name="elo_Rating">Initial value of the Elo_Rating property.</param>
-        public static Coder CreateCoder(global::System.Int32 id, global::System.String handle, global::System.Int32 firstRoundId, global::System.Int32 lastRoundId, global::System.Int32 roundsCount, global::System.Int32 tc_Rating, global::System.Int32 tc_Volatility, global::System.Int32 elo_Rating)
+        /// <param name="elo_KFactor">Initial value of the Elo_KFactor property.</param>
+        public static Coder CreateCoder(global::System.Int32 id, global::System.String handle, global::System.Int32 firstRoundId, global::System.Int32 lastRoundId, global::System.Int32 roundsCount, global::System.Int32 tc_Rating, global::System.Int32 tc_Volatility, global::System.Int32 elo_Rating, global::System.Int32 elo_KFactor)
         {
             Coder coder = new Coder();
             coder.Id = id;
@@ -190,6 +191,7 @@ namespace TopCoder.Analysis.Data
             coder.Tc_Rating = tc_Rating;
             coder.Tc_Volatility = tc_Volatility;
             coder.Elo_Rating = elo_Rating;
+            coder.Elo_KFactor = elo_KFactor;
             return coder;
         }
 
@@ -391,6 +393,30 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Elo_Rating;
         partial void OnElo_RatingChanging(global::System.Int32 value);
         partial void OnElo_RatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Elo_KFactor
+        {
+            get
+            {
+                return _Elo_KFactor;
+            }
+            set
+            {
+                OnElo_KFactorChanging(value);
+                ReportPropertyChanging("Elo_KFactor");
+                _Elo_KFactor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Elo_KFactor");
+                OnElo_KFactorChanged();
+            }
+        }
+        private global::System.Int32 _Elo_KFactor;
+        partial void OnElo_KFactorChanging(global::System.Int32 value);
+        partial void OnElo_KFactorChanged();
 
         #endregion
 
@@ -783,7 +809,8 @@ namespace TopCoder.Analysis.Data
         /// <param name="elo_NewRating">Initial value of the Elo_NewRating property.</param>
         /// <param name="tc_RatingDiff">Initial value of the Tc_RatingDiff property.</param>
         /// <param name="elo_RatingDiff">Initial value of the Elo_RatingDiff property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff)
+        /// <param name="elo_NewKFactor">Initial value of the Elo_NewKFactor property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff, global::System.Int32 elo_NewKFactor)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
@@ -800,6 +827,7 @@ namespace TopCoder.Analysis.Data
             roundResult.Elo_NewRating = elo_NewRating;
             roundResult.Tc_RatingDiff = tc_RatingDiff;
             roundResult.Elo_RatingDiff = elo_RatingDiff;
+            roundResult.Elo_NewKFactor = elo_NewKFactor;
             return roundResult;
         }
 
@@ -1148,6 +1176,30 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Elo_RatingDiff;
         partial void OnElo_RatingDiffChanging(global::System.Int32 value);
         partial void OnElo_RatingDiffChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Elo_NewKFactor
+        {
+            get
+            {
+                return _Elo_NewKFactor;
+            }
+            set
+            {
+                OnElo_NewKFactorChanging(value);
+                ReportPropertyChanging("Elo_NewKFactor");
+                _Elo_NewKFactor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Elo_NewKFactor");
+                OnElo_NewKFactorChanged();
+            }
+        }
+        private global::System.Int32 _Elo_NewKFactor;
+        partial void OnElo_NewKFactorChanging(global::System.Int32 value);
+        partial void OnElo_NewKFactorChanged();
 
         #endregion
 

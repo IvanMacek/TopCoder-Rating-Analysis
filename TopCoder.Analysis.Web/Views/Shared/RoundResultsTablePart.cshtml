@@ -13,17 +13,18 @@
                 <th class="round-col"> Round </th>  
                 <th class="coder-col"> Coder </th>  
                 <th> Div </th>  
-                <th> Div Coders </th>  
+                <th class="divcoders-col"> Div Coders </th>  
                 <th> Rank </th>  
                 <th> Relative Rank </th>  
                 <th> Points </th>  
                 <th> Rated Rounds </th>  
-                <th> TC Volatility </th>  
-                <th> TC Old </th>  
-                <th> TC New </th>  
+                <th> TC Old Rat </th>  
+                <th> TC New Rat </th>  
+                <th> TC New Vol </th>  
                 <th> TC Diff </th>  
-                <th> ELO Old </th>  
-                <th> ELO New </th>  
+                <th> ELO Old Rat </th>  
+                <th> ELO New Rat </th>  
+                <th> ELO New K </th>  
                 <th> ELO Diff </th>  
             </tr>
         </thead>
@@ -39,19 +40,20 @@
                 <td class="round-col"> @Html.ActionLink(rr.Round.Name, "Single", "Rounds", new { roundId = rr.Round.Id }, null) </td>
                 <td class="coder-col"> @Html.ActionLink(rr.Coder.Handle, "Single", "Coders", new { handle = rr.Coder.Handle }, null) </td>  
                 <td> @rr.Division </td>
-                <td> @divCodersCount </td>
+                <td class="divcoders-col"> @divCodersCount </td>
                 <td> @rr.DivisionPlace </td>
                 <td> @relativePlace.ToString("0.##") % </td>
                 <td> @ColorCoding.GoodBad(rr.Points, 1) </td>
                 <td> @rr.NumberOfRatings</td>
 
-                <td class="rating"> @rr.Tc_NewVolatility </td>
                 <td class="rating"> @ColorCoding.RatingClass(rr.Tc_OldRating) </td>
                 <td class="rating"> @ColorCoding.RatingClass(rr.Tc_NewRating) </td>
+                <td class="rating"> @rr.Tc_NewVolatility </td>
                 <td> @ColorCoding.GoodBad(rr.Tc_RatingDiff, 0) </td>
 
                 <td class="rating"> @ColorCoding.RatingClass(rr.Elo_OldRating) </td>
                 <td class="rating"> @ColorCoding.RatingClass(rr.Elo_NewRating) </td>
+                <td class="rating"> @rr.Elo_NewKFactor </td>
                 <td> @ColorCoding.GoodBad(@rr.Elo_RatingDiff, 0) </td>
 
             </tr>
