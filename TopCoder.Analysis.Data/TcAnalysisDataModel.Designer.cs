@@ -544,7 +544,8 @@ namespace TopCoder.Analysis.Data
         /// <param name="totalCodersCount">Initial value of the TotalCodersCount property.</param>
         /// <param name="divOneCodersCount">Initial value of the DivOneCodersCount property.</param>
         /// <param name="divTwoCodersCount">Initial value of the DivTwoCodersCount property.</param>
-        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 totalCodersCount, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount)
+        /// <param name="competitionFactor">Initial value of the CompetitionFactor property.</param>
+        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 totalCodersCount, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double competitionFactor)
         {
             Round round = new Round();
             round.Id = id;
@@ -553,6 +554,7 @@ namespace TopCoder.Analysis.Data
             round.TotalCodersCount = totalCodersCount;
             round.DivOneCodersCount = divOneCodersCount;
             round.DivTwoCodersCount = divTwoCodersCount;
+            round.CompetitionFactor = competitionFactor;
             return round;
         }
 
@@ -706,6 +708,30 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _DivTwoCodersCount;
         partial void OnDivTwoCodersCountChanging(global::System.Int32 value);
         partial void OnDivTwoCodersCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double CompetitionFactor
+        {
+            get
+            {
+                return _CompetitionFactor;
+            }
+            set
+            {
+                OnCompetitionFactorChanging(value);
+                ReportPropertyChanging("CompetitionFactor");
+                _CompetitionFactor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CompetitionFactor");
+                OnCompetitionFactorChanged();
+            }
+        }
+        private global::System.Double _CompetitionFactor;
+        partial void OnCompetitionFactorChanging(global::System.Double value);
+        partial void OnCompetitionFactorChanged();
 
         #endregion
 
@@ -810,7 +836,9 @@ namespace TopCoder.Analysis.Data
         /// <param name="tc_RatingDiff">Initial value of the Tc_RatingDiff property.</param>
         /// <param name="elo_RatingDiff">Initial value of the Elo_RatingDiff property.</param>
         /// <param name="elo_NewKFactor">Initial value of the Elo_NewKFactor property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff, global::System.Int32 elo_NewKFactor)
+        /// <param name="tc_OldVolatility">Initial value of the Tc_OldVolatility property.</param>
+        /// <param name="tc_VolatilityDiff">Initial value of the Tc_VolatilityDiff property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff, global::System.Int32 elo_NewKFactor, global::System.Int32 tc_OldVolatility, global::System.Int32 tc_VolatilityDiff)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
@@ -828,6 +856,8 @@ namespace TopCoder.Analysis.Data
             roundResult.Tc_RatingDiff = tc_RatingDiff;
             roundResult.Elo_RatingDiff = elo_RatingDiff;
             roundResult.Elo_NewKFactor = elo_NewKFactor;
+            roundResult.Tc_OldVolatility = tc_OldVolatility;
+            roundResult.Tc_VolatilityDiff = tc_VolatilityDiff;
             return roundResult;
         }
 
@@ -1200,6 +1230,54 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Elo_NewKFactor;
         partial void OnElo_NewKFactorChanging(global::System.Int32 value);
         partial void OnElo_NewKFactorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc_OldVolatility
+        {
+            get
+            {
+                return _Tc_OldVolatility;
+            }
+            set
+            {
+                OnTc_OldVolatilityChanging(value);
+                ReportPropertyChanging("Tc_OldVolatility");
+                _Tc_OldVolatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_OldVolatility");
+                OnTc_OldVolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc_OldVolatility;
+        partial void OnTc_OldVolatilityChanging(global::System.Int32 value);
+        partial void OnTc_OldVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc_VolatilityDiff
+        {
+            get
+            {
+                return _Tc_VolatilityDiff;
+            }
+            set
+            {
+                OnTc_VolatilityDiffChanging(value);
+                ReportPropertyChanging("Tc_VolatilityDiff");
+                _Tc_VolatilityDiff = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_VolatilityDiff");
+                OnTc_VolatilityDiffChanged();
+            }
+        }
+        private global::System.Int32 _Tc_VolatilityDiff;
+        partial void OnTc_VolatilityDiffChanging(global::System.Int32 value);
+        partial void OnTc_VolatilityDiffChanged();
 
         #endregion
 

@@ -52,8 +52,10 @@
           <Property Name="Points" Type="float" Nullable="false" />
           <Property Name="Tc_OldRating" Type="int" Nullable="false" />
           <Property Name="Tc_NewRating" Type="int" Nullable="false" />
-          <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
           <Property Name="Tc_RatingDiff" Type="int" Nullable="false" />
+          <Property Name="Tc_OldVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc_VolatilityDiff" Type="int" Nullable="false" />
           <Property Name="Elo_OldRating" Type="int" Nullable="false" />
           <Property Name="Elo_NewRating" Type="int" Nullable="false" />
           <Property Name="Elo_NewKFactor" Type="int" Nullable="false" />
@@ -71,6 +73,7 @@
           <Property Name="TotalCodersCount" Type="int" Nullable="false" />
           <Property Name="DivOneCodersCount" Type="int" Nullable="false" />
           <Property Name="DivTwoCodersCount" Type="int" Nullable="false" />
+          <Property Name="CompetitionFactor" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Store.Coders" Multiplicity="1" />
@@ -184,6 +187,8 @@
           <Property Type="Int32" Name="Tc_RatingDiff" Nullable="false" />
           <Property Type="Int32" Name="Elo_RatingDiff" Nullable="false" />
           <Property Type="Int32" Name="Elo_NewKFactor" Nullable="false" />
+          <Property Type="Int32" Name="Tc_OldVolatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc_VolatilityDiff" Nullable="false" />
         </EntityType>
         <EntityType Name="Round">
           <Key>
@@ -198,6 +203,7 @@
           <Property Type="Int32" Name="DivTwoCodersCount" Nullable="false" />
           <NavigationProperty Name="FirstRoundCoders" Relationship="Model.FK_FirstRoundId" FromRole="Round" ToRole="Coder" />
           <NavigationProperty Name="LastRoundCoders" Relationship="Model.FK_LastRoundId" FromRole="Round" ToRole="Coder" />
+          <Property Type="Double" Name="CompetitionFactor" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Coder" Multiplicity="1" />
@@ -271,6 +277,8 @@
           <EntitySetMapping Name="RoundResults">
             <EntityTypeMapping TypeName="Model.RoundResult">
               <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="Tc_VolatilityDiff" ColumnName="Tc_VolatilityDiff" />
+                <ScalarProperty Name="Tc_OldVolatility" ColumnName="Tc_OldVolatility" />
                 <ScalarProperty Name="Elo_NewKFactor" ColumnName="Elo_NewKFactor" />
                 <ScalarProperty Name="Elo_RatingDiff" ColumnName="Elo_RatingDiff" />
                 <ScalarProperty Name="Tc_RatingDiff" ColumnName="Tc_RatingDiff" />
@@ -292,6 +300,7 @@
           <EntitySetMapping Name="Rounds">
             <EntityTypeMapping TypeName="Model.Round">
               <MappingFragment StoreEntitySet="Rounds">
+                <ScalarProperty Name="CompetitionFactor" ColumnName="CompetitionFactor" />
                 <ScalarProperty Name="DivTwoCodersCount" ColumnName="DivTwoCodersCount" />
                 <ScalarProperty Name="DivOneCodersCount" ColumnName="DivOneCodersCount" />
                 <ScalarProperty Name="TotalCodersCount" ColumnName="TotalCodersCount" />
@@ -323,23 +332,23 @@
     <Diagrams>
       <Diagram Name="TcAnalysisDataModel">
         <EntityTypeShape EntityType="Model.Coder" Width="2.25" PointX="2" PointY="2.625" Height="3.1340950520833326" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.RoundResult" Width="2.25" PointX="5.75" PointY="4.75" Height="3.7109993489583331" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Round" Width="2.25" PointX="5.75" PointY="1.25" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RoundResult" Width="2.25" PointX="5.75" PointY="5" Height="4.2879036458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Round" Width="2.25" PointX="5.75" PointY="1" Height="2.9417936197916656" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_CoderId" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.25" PointY="5.2545475260416659" />
-          <ConnectorPoint PointX="5.75" PointY="5.2545475260416659" />
+          <ConnectorPoint PointX="4.25" PointY="5.4756982421875" />
+          <ConnectorPoint PointX="5.75" PointY="5.4756982421875" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_RoundId" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.875" PointY="3.9994921874999996" />
-          <ConnectorPoint PointX="6.875" PointY="4.75" />
+          <ConnectorPoint PointX="6.875" PointY="3.9417936197916656" />
+          <ConnectorPoint PointX="6.875" PointY="5" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_FirstRoundId" >
-          <ConnectorPoint PointX="5.75" PointY="3.31224609375" />
-          <ConnectorPoint PointX="4.25" PointY="3.31224609375" />
+          <ConnectorPoint PointX="5.75" PointY="3.2833968098958328" />
+          <ConnectorPoint PointX="4.25" PointY="3.2833968098958328" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_LastRoundId" >
-          <ConnectorPoint PointX="5.75" PointY="2.906123046875" />
-          <ConnectorPoint PointX="4.25" PointY="2.906123046875" />
+          <ConnectorPoint PointX="5.75" PointY="2.8916984049479164" />
+          <ConnectorPoint PointX="4.25" PointY="2.8916984049479164" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

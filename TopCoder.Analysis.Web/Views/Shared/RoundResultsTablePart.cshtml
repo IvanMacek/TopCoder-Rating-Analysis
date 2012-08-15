@@ -6,26 +6,28 @@
     <table>
         <thead>
             <tr>
-                <th> Row count: </th>  
-                <th> @Model.Count() </th>  
+                <th> Row count: </th>
+                <th> @Model.Count() </th>
             </tr>
             <tr>
-                <th class="round-col"> Round </th>  
-                <th class="coder-col"> Coder </th>  
-                <th> Div </th>  
-                <th class="divcoders-col"> Div Coders </th>  
-                <th> Rank </th>  
-                <th> Relative Rank </th>  
-                <th> Points </th>  
-                <th> Rated Rounds </th>  
-                <th> TC Old Rat </th>  
-                <th> TC New Rat </th>  
-                <th> TC New Vol </th>  
-                <th> TC Diff </th>  
-                <th> ELO Old Rat </th>  
-                <th> ELO New Rat </th>  
-                <th> ELO New K </th>  
-                <th> ELO Diff </th>  
+                <th class="round-col"> Round </th>
+                <th class="coder-col"> Coder </th>
+                <th> Div </th>
+                <th class="divcoders-col"> Div Coders </th>
+                <th> Rank </th>
+                <th> Relative Rank </th>
+                <th> Points </th>
+                <th> Rated Rounds </th>
+                <th> TC R Old </th>
+                <th> TC R New </th>
+                <th> TC R Diff </th>
+                <th> TC V Old </th>
+                <th> TC V New </th>
+                <th> TC V Diff </th>
+                <th> ELO R Old </th>
+                <th> ELO R New </th>
+                <th> ELO R Diff </th>
+                <th> ELO K New </th>
             </tr>
         </thead>
 
@@ -48,13 +50,15 @@
 
                 <td class="rating"> @ColorCoding.RatingClass(rr.Tc_OldRating) </td>
                 <td class="rating"> @ColorCoding.RatingClass(rr.Tc_NewRating) </td>
-                <td class="rating"> @rr.Tc_NewVolatility </td>
                 <td> @ColorCoding.GoodBad(rr.Tc_RatingDiff, 0) </td>
+                <td class="rating"> @rr.Tc_OldVolatility </td>
+                <td class="rating"> @rr.Tc_NewVolatility </td>
+                <td> @ColorCoding.GoodBad(rr.Tc_VolatilityDiff, 0) </td>
 
                 <td class="rating"> @ColorCoding.RatingClass(rr.Elo_OldRating) </td>
                 <td class="rating"> @ColorCoding.RatingClass(rr.Elo_NewRating) </td>
-                <td class="rating"> @rr.Elo_NewKFactor </td>
                 <td> @ColorCoding.GoodBad(@rr.Elo_RatingDiff, 0) </td>
+                <td class="rating"> @rr.Elo_NewKFactor </td>
 
             </tr>
         }   

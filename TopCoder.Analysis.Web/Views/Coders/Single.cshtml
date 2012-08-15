@@ -62,7 +62,7 @@
         data.addColumn('number', 'TopCoder Volatility');
         data.addColumn('number', 'Elo K-Factor');
         data.addRows([
-            @foreach (var rr in Model.RoundResults)
+            @foreach (var rr in Model.RoundResults.Where(r => r.IsRated))
             {
                 <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.Tc_NewRating, @rr.Elo_NewRating, @rr.Tc_RatingDiff, @rr.Elo_RatingDiff, @rr.Tc_NewVolatility, @rr.Elo_NewKFactor] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }

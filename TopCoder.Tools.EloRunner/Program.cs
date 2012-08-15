@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 using TopCoder.Analysis.Data;
 using TopCoder.Tools.EloRunner.Elo;
@@ -12,8 +13,8 @@ namespace TopCoder.Tools.EloRunner
     {
         public static void Main(string[] args)
         {
-            const int startingRating = 1200;
-            const int startingKFactor = 11;
+            const int startingRating = 1500;
+            const int startingKFactor = 2;
 
             var globalStopwatch = Stopwatch.StartNew();
 
@@ -59,18 +60,19 @@ namespace TopCoder.Tools.EloRunner
                      select divGroups
                     ).ToList();
 
-                foreach (var results in divisionsResults)
+                foreach (var divResults in divisionsResults)
                 {
-                    foreach (var result in results.Where(r => r.IsRated))
+                    foreach(var result in divResults.Where(r => r.IsRated))
                     {
                         var currentRating = result.Coder.Elo_Rating;
                         var currentKFactor = result.Coder.Elo_KFactor;
 
-                        var opponentsRatings = results.Select(rr => rr.Coder.Elo_Rating).ToArray();
+                        var resultsWithoutThisOne = divResults.Where(rr => rr.CoderId != result.CoderId).ToList();
+                        var opponentsRatings = resultsWithoutThisOne.Select(rr => rr.Coder.Elo_Rating).ToArray();
                         var observedScores =
-                            results.Where(rr => rr.DivisionPlace < result.DivisionPlace).Select(rr => 0.0)
-                                .Concat(results.Where(rr => rr.DivisionPlace == result.DivisionPlace).Select(rr => 0.5))
-                                .Concat(results.Where(rr => rr.DivisionPlace > result.DivisionPlace).Select(rr => 1.0))
+                            resultsWithoutThisOne.Where(rr => rr.DivisionPlace < result.DivisionPlace).Select(rr => 0.0)
+                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionPlace == result.DivisionPlace).Select(rr => 0.5))
+                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionPlace > result.DivisionPlace).Select(rr => 1.0))
                                 .ToArray();
 
                         var eloAlgorithm = new EloAlgorithm();

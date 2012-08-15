@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{03A40126
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopCoder.Tools.EloRunner.Tests", "Tests\TopCoder.Tools.EloRunner.Tests\TopCoder.Tools.EloRunner.Tests.csproj", "{A1373BCD-86C7-419F-9DF9-BDD39E332D04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopCoder.Tools.TcAlgorithmRunner", "TopCoder.Tools.TcAlgorithmRunner\TopCoder.Tools.TcAlgorithmRunner.csproj", "{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,16 @@ Global
 		{A1373BCD-86C7-419F-9DF9-BDD39E332D04}.Release|Mixed Platforms.Build.0 = Release|x86
 		{A1373BCD-86C7-419F-9DF9-BDD39E332D04}.Release|x86.ActiveCfg = Release|x86
 		{A1373BCD-86C7-419F-9DF9-BDD39E332D04}.Release|x86.Build.0 = Release|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Debug|x86.ActiveCfg = Debug|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Debug|x86.Build.0 = Debug|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Release|Any CPU.ActiveCfg = Release|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Release|x86.ActiveCfg = Release|x86
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +96,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C9F2FD0F-95BF-40F5-964E-DBA12C9D6447} = {A8F12F47-3A34-4A37-BF8D-3A86D90A13A2}
 		{D99C7D7E-04F1-456D-AFFF-3EC5354BEE42} = {A8F12F47-3A34-4A37-BF8D-3A86D90A13A2}
+		{47A0A84E-BA7A-44B4-B2AB-3C3A86E8581B} = {A8F12F47-3A34-4A37-BF8D-3A86D90A13A2}
 		{03A40126-696C-45D7-9270-BDA384401034} = {9464652F-BD5C-4B01-9166-16E62CCA405E}
 		{A1373BCD-86C7-419F-9DF9-BDD39E332D04} = {03A40126-696C-45D7-9270-BDA384401034}
 	EndGlobalSection
