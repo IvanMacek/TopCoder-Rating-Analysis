@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 using TopCoder.Analysis.Data;
 using TopCoder.Tools.EloRunner.Elo;
@@ -13,8 +12,8 @@ namespace TopCoder.Tools.EloRunner
     {
         public static void Main(string[] args)
         {
-            const int startingRating = 1500;
-            const int startingKFactor = 2;
+            const int startingRating = 1200;
+            const int startingKFactor = 1;
 
             var globalStopwatch = Stopwatch.StartNew();
 
