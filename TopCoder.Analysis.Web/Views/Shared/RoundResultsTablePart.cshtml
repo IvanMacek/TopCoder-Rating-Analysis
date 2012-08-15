@@ -10,10 +10,11 @@
                 <th> @Model.Count() </th>
             </tr>
             <tr>
-                <th class="round-col"> Round </th>
                 <th class="coder-col"> Coder </th>
+                <th class="round-col"> Round </th>
+                <th class="round-col"> CF </th>
+                <th class="round-col"> Div Coders </th>
                 <th> Div </th>
-                <th class="divcoders-col"> Div Coders </th>
                 <th> Rank </th>
                 <th> Relative Rank </th>
                 <th> Points </th>
@@ -24,6 +25,8 @@
                 <th> TC V Old </th>
                 <th> TC V New </th>
                 <th> TC V Diff </th>
+                <th> TC W </th>
+                <th> TC K </th>
                 <th> ELO R Old </th>
                 <th> ELO R New </th>
                 <th> ELO R Diff </th>
@@ -39,10 +42,11 @@
                 
             <tr @Html.Raw(rr.IsRated ? string.Empty : @"class=""ui-state-disabled"" title=""Unrated round""")>
                 
-                <td class="round-col"> @Html.ActionLink(rr.Round.Name, "Single", "Rounds", new { roundId = rr.Round.Id }, null) </td>
                 <td class="coder-col"> @Html.ActionLink(rr.Coder.Handle, "Single", "Coders", new { handle = rr.Coder.Handle }, null) </td>  
+                <td class="round-col"> @Html.ActionLink(rr.Round.Name, "Single", "Rounds", new { roundId = rr.Round.Id }, null) </td>
+                <td class="round-col"> @rr.Round.CompetitionFactor.ToString("0.##") </td>
+                <td class="round-col"> @divCodersCount </td>
                 <td> @rr.Division </td>
-                <td class="divcoders-col"> @divCodersCount </td>
                 <td> @rr.DivisionPlace </td>
                 <td> @relativePlace.ToString("0.##") % </td>
                 <td> @ColorCoding.GoodBad(rr.Points, 1) </td>
@@ -54,11 +58,13 @@
                 <td class="rating"> @rr.Tc_OldVolatility </td>
                 <td class="rating"> @rr.Tc_NewVolatility </td>
                 <td> @ColorCoding.GoodBad(rr.Tc_VolatilityDiff, 0) </td>
+                <td > @rr.Tc_Weight.ToString("0.##") </td>
+                <td > @rr.Tc_KFactor.ToString("0.##") </td>
 
                 <td class="rating"> @ColorCoding.RatingClass(rr.Elo_OldRating) </td>
                 <td class="rating"> @ColorCoding.RatingClass(rr.Elo_NewRating) </td>
                 <td> @ColorCoding.GoodBad(@rr.Elo_RatingDiff, 0) </td>
-                <td class="rating"> @rr.Elo_NewKFactor </td>
+                <td class="rating"> @rr.Elo_NewKFactor.ToString("0.##") </td>
 
             </tr>
         }   

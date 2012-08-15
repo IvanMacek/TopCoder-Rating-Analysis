@@ -50,18 +50,20 @@
           <Property Name="Division" Type="int" Nullable="false" />
           <Property Name="DivisionPlace" Type="int" Nullable="false" />
           <Property Name="Points" Type="float" Nullable="false" />
+          <Property Name="IsRated" Type="bit" Nullable="false" />
+          <Property Name="NumberOfRatings" Type="int" Nullable="false" />
           <Property Name="Tc_OldRating" Type="int" Nullable="false" />
           <Property Name="Tc_NewRating" Type="int" Nullable="false" />
           <Property Name="Tc_RatingDiff" Type="int" Nullable="false" />
           <Property Name="Tc_OldVolatility" Type="int" Nullable="false" />
           <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
           <Property Name="Tc_VolatilityDiff" Type="int" Nullable="false" />
+          <Property Name="Tc_Weight" Type="float" Nullable="false" />
+          <Property Name="Tc_KFactor" Type="float" Nullable="false" />
           <Property Name="Elo_OldRating" Type="int" Nullable="false" />
           <Property Name="Elo_NewRating" Type="int" Nullable="false" />
           <Property Name="Elo_NewKFactor" Type="int" Nullable="false" />
           <Property Name="Elo_RatingDiff" Type="int" Nullable="false" />
-          <Property Name="NumberOfRatings" Type="int" Nullable="false" />
-          <Property Name="IsRated" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Rounds">
           <Key>
@@ -189,6 +191,8 @@
           <Property Type="Int32" Name="Elo_NewKFactor" Nullable="false" />
           <Property Type="Int32" Name="Tc_OldVolatility" Nullable="false" />
           <Property Type="Int32" Name="Tc_VolatilityDiff" Nullable="false" />
+          <Property Type="Double" Name="Tc_Weight" Nullable="false" />
+          <Property Type="Double" Name="Tc_KFactor" Nullable="false" />
         </EntityType>
         <EntityType Name="Round">
           <Key>
@@ -277,6 +281,8 @@
           <EntitySetMapping Name="RoundResults">
             <EntityTypeMapping TypeName="Model.RoundResult">
               <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="Tc_KFactor" ColumnName="Tc_KFactor" />
+                <ScalarProperty Name="Tc_Weight" ColumnName="Tc_Weight" />
                 <ScalarProperty Name="Tc_VolatilityDiff" ColumnName="Tc_VolatilityDiff" />
                 <ScalarProperty Name="Tc_OldVolatility" ColumnName="Tc_OldVolatility" />
                 <ScalarProperty Name="Elo_NewKFactor" ColumnName="Elo_NewKFactor" />

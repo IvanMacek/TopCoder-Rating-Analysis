@@ -838,7 +838,9 @@ namespace TopCoder.Analysis.Data
         /// <param name="elo_NewKFactor">Initial value of the Elo_NewKFactor property.</param>
         /// <param name="tc_OldVolatility">Initial value of the Tc_OldVolatility property.</param>
         /// <param name="tc_VolatilityDiff">Initial value of the Tc_VolatilityDiff property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff, global::System.Int32 elo_NewKFactor, global::System.Int32 tc_OldVolatility, global::System.Int32 tc_VolatilityDiff)
+        /// <param name="tc_Weight">Initial value of the Tc_Weight property.</param>
+        /// <param name="tc_KFactor">Initial value of the Tc_KFactor property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionPlace, global::System.Double points, global::System.Int32 tc_OldRating, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Int32 numberOfRatings, global::System.Boolean isRated, global::System.Int32 elo_OldRating, global::System.Int32 elo_NewRating, global::System.Int32 tc_RatingDiff, global::System.Int32 elo_RatingDiff, global::System.Int32 elo_NewKFactor, global::System.Int32 tc_OldVolatility, global::System.Int32 tc_VolatilityDiff, global::System.Double tc_Weight, global::System.Double tc_KFactor)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
@@ -858,6 +860,8 @@ namespace TopCoder.Analysis.Data
             roundResult.Elo_NewKFactor = elo_NewKFactor;
             roundResult.Tc_OldVolatility = tc_OldVolatility;
             roundResult.Tc_VolatilityDiff = tc_VolatilityDiff;
+            roundResult.Tc_Weight = tc_Weight;
+            roundResult.Tc_KFactor = tc_KFactor;
             return roundResult;
         }
 
@@ -1278,6 +1282,54 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Tc_VolatilityDiff;
         partial void OnTc_VolatilityDiffChanging(global::System.Int32 value);
         partial void OnTc_VolatilityDiffChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_Weight
+        {
+            get
+            {
+                return _Tc_Weight;
+            }
+            set
+            {
+                OnTc_WeightChanging(value);
+                ReportPropertyChanging("Tc_Weight");
+                _Tc_Weight = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_Weight");
+                OnTc_WeightChanged();
+            }
+        }
+        private global::System.Double _Tc_Weight;
+        partial void OnTc_WeightChanging(global::System.Double value);
+        partial void OnTc_WeightChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_KFactor
+        {
+            get
+            {
+                return _Tc_KFactor;
+            }
+            set
+            {
+                OnTc_KFactorChanging(value);
+                ReportPropertyChanging("Tc_KFactor");
+                _Tc_KFactor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_KFactor");
+                OnTc_KFactorChanged();
+            }
+        }
+        private global::System.Double _Tc_KFactor;
+        partial void OnTc_KFactorChanging(global::System.Double value);
+        partial void OnTc_KFactorChanged();
 
         #endregion
 

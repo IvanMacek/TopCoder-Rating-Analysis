@@ -27,6 +27,13 @@
             options: { pointSize: 4, title: 'Number of Coders Per Round' },
             view: { columns: [0, 1]}
         });
+        
+        var cfChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'cfChart',
+            options: { pointSize: 4, title: 'Competition Factor Per Round' },
+            view: { columns: [0, 2]}
+        });
 
         var parseDate = function(input) {
             var parts = input.match( /(\d+)/g );
@@ -36,14 +43,17 @@
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Round');
         data.addColumn('number', 'Total Coders');
+        data.addColumn('number', 'Competition Factor');
         data.addRows([
             @foreach (var r in Model.Rounds)
             {
-                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount] </text>@(r != Model.Rounds.Last() ? "," : string.Empty)
+                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount, @r.CompetitionFactor.ToString().Replace(",", ".")] </text>@(r != Model.Rounds.Last() ? "," : string.Empty)
             }
         ]);
 
-        dashboard.bind(control, codersChart);
+        dashboard
+            .bind(control, codersChart)
+            .bind(control, cfChart);
         dashboard.draw(data);
     });
 </script>
@@ -52,6 +62,7 @@
 
 <div id="dashboard" style="width: 64%; float: right;">
     <div id="codersChart" style="height: 400px;"></div>
+    <div id="cfChart" style="height: 400px;"></div>
     <div id="control" style=" width: 50%; height: 70px; margin: auto;"></div>
 </div>
 

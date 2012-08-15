@@ -17,10 +17,18 @@ namespace TopCoder.Tools.TcAlgorithmRunner
                 {
                     // Calculate Competition Factor
                     //var participants = round.RoundResults.Select(x => new Functions.Coder(x.Tc_OldRating, x.Tc_OldVolatility)).ToList();
-                    //var competitionFactorFunction = new CompetitionFactorFunction();
-                    //var cf = competitionFactorFunction.Calculate(participants);
+                    //var cf = new CompetitionFactorFunction().Calculate(participants);
                     //round.CompetitionFactor = cf;
 
+                    foreach (var rr in round.RoundResults)
+                    {
+                        // Calculate Weight and K-Factor
+                        var w = new CoderCompetitionWeightFunction().Calculate(rr.Elo_OldRating, rr.NumberOfRatings);
+                        var k = new KFactorFunction().Calculate(round.CompetitionFactor, w);
+
+                        rr.Tc_Weight = w;
+                        rr.Tc_KFactor = k;
+                    }
 
                     db.SaveChanges();
 

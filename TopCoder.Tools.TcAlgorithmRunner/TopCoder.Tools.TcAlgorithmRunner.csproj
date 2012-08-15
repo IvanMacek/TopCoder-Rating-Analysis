@@ -83,6 +83,8 @@
   <ItemGroup>
     <Compile Include="Functions\Coder.cs" />
     <Compile Include="Functions\CompetitionFactorFunction.cs" />
+    <Compile Include="Functions\CoderCompetitionWeightFunction.cs" />
+    <Compile Include="Functions\KFactorFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
