@@ -14,7 +14,7 @@
                 ui: {
                     chartType: 'LineChart',
                     chartOptions: { pointSize: 1 },
-                    chartView: { columns: [0, 1, 2] },
+                    chartView: { columns: [0, 1] },
                     minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
                 }
             }
@@ -23,29 +23,29 @@
         var ratingsChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'ratingsChart',
-            options: { pointSize: 4, title: 'TC & ELO Ratings' },
-            view: { columns: [0, 1, 2]}
+            options: { title: 'Ratings' },
+            view: { columns: [0, 1]}
         });
         
         var volatilityChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'volatilityChart',
-            options: { pointSize: 4, title: 'TC Volatility' },
-            view: { columns: [0, 5]}
-        });
-        
-         var kFactorChart = new google.visualization.ChartWrapper({
-            chartType: 'LineChart',
-            containerId: 'kFactorChart',
-            options: { pointSize: 4, title: 'ELO K-Factor' },
-            view: { columns: [0, 6]}
+            options: { title: 'Volatility' },
+            view: { columns: [0, 2]}
         });
 
         var ratingsDiffChart = new google.visualization.ChartWrapper({
             chartType: 'AreaChart',
             containerId: 'ratingsDiffChart',
-            options: { pointSize: 4, title: 'TC & ELO Ratings Differences' },
-            view: { columns: [0, 3, 4]}
+            options: { title: 'Ratings Differences' },
+            view: { columns: [0, 3]}
+        });
+        
+        var weightChart = new google.visualization.ChartWrapper({
+            chartType: 'AreaChart',
+            containerId: 'weightChart',
+            options: { title: 'Competition Weight' },
+            view: { columns: [0, 4]}
         });
         
         var parseDate = function(input) {
@@ -55,16 +55,14 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Round');
-        data.addColumn('number', 'TopCoder Rating');
-        data.addColumn('number', 'ELO Rating');
-        data.addColumn('number', 'TopCoder Rating Diff');
-        data.addColumn('number', 'ELO Rating Diff');
-        data.addColumn('number', 'TopCoder Volatility');
-        data.addColumn('number', 'Elo K-Factor');
+        data.addColumn('number', 'Rating');
+        data.addColumn('number', 'Volatility');
+        data.addColumn('number', 'Rating Diff');
+        data.addColumn('number', 'Competition Weight');
         data.addRows([
             @foreach (var rr in Model.RoundResults.Where(r => r.IsRated))
             {
-                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.Tc_NewRating, @rr.Elo_NewRating, @rr.Tc_RatingDiff, @rr.Elo_RatingDiff, @rr.Tc_NewVolatility, @rr.Elo_NewKFactor] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
+                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.RatingDiff, @rr.Tc_Weight.ToString().Replace(",", ".")] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }
         ]);
 
@@ -72,7 +70,7 @@
             .bind(control, ratingsChart)
             .bind(control, ratingsDiffChart)
             .bind(control, volatilityChart)
-            .bind(control, kFactorChart);
+            .bind(control, weightChart);
         
         dashboard.draw(data);
     });
@@ -92,11 +90,11 @@
 <h3>Coder's Timeline</h3>
 
 <div id="dashboard">
-    <div id="control" style="width: 50%; height: 70px; margin: auto;"></div>
-    <div id="volatilityChart" style="width: 50%; height: 400px; float: right;"></div>
-    <div id="ratingsChart" style="width: 50%; height: 400px;"></div>
-    <div id="kFactorChart" style="width: 50%; height: 400px; float: right;"></div>
-    <div id="ratingsDiffChart" style="width: 50%; height: 400px;"></div>
+    <div id="control" style="width: 50%; height: 40px; margin: auto;"></div>
+    <div id="volatilityChart" style="width: 50%; height: 200px; float: right;"></div>
+    <div id="ratingsChart" style="width: 50%; height: 200px;"></div>
+    <div id="weightChart" style="width: 50%; height: 200px; float: right;"></div>
+    <div id="ratingsDiffChart" style="width: 50%; height: 200px;"></div>
 </div>
 
 <h3>Coder's Round Results</h3>

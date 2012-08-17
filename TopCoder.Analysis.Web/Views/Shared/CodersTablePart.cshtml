@@ -11,10 +11,8 @@
             </tr>
             <tr>
                 <th> Coder handle </th>  
-                <th> TC Rating </th>  
-                <th> TC Volatility </th>  
-                <th> ELO Rating </th>  
-                <th> ELO K-Factor </th>  
+                <th> Rating </th>  
+                <th> Volatility </th>  
                 <th> First round </th>  
                 <th> Last round </th>  
                 <th> Rounds count </th>  
@@ -28,10 +26,8 @@
             var age = coder.LastRound.Date - coder.FirstRound.Date;
             <tr>
                 <td> @Html.ActionLink(coder.Handle, "Single", "Coders", new { handle = coder.Handle }, null) </td>  
-                <td class="rating"> @ColorCoding.RatingClass(coder.Tc_Rating) </td>  
-                <td> @coder.Tc_Volatility </td>  
-                <td class="rating"> @ColorCoding.RatingClass(coder.Elo_Rating) </td>  
-                <td> @coder.Elo_KFactor </td>  
+                <td class="rating"> @ColorCoding.RatingClass(coder.Rating) </td>  
+                <td> @coder.Volatility </td>  
                 <td> @coder.FirstRound.Name <br/> @coder.FirstRound.Date.ToShortDateString() </td>  
                 <td> @coder.LastRound.Name <br/> @coder.LastRound.Date.ToShortDateString() </td>  
                 <td> @coder.RoundsCount </td>  

@@ -12,22 +12,33 @@ namespace TopCoder.Tools.TcAlgorithmRunner
         {
             using (var db = new TcAnalysisDataModel())
             {
-                var rounds = db.Rounds.ToList();
+                var rounds = db.Rounds.OrderBy(r => r.Date).ToList();
                 foreach (var round in rounds)
                 {
-                    // Calculate Competition Factor
-                    //var participants = round.RoundResults.Select(x => new Functions.Coder(x.Tc_OldRating, x.Tc_OldVolatility)).ToList();
-                    //var cf = new CompetitionFactorFunction().Calculate(participants);
-                    //round.CompetitionFactor = cf;
-
-                    foreach (var rr in round.RoundResults)
+                    foreach (var div in new[] { 1, 2 })
                     {
-                        // Calculate Weight and K-Factor
-                        var w = new CoderCompetitionWeightFunction().Calculate(rr.Elo_OldRating, rr.NumberOfRatings);
-                        var k = new KFactorFunction().Calculate(round.CompetitionFactor, w);
+                        var divRoundResults = round.RoundResults.Where(x => x.Division == div).ToList();
+                        var codersInDiv = divRoundResults.Select(y => new Functions.Coder(y.OldRating, y.OldVolatility)).ToList();
 
-                        rr.Tc_Weight = w;
-                        rr.Tc_KFactor = k;
+                        if (!codersInDiv.Any()) { continue; }
+
+                        //var cf = new CompetitionFactorFunction().Calculate(codersInDiv);
+                        //if (div == 1) { round.DivOneCompetitionFactor = cf; }
+                        //if (div == 2) { round.DivTwoCompetitionFactor = cf; }
+
+                        foreach (var rr in divRoundResults)
+                        {
+                            //var w = new CoderCompetitionWeightFunction().Calculate(rr.Tc_OldRating, rr.NumberOfRatings - 1);
+                            //rr.Tc_Weight = w;
+
+                            //var k = new KFactorFunction().Calculate((div == 1) ? round.DivOneCompetitionFactor : round.DivTwoCompetitionFactor, rr.Tc_Weight);
+                            //rr.Tc_KFactor = k;
+                            //Console.WriteLine(k);
+
+                            var er = new ExpectedRankFunction().Calculate(new Functions.Coder(rr.OldRating, rr.OldVolatility), codersInDiv);
+                            rr.Tc_ExpectedRank = er;
+                            //Console.WriteLine(er);
+                        }
                     }
 
                     db.SaveChanges();

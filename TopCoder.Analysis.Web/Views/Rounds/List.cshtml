@@ -13,7 +13,7 @@
             options: {
               filterColumnIndex: 0,
               ui: {
-                chartType: 'AreaChart',
+                chartType: 'ScatterChart',
                 chartOptions: { pointSize: 1 },
                 chartView: { columns: [0, 1] },
                 minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
@@ -22,17 +22,17 @@
         });
 
         var codersChart = new google.visualization.ChartWrapper({
-            chartType: 'LineChart',
+            chartType: 'ScatterChart',
             containerId: 'codersChart',
-            options: { pointSize: 4, title: 'Number of Coders Per Round' },
+            options: { pointSize: 2, title: 'Number of Coders Per Round' },
             view: { columns: [0, 1]}
         });
         
         var cfChart = new google.visualization.ChartWrapper({
-            chartType: 'LineChart',
+            chartType: 'ScatterChart',
             containerId: 'cfChart',
-            options: { pointSize: 4, title: 'Competition Factor Per Round' },
-            view: { columns: [0, 2]}
+            options: { pointSize: 2, title: 'Competition Factor Per Round' },
+            view: { columns: [0, 2, 3]}
         });
 
         var parseDate = function(input) {
@@ -43,11 +43,12 @@
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Round');
         data.addColumn('number', 'Total Coders');
-        data.addColumn('number', 'Competition Factor');
+        data.addColumn('number', 'Div 1 Competition Factor');
+        data.addColumn('number', 'Div 2 Competition Factor');
         data.addRows([
             @foreach (var r in Model.Rounds)
             {
-                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount, @r.CompetitionFactor.ToString().Replace(",", ".")] </text>@(r != Model.Rounds.Last() ? "," : string.Empty)
+                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", ".")] </text>@(r != Model.Rounds.Last() ? "," : string.Empty)
             }
         ]);
 

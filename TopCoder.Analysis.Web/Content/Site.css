@@ -330,7 +330,11 @@ div#title {
 .good { color: green; }
 .bad  { color: red; }
 
-.rating { background-color: lightsteelblue; }
+.rat { background-color: lightsteelblue; }
+.vol {  }
+.rank { background-color: lightsteelblue; }
+.wght {  }
+
 .rating-1 { color: gray; }
 .rating-2 { color: green; }
 .rating-3 { color: blue; }
@@ -342,12 +346,12 @@ div#title {
 ----------------------------------------------------------*/
 
 .clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
-	}
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+    }
 * html .clearfix             { zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */

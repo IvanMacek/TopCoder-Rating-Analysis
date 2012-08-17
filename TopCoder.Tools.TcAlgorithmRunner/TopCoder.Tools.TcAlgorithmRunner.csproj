@@ -71,19 +71,27 @@
     <StartupObject>TopCoder.Tools.TcAlgorithmRunner.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.2.1.2\lib\Net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="zlib.net">
+      <HintPath>..\packages\zlib.net.1.0.4.0\lib\zlib.net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\Coder.cs" />
     <Compile Include="Functions\CompetitionFactorFunction.cs" />
     <Compile Include="Functions\CoderCompetitionWeightFunction.cs" />
+    <Compile Include="Functions\ExpectedRankFunction.cs" />
     <Compile Include="Functions\KFactorFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
+    <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
+    <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

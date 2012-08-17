@@ -7,7 +7,7 @@ using TopCoder.Analysis.Data;
 using TopCoder.Tools.EloRunner.Elo;
 
 namespace TopCoder.Tools.EloRunner
-{
+{ 
     public class Program
     {
         public static void Main(string[] args)
@@ -69,9 +69,9 @@ namespace TopCoder.Tools.EloRunner
                         var resultsWithoutThisOne = divResults.Where(rr => rr.CoderId != result.CoderId).ToList();
                         var opponentsRatings = resultsWithoutThisOne.Select(rr => rr.Coder.Elo_Rating).ToArray();
                         var observedScores =
-                            resultsWithoutThisOne.Where(rr => rr.DivisionPlace < result.DivisionPlace).Select(rr => 0.0)
-                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionPlace == result.DivisionPlace).Select(rr => 0.5))
-                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionPlace > result.DivisionPlace).Select(rr => 1.0))
+                            resultsWithoutThisOne.Where(rr => rr.DivisionRank < result.DivisionRank).Select(rr => 0.0)
+                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionRank == result.DivisionRank).Select(rr => 0.5))
+                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionRank > result.DivisionRank).Select(rr => 1.0))
                                 .ToArray();
 
                         var eloAlgorithm = new EloAlgorithm();
@@ -81,7 +81,6 @@ namespace TopCoder.Tools.EloRunner
                         result.Elo_OldRating = currentRating;
                         result.Elo_NewRating = newRating;
                         result.Elo_NewKFactor = currentKFactor;
-                        result.Elo_RatingDiff = newRating - currentRating;
                     }
                 }
 
