@@ -21,7 +21,7 @@ namespace TopCoder.Tools.EloRunner
             {
                 Trace.Write(string.Format("Coders ratings setting to {0} points and {1} K-Factor... ", startingRating, startingKFactor));
                 
-                _ResetAllCodersRatings(db, startingRating, startingKFactor);
+                //_ResetAllCodersRatings(db, startingRating, startingKFactor);
                 
                 Trace.WriteLine("Done!");
 
@@ -31,7 +31,7 @@ namespace TopCoder.Tools.EloRunner
                 Trace.WriteLine(string.Format("Started calculating ELO over {0} rounds...", rounds.Count));
                 Trace.Indent();
 
-                _UpdateRoundResults(db, rounds);
+                //_UpdateRoundResults(db, rounds);
 
                 Trace.Unindent();
                 Trace.WriteLine(string.Format("Done calculating ELO over {0} rounds!", rounds.Count));
@@ -41,73 +41,73 @@ namespace TopCoder.Tools.EloRunner
             }
         }
 
-        private static void _UpdateRoundResults(TcAnalysisDataModel db, IList<Round> rounds)
-        {
-            foreach (var x in rounds.Select((x, i) => new { Round = x, Index = i }))
-            {
-                var index = x.Index;
-                var round = x.Round;
-                var roundStopwatch = Stopwatch.StartNew();
+        //private static void _UpdateRoundResults(TcAnalysisDataModel db, IList<Round> rounds)
+        //{
+        //    foreach (var x in rounds.Select((x, i) => new { Round = x, Index = i }))
+        //    {
+        //        var index = x.Index;
+        //        var round = x.Round;
+        //        var roundStopwatch = Stopwatch.StartNew();
 
-                Trace.Write(string.Format("{0:000}. {1}... ", index + 1, round.Name));
+        //        Trace.Write(string.Format("{0:000}. {1}... ", index + 1, round.Name));
 
-                var divisionsResults =
-                    (from rr in db.RoundResults.Include("Coder")
-                     where rr.RoundId == round.Id
-                     group rr by rr.Division
-                     into divGroups
-                     select divGroups
-                    ).ToList();
+        //        var divisionsResults =
+        //            (from rr in db.RoundResults.Include("Coder")
+        //             where rr.RoundId == round.Id
+        //             group rr by rr.Division
+        //             into divGroups
+        //             select divGroups
+        //            ).ToList();
 
-                foreach (var divResults in divisionsResults)
-                {
-                    foreach(var result in divResults.Where(r => r.IsRated))
-                    {
-                        var currentRating = result.Coder.Elo_Rating;
-                        var currentKFactor = result.Coder.Elo_KFactor;
+        //        foreach (var divResults in divisionsResults)
+        //        {
+        //            foreach(var result in divResults.Where(r => r.IsRated))
+        //            {
+        //                var currentRating = result.Coder.Elo_Rating;
+        //                var currentKFactor = result.Coder.Elo_KFactor;
 
-                        var resultsWithoutThisOne = divResults.Where(rr => rr.CoderId != result.CoderId).ToList();
-                        var opponentsRatings = resultsWithoutThisOne.Select(rr => rr.Coder.Elo_Rating).ToArray();
-                        var observedScores =
-                            resultsWithoutThisOne.Where(rr => rr.DivisionRank < result.DivisionRank).Select(rr => 0.0)
-                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionRank == result.DivisionRank).Select(rr => 0.5))
-                                .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionRank > result.DivisionRank).Select(rr => 1.0))
-                                .ToArray();
+        //                var resultsWithoutThisOne = divResults.Where(rr => rr.CoderId != result.CoderId).ToList();
+        //                var opponentsRatings = resultsWithoutThisOne.Select(rr => rr.Coder.Elo_Rating).ToArray();
+        //                var observedScores =
+        //                    resultsWithoutThisOne.Where(rr => rr.DivisionRank < result.DivisionRank).Select(rr => 0.0)
+        //                        .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionRank == result.DivisionRank).Select(rr => 0.5))
+        //                        .Concat(resultsWithoutThisOne.Where(rr => rr.DivisionRank > result.DivisionRank).Select(rr => 1.0))
+        //                        .ToArray();
 
-                        var eloAlgorithm = new EloAlgorithm();
-                        var newRating = eloAlgorithm.CalculateNewRating(currentRating, currentKFactor, opponentsRatings, observedScores);
+        //                var eloAlgorithm = new EloAlgorithm();
+        //                var newRating = eloAlgorithm.CalculateNewRating(currentRating, currentKFactor, opponentsRatings, observedScores);
 
-                        // Update result
-                        result.Elo_OldRating = currentRating;
-                        result.Elo_NewRating = newRating;
-                        result.Elo_NewKFactor = currentKFactor;
-                    }
-                }
+        //                // Update result
+        //                result.Elo_OldRating = currentRating;
+        //                result.Elo_NewRating = newRating;
+        //                result.Elo_NewKFactor = currentKFactor;
+        //            }
+        //        }
 
-                // Update coders
-                foreach (var result in divisionsResults.SelectMany(a => a).Where(r => r.IsRated))
-                {
-                    result.Coder.Elo_Rating = result.Elo_NewRating;
-                    result.Coder.Elo_KFactor = result.Elo_NewKFactor;
-                }
+        //        // Update coders
+        //        foreach (var result in divisionsResults.SelectMany(a => a).Where(r => r.IsRated))
+        //        {
+        //            result.Coder.Elo_Rating = result.Elo_NewRating;
+        //            result.Coder.Elo_KFactor = result.Elo_NewKFactor;
+        //        }
 
-                db.SaveChanges();
+        //        db.SaveChanges();
 
-                roundStopwatch.Stop();
-                Trace.WriteLine(TimeSpan.FromMilliseconds(roundStopwatch.ElapsedMilliseconds));
-            }
-        }
+        //        roundStopwatch.Stop();
+        //        Trace.WriteLine(TimeSpan.FromMilliseconds(roundStopwatch.ElapsedMilliseconds));
+        //    }
+        //}
 
-        private static void _ResetAllCodersRatings(TcAnalysisDataModel db, int startingRating, int startingKFactor)
-        {
-            var coders = db.Coders.ToList();
-            foreach (var coder in coders)
-            {
-                coder.Elo_Rating = startingRating;
-                coder.Elo_KFactor = startingKFactor;
-            }
+        //private static void _ResetAllCodersRatings(TcAnalysisDataModel db, int startingRating, int startingKFactor)
+        //{
+        //    var coders = db.Coders.ToList();
+        //    foreach (var coder in coders)
+        //    {
+        //        coder.Elo_Rating = startingRating;
+        //        coder.Elo_KFactor = startingKFactor;
+        //    }
 
-            db.SaveChanges();
-        }
+        //    db.SaveChanges();
+        //}
     }
 }

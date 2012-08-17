@@ -46,7 +46,7 @@
           <Property Name="RoundId" Type="int" Nullable="false" />
           <Property Name="CoderId" Type="int" Nullable="false" />
           <Property Name="Division" Type="int" Nullable="false" />
-          <Property Name="DivisionRank" Type="int" Nullable="false" />
+          <Property Name="DivisionPlace" Type="int" Nullable="false" />
           <Property Name="Points" Type="float" Nullable="false" />
           <Property Name="IsRated" Type="bit" Nullable="false" />
           <Property Name="NumberOfRatings" Type="int" Nullable="false" />
@@ -54,9 +54,15 @@
           <Property Name="NewRating" Type="int" Nullable="false" />
           <Property Name="OldVolatility" Type="int" Nullable="false" />
           <Property Name="NewVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc_ExpectedRank" Type="float" Nullable="false" />
+          <Property Name="Tc_ActualRank" Type="float" Nullable="false" />
+          <Property Name="Tc_ExpectedPerf" Type="float" Nullable="false" />
+          <Property Name="Tc_ActualPerf" Type="float" Nullable="false" />
           <Property Name="Tc_Weight" Type="float" Nullable="false" />
           <Property Name="Tc_KFactor" Type="float" Nullable="false" />
-          <Property Name="Tc_ExpectedRank" Type="float" Nullable="false" />
+          <Property Name="Tc_Cap" Type="float" Nullable="false" />
+          <Property Name="Tc_NewRating" Type="int" Nullable="false" />
+          <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rounds">
           <Key>
@@ -65,11 +71,18 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="TotalCodersCount" Type="int" Nullable="false" />
+          <Property Name="CodersCount" Type="int" Nullable="false" />
           <Property Name="DivOneCodersCount" Type="int" Nullable="false" />
           <Property Name="DivTwoCodersCount" Type="int" Nullable="false" />
           <Property Name="DivOneCompetitionFactor" Type="float" Nullable="false" />
           <Property Name="DivTwoCompetitionFactor" Type="float" Nullable="false" />
+          <Property Name="DivOneRatingsMean" Type="float" Nullable="false" />
+          <Property Name="DivTwoRatingsMean" Type="float" Nullable="false" />
+          <Property Name="DivOneRatingsDeviation" Type="float" Nullable="false" />
+          <Property Name="DivTwoRatingsDeviation" Type="float" Nullable="false" />
+          <Property Name="GlobalCodersCount" Type="int" Nullable="false" />
+          <Property Name="GlobalRatingsMean" Type="float" Nullable="false" />
+          <Property Name="GlobalRatingsDeviation" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Store.Coders" Multiplicity="1" />
@@ -167,12 +180,10 @@
           <Property Type="Int32" Name="RoundId" Nullable="false" />
           <Property Type="Int32" Name="CoderId" Nullable="false" />
           <Property Type="Int32" Name="Division" Nullable="false" />
-          <Property Type="Int32" Name="DivisionRank" Nullable="false" />
           <Property Type="Double" Name="Points" Nullable="false" />
           <Property Type="Boolean" Name="IsRated" Nullable="false" />
           <Property Type="Int32" Name="NumberOfRatings" Nullable="false" />
           <Property Type="Double" Name="Tc_Weight" Nullable="false" />
-          <Property Type="Double" Name="Tc_KFactor" Nullable="false" />
           <Property Type="Double" Name="Tc_ExpectedRank" Nullable="false" />
           <NavigationProperty Name="Coder" Relationship="Model.FK_CoderId" FromRole="RoundResult" ToRole="Coder" />
           <NavigationProperty Name="Round" Relationship="Model.FK_RoundId" FromRole="RoundResult" ToRole="Round" />
@@ -180,6 +191,14 @@
           <Property Type="Int32" Name="NewRating" Nullable="false" />
           <Property Type="Int32" Name="OldVolatility" Nullable="false" />
           <Property Type="Int32" Name="NewVolatility" Nullable="false" />
+          <Property Type="Int32" Name="DivisionPlace" Nullable="false" />
+          <Property Type="Double" Name="Tc_ActualRank" Nullable="false" />
+          <Property Type="Double" Name="Tc_ExpectedPerf" Nullable="false" />
+          <Property Type="Double" Name="Tc_ActualPerf" Nullable="false" />
+          <Property Type="Double" Name="Tc_Cap" Nullable="false" />
+          <Property Type="Int32" Name="Tc_NewRating" Nullable="false" />
+          <Property Type="Int32" Name="Tc_NewVolatility" Nullable="false" />
+          <Property Type="Double" Name="Tc_KFactor" Nullable="false" />
         </EntityType>
         <EntityType Name="Round">
           <Key>
@@ -188,7 +207,6 @@
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="Date" Nullable="false" />
-          <Property Type="Int32" Name="TotalCodersCount" Nullable="false" />
           <Property Type="Int32" Name="DivOneCodersCount" Nullable="false" />
           <Property Type="Int32" Name="DivTwoCodersCount" Nullable="false" />
           <NavigationProperty Name="Coders" Relationship="Model.FK_FirstRoundId" FromRole="Round" ToRole="Coder" />
@@ -196,6 +214,14 @@
           <NavigationProperty Name="RoundResults" Relationship="Model.FK_RoundId" FromRole="Round" ToRole="RoundResult" />
           <Property Type="Double" Name="DivOneCompetitionFactor" Nullable="false" />
           <Property Type="Double" Name="DivTwoCompetitionFactor" Nullable="false" />
+          <Property Type="Int32" Name="GlobalCodersCount" Nullable="false" />
+          <Property Type="Double" Name="GlobalRatingsMean" Nullable="false" />
+          <Property Type="Double" Name="GlobalRatingsDeviation" Nullable="false" />
+          <Property Type="Int32" Name="CodersCount" Nullable="false" />
+          <Property Type="Double" Name="DivOneRatingsMean" Nullable="false" />
+          <Property Type="Double" Name="DivTwoRatingsMean" Nullable="false" />
+          <Property Type="Double" Name="DivOneRatingsDeviation" Nullable="false" />
+          <Property Type="Double" Name="DivTwoRatingsDeviation" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Type="Model.Coder" Role="Coder" Multiplicity="1" />
@@ -267,17 +293,23 @@
           <EntitySetMapping Name="RoundResults">
             <EntityTypeMapping TypeName="Model.RoundResult">
               <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="Tc_KFactor" ColumnName="Tc_KFactor" />
+                <ScalarProperty Name="Tc_NewVolatility" ColumnName="Tc_NewVolatility" />
+                <ScalarProperty Name="Tc_NewRating" ColumnName="Tc_NewRating" />
+                <ScalarProperty Name="Tc_Cap" ColumnName="Tc_Cap" />
+                <ScalarProperty Name="Tc_ActualPerf" ColumnName="Tc_ActualPerf" />
+                <ScalarProperty Name="Tc_ExpectedPerf" ColumnName="Tc_ExpectedPerf" />
+                <ScalarProperty Name="Tc_ActualRank" ColumnName="Tc_ActualRank" />
+                <ScalarProperty Name="DivisionPlace" ColumnName="DivisionPlace" />
                 <ScalarProperty Name="NewVolatility" ColumnName="NewVolatility" />
                 <ScalarProperty Name="OldVolatility" ColumnName="OldVolatility" />
                 <ScalarProperty Name="NewRating" ColumnName="NewRating" />
                 <ScalarProperty Name="OldRating" ColumnName="OldRating" />
                 <ScalarProperty Name="Tc_ExpectedRank" ColumnName="Tc_ExpectedRank" />
-                <ScalarProperty Name="Tc_KFactor" ColumnName="Tc_KFactor" />
                 <ScalarProperty Name="Tc_Weight" ColumnName="Tc_Weight" />
                 <ScalarProperty Name="NumberOfRatings" ColumnName="NumberOfRatings" />
                 <ScalarProperty Name="IsRated" ColumnName="IsRated" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="DivisionRank" ColumnName="DivisionRank" />
                 <ScalarProperty Name="Division" ColumnName="Division" />
                 <ScalarProperty Name="CoderId" ColumnName="CoderId" />
                 <ScalarProperty Name="RoundId" ColumnName="RoundId" />
@@ -287,11 +319,18 @@
           <EntitySetMapping Name="Rounds">
             <EntityTypeMapping TypeName="Model.Round">
               <MappingFragment StoreEntitySet="Rounds">
+                <ScalarProperty Name="DivTwoRatingsDeviation" ColumnName="DivTwoRatingsDeviation" />
+                <ScalarProperty Name="DivOneRatingsDeviation" ColumnName="DivOneRatingsDeviation" />
+                <ScalarProperty Name="DivTwoRatingsMean" ColumnName="DivTwoRatingsMean" />
+                <ScalarProperty Name="DivOneRatingsMean" ColumnName="DivOneRatingsMean" />
+                <ScalarProperty Name="CodersCount" ColumnName="CodersCount" />
+                <ScalarProperty Name="GlobalRatingsDeviation" ColumnName="GlobalRatingsDeviation" />
+                <ScalarProperty Name="GlobalRatingsMean" ColumnName="GlobalRatingsMean" />
+                <ScalarProperty Name="GlobalCodersCount" ColumnName="GlobalCodersCount" />
                 <ScalarProperty Name="DivTwoCompetitionFactor" ColumnName="DivTwoCompetitionFactor" />
                 <ScalarProperty Name="DivOneCompetitionFactor" ColumnName="DivOneCompetitionFactor" />
                 <ScalarProperty Name="DivTwoCodersCount" ColumnName="DivTwoCodersCount" />
                 <ScalarProperty Name="DivOneCodersCount" ColumnName="DivOneCodersCount" />
-                <ScalarProperty Name="TotalCodersCount" ColumnName="TotalCodersCount" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -320,23 +359,23 @@
     <Diagrams>
       <Diagram Name="TcAnalysisDataModel">
         <EntityTypeShape EntityType="Model.Coder" Width="2" PointX="3.875" PointY="0.875" Height="2.9417936197916656" />
-        <EntityTypeShape EntityType="Model.RoundResult" Width="2" PointX="7.125" PointY="1.125" Height="3.3263964843749996" />
-        <EntityTypeShape EntityType="Model.Round" Width="2" PointX="0.75" PointY="1.75" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="Model.RoundResult" Width="2" PointX="7.125" PointY="1.125" Height="5.2494108072916656" />
+        <EntityTypeShape EntityType="Model.Round" Width="2" PointX="0.75" PointY="1.75" Height="3.5186979166666656" />
         <AssociationConnector Association="Model.FK_CoderId" >
           <ConnectorPoint PointX="5.875" PointY="2.4708968098958328" />
           <ConnectorPoint PointX="7.125" PointY="2.4708968098958328" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_FirstRoundId" >
-          <ConnectorPoint PointX="2.75" PointY="2.7833968098958328" />
-          <ConnectorPoint PointX="3.875" PointY="2.7833968098958328" />
+          <ConnectorPoint PointX="2.75" PointY="3.1825152401495318" />
+          <ConnectorPoint PointX="3.875" PointY="3.1825152401495318" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_LastRoundId" >
-          <ConnectorPoint PointX="2.75" PointY="2.2041984049479164" />
-          <ConnectorPoint PointX="3.875" PointY="2.2041984049479164" />
+          <ConnectorPoint PointX="2.75" PointY="2.4037576200747659" />
+          <ConnectorPoint PointX="3.875" PointY="2.4037576200747659" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_RoundId" >
-          <ConnectorPoint PointX="2.75" PointY="4.3816943359375" />
-          <ConnectorPoint PointX="7.125" PointY="4.3816943359375" />
+          <ConnectorPoint PointX="2.75" PointY="4.5739957682291656" />
+          <ConnectorPoint PointX="7.125" PointY="4.5739957682291656" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

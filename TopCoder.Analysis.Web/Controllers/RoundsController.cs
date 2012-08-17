@@ -35,7 +35,7 @@ namespace TopCoder.Analysis.Web.Controllers
                 model.RoundResults =
                     (from rr in db.RoundResults.Include("Round").Include("Coder")
                      where rr.RoundId == roundId
-                     orderby rr.DivisionRank ascending
+                     orderby rr.DivisionPlace ascending
                      select rr
                     ).ToList();
             }

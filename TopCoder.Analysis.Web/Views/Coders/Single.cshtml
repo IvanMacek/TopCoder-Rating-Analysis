@@ -33,19 +33,12 @@
             options: { title: 'Volatility' },
             view: { columns: [0, 2]}
         });
-
-        var ratingsDiffChart = new google.visualization.ChartWrapper({
-            chartType: 'AreaChart',
-            containerId: 'ratingsDiffChart',
-            options: { title: 'Ratings Differences' },
-            view: { columns: [0, 3]}
-        });
         
         var weightChart = new google.visualization.ChartWrapper({
             chartType: 'AreaChart',
             containerId: 'weightChart',
             options: { title: 'Competition Weight' },
-            view: { columns: [0, 4]}
+            view: { columns: [0, 3]}
         });
         
         var parseDate = function(input) {
@@ -57,18 +50,16 @@
         data.addColumn('date', 'Round');
         data.addColumn('number', 'Rating');
         data.addColumn('number', 'Volatility');
-        data.addColumn('number', 'Rating Diff');
         data.addColumn('number', 'Competition Weight');
         data.addRows([
             @foreach (var rr in Model.RoundResults.Where(r => r.IsRated))
             {
-                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.RatingDiff, @rr.Tc_Weight.ToString().Replace(",", ".")] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
+                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.Tc_Weight.ToString().Replace(",", ".")] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }
         ]);
 
         dashboard
             .bind(control, ratingsChart)
-            .bind(control, ratingsDiffChart)
             .bind(control, volatilityChart)
             .bind(control, weightChart);
         
@@ -93,8 +84,7 @@
     <div id="control" style="width: 50%; height: 40px; margin: auto;"></div>
     <div id="volatilityChart" style="width: 50%; height: 200px; float: right;"></div>
     <div id="ratingsChart" style="width: 50%; height: 200px;"></div>
-    <div id="weightChart" style="width: 50%; height: 200px; float: right;"></div>
-    <div id="ratingsDiffChart" style="width: 50%; height: 200px;"></div>
+    <div id="weightChart" style="width: 50%; height: 200px;"></div>
 </div>
 
 <h3>Coder's Round Results</h3>

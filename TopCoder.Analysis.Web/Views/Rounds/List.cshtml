@@ -13,26 +13,47 @@
             options: {
               filterColumnIndex: 0,
               ui: {
-                chartType: 'ScatterChart',
+                chartType: 'LineChart',
                 chartOptions: { pointSize: 1 },
-                chartView: { columns: [0, 1] },
+                chartView: { columns: [0, 2] },
                 minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
               }
             }
         });
 
-        var codersChart = new google.visualization.ChartWrapper({
+        var codersPerRoundChart = new google.visualization.ChartWrapper({
             chartType: 'ScatterChart',
-            containerId: 'codersChart',
-            options: { pointSize: 2, title: 'Number of Coders Per Round' },
+            containerId: 'codersPerRoundChart',
+            options: { pointSize: 1, title: 'Coders Per Round' },
             view: { columns: [0, 1]}
+        });
+        
+        var totalCodersChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'totalCodersChart',
+            options: { title: 'Total Coders' },
+            view: { columns: [0, 2]}
         });
         
         var cfChart = new google.visualization.ChartWrapper({
             chartType: 'ScatterChart',
             containerId: 'cfChart',
-            options: { pointSize: 2, title: 'Competition Factor Per Round' },
-            view: { columns: [0, 2, 3]}
+            options: { pointSize: 1, title: 'Competition Factor Per Round' },
+            view: { columns: [0, 3, 4]}
+        });
+        
+        var ratMeanChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'ratMeanChart',
+            options: { title: 'Ratings Mean Per Round' },
+            view: { columns: [0, 5]}
+        });
+        
+        var ratDevianceChart = new google.visualization.ChartWrapper({
+            chartType: 'LineChart',
+            containerId: 'ratDevianceChart',
+            options: { title: 'Ratings Standard Deviation Per Round' },
+            view: { columns: [0, 6]}
         });
 
         var parseDate = function(input) {
@@ -42,19 +63,25 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Round');
+        data.addColumn('number', 'Coders Per Round');
         data.addColumn('number', 'Total Coders');
         data.addColumn('number', 'Div 1 Competition Factor');
         data.addColumn('number', 'Div 2 Competition Factor');
+        data.addColumn('number', 'Ratings Mean');
+        data.addColumn('number', 'Ratings Standard Deviation');
         data.addRows([
             @foreach (var r in Model.Rounds)
             {
-                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", ".")] </text>@(r != Model.Rounds.Last() ? "," : string.Empty)
+                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount, @r.GlobalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", "."), @r.GlobalRatingsMean.ToString().Replace(",", "."), @r.GlobalRatingsDeviation.ToString().Replace(",", ".") ] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
             }
         ]);
 
         dashboard
-            .bind(control, codersChart)
-            .bind(control, cfChart);
+            .bind(control, codersPerRoundChart)
+            .bind(control, totalCodersChart)
+            .bind(control, cfChart)
+            .bind(control, ratMeanChart)
+            .bind(control, ratDevianceChart);
         dashboard.draw(data);
     });
 </script>
@@ -62,9 +89,12 @@
 <h2>Rounds List</h2>
 
 <div id="dashboard" style="width: 64%; float: right;">
-    <div id="codersChart" style="height: 400px;"></div>
-    <div id="cfChart" style="height: 400px;"></div>
-    <div id="control" style=" width: 50%; height: 70px; margin: auto;"></div>
+    <div id="control" style=" width: 50%; height: 50px; margin: auto;"></div>
+    <div id="totalCodersChart" style="height: 200px;"></div>
+    <div id="codersPerRoundChart" style="height: 200px;"></div>
+    <div id="cfChart" style="height: 200px;"></div>
+    <div id="ratMeanChart" style="height: 200px;"></div>
+    <div id="ratDevianceChart" style="height: 200px;"></div>
 </div>
 
 <div style="width: 35%;">

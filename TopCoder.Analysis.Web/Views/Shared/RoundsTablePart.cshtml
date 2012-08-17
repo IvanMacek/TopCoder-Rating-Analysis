@@ -13,10 +13,21 @@
                 <th> Name </th>  
                 <th> Date </th>  
                 <th> Coders </th>  
-                <th> Div 1 Coders </th>  
-                <th> Div 2 Coders </th>  
-                <th> Div 1 CF </th>  
-                <th> Div 2 CF </th>  
+
+                <th> D1 Coders </th>  
+                <th> D1 Rat Mean </th>  
+                <th> D1 Rat StdDev </th>  
+                <th> D1 CF </th>  
+
+                <th> D2 Coders </th>  
+                <th> D2 Rat Mean </th>  
+                <th> D2 Rat StdDev </th>  
+                <th> D2 CF </th>  
+                
+                <th> GL Coders </th>  
+                <th> GL Rat Mean </th>  
+                <th> GL Rat StdDev </th>  
+                
             </tr>
         </thead>
 
@@ -25,12 +36,22 @@
         {
             <tr>
                 <td> @Html.ActionLink(round.Name, "Single", "Rounds", new { roundId = round.Id }, null) </td>  
-                <td> @round.Date.ToShortDateString() </td>  
-                <td> @round.TotalCodersCount </td>  
+                <td> @round.Date.ToShortDateString() </td>
+                <td> @round.CodersCount </td>  
+
                 <td> @round.DivOneCodersCount </td>  
+                <td> @round.DivOneRatingsMean.ToString("0.##") </td>  
+                <td> @round.DivOneRatingsDeviation.ToString("0.##") </td>  
+                <td> @round.DivOneCompetitionFactor.ToString("0.##") </td>  
+                
                 <td> @round.DivTwoCodersCount </td>  
-                <td> @round.DivOneCompetitionFactor.ToString("0.#") </td>  
-                <td> @round.DivTwoCompetitionFactor.ToString("0.#") </td>  
+                <td> @round.DivTwoRatingsMean.ToString("0.##") </td>  
+                <td> @round.DivTwoRatingsDeviation.ToString("0.##") </td>  
+                <td> @round.DivTwoCompetitionFactor.ToString("0.##") </td>  
+
+                <td> @round.GlobalCodersCount.ToString("0.#") </td>  
+                <td> @round.GlobalRatingsMean.ToString("0.#") </td>  
+                <td> @round.GlobalRatingsDeviation.ToString("0.#") </td>  
             </tr>
         }   
         </tbody>

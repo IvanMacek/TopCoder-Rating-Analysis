@@ -489,22 +489,36 @@ namespace TopCoder.Analysis.Data
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="date">Initial value of the Date property.</param>
-        /// <param name="totalCodersCount">Initial value of the TotalCodersCount property.</param>
         /// <param name="divOneCodersCount">Initial value of the DivOneCodersCount property.</param>
         /// <param name="divTwoCodersCount">Initial value of the DivTwoCodersCount property.</param>
         /// <param name="divOneCompetitionFactor">Initial value of the DivOneCompetitionFactor property.</param>
         /// <param name="divTwoCompetitionFactor">Initial value of the DivTwoCompetitionFactor property.</param>
-        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 totalCodersCount, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor)
+        /// <param name="globalCodersCount">Initial value of the GlobalCodersCount property.</param>
+        /// <param name="globalRatingsMean">Initial value of the GlobalRatingsMean property.</param>
+        /// <param name="globalRatingsDeviation">Initial value of the GlobalRatingsDeviation property.</param>
+        /// <param name="codersCount">Initial value of the CodersCount property.</param>
+        /// <param name="divOneRatingsMean">Initial value of the DivOneRatingsMean property.</param>
+        /// <param name="divTwoRatingsMean">Initial value of the DivTwoRatingsMean property.</param>
+        /// <param name="divOneRatingsDeviation">Initial value of the DivOneRatingsDeviation property.</param>
+        /// <param name="divTwoRatingsDeviation">Initial value of the DivTwoRatingsDeviation property.</param>
+        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Int32 codersCount, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation)
         {
             Round round = new Round();
             round.Id = id;
             round.Name = name;
             round.Date = date;
-            round.TotalCodersCount = totalCodersCount;
             round.DivOneCodersCount = divOneCodersCount;
             round.DivTwoCodersCount = divTwoCodersCount;
             round.DivOneCompetitionFactor = divOneCompetitionFactor;
             round.DivTwoCompetitionFactor = divTwoCompetitionFactor;
+            round.GlobalCodersCount = globalCodersCount;
+            round.GlobalRatingsMean = globalRatingsMean;
+            round.GlobalRatingsDeviation = globalRatingsDeviation;
+            round.CodersCount = codersCount;
+            round.DivOneRatingsMean = divOneRatingsMean;
+            round.DivTwoRatingsMean = divTwoRatingsMean;
+            round.DivOneRatingsDeviation = divOneRatingsDeviation;
+            round.DivTwoRatingsDeviation = divTwoRatingsDeviation;
             return round;
         }
 
@@ -586,30 +600,6 @@ namespace TopCoder.Analysis.Data
         private global::System.DateTime _Date;
         partial void OnDateChanging(global::System.DateTime value);
         partial void OnDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 TotalCodersCount
-        {
-            get
-            {
-                return _TotalCodersCount;
-            }
-            set
-            {
-                OnTotalCodersCountChanging(value);
-                ReportPropertyChanging("TotalCodersCount");
-                _TotalCodersCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TotalCodersCount");
-                OnTotalCodersCountChanged();
-            }
-        }
-        private global::System.Int32 _TotalCodersCount;
-        partial void OnTotalCodersCountChanging(global::System.Int32 value);
-        partial void OnTotalCodersCountChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -706,6 +696,198 @@ namespace TopCoder.Analysis.Data
         private global::System.Double _DivTwoCompetitionFactor;
         partial void OnDivTwoCompetitionFactorChanging(global::System.Double value);
         partial void OnDivTwoCompetitionFactorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GlobalCodersCount
+        {
+            get
+            {
+                return _GlobalCodersCount;
+            }
+            set
+            {
+                OnGlobalCodersCountChanging(value);
+                ReportPropertyChanging("GlobalCodersCount");
+                _GlobalCodersCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GlobalCodersCount");
+                OnGlobalCodersCountChanged();
+            }
+        }
+        private global::System.Int32 _GlobalCodersCount;
+        partial void OnGlobalCodersCountChanging(global::System.Int32 value);
+        partial void OnGlobalCodersCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double GlobalRatingsMean
+        {
+            get
+            {
+                return _GlobalRatingsMean;
+            }
+            set
+            {
+                OnGlobalRatingsMeanChanging(value);
+                ReportPropertyChanging("GlobalRatingsMean");
+                _GlobalRatingsMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GlobalRatingsMean");
+                OnGlobalRatingsMeanChanged();
+            }
+        }
+        private global::System.Double _GlobalRatingsMean;
+        partial void OnGlobalRatingsMeanChanging(global::System.Double value);
+        partial void OnGlobalRatingsMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double GlobalRatingsDeviation
+        {
+            get
+            {
+                return _GlobalRatingsDeviation;
+            }
+            set
+            {
+                OnGlobalRatingsDeviationChanging(value);
+                ReportPropertyChanging("GlobalRatingsDeviation");
+                _GlobalRatingsDeviation = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GlobalRatingsDeviation");
+                OnGlobalRatingsDeviationChanged();
+            }
+        }
+        private global::System.Double _GlobalRatingsDeviation;
+        partial void OnGlobalRatingsDeviationChanging(global::System.Double value);
+        partial void OnGlobalRatingsDeviationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CodersCount
+        {
+            get
+            {
+                return _CodersCount;
+            }
+            set
+            {
+                OnCodersCountChanging(value);
+                ReportPropertyChanging("CodersCount");
+                _CodersCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CodersCount");
+                OnCodersCountChanged();
+            }
+        }
+        private global::System.Int32 _CodersCount;
+        partial void OnCodersCountChanging(global::System.Int32 value);
+        partial void OnCodersCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivOneRatingsMean
+        {
+            get
+            {
+                return _DivOneRatingsMean;
+            }
+            set
+            {
+                OnDivOneRatingsMeanChanging(value);
+                ReportPropertyChanging("DivOneRatingsMean");
+                _DivOneRatingsMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivOneRatingsMean");
+                OnDivOneRatingsMeanChanged();
+            }
+        }
+        private global::System.Double _DivOneRatingsMean;
+        partial void OnDivOneRatingsMeanChanging(global::System.Double value);
+        partial void OnDivOneRatingsMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivTwoRatingsMean
+        {
+            get
+            {
+                return _DivTwoRatingsMean;
+            }
+            set
+            {
+                OnDivTwoRatingsMeanChanging(value);
+                ReportPropertyChanging("DivTwoRatingsMean");
+                _DivTwoRatingsMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivTwoRatingsMean");
+                OnDivTwoRatingsMeanChanged();
+            }
+        }
+        private global::System.Double _DivTwoRatingsMean;
+        partial void OnDivTwoRatingsMeanChanging(global::System.Double value);
+        partial void OnDivTwoRatingsMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivOneRatingsDeviation
+        {
+            get
+            {
+                return _DivOneRatingsDeviation;
+            }
+            set
+            {
+                OnDivOneRatingsDeviationChanging(value);
+                ReportPropertyChanging("DivOneRatingsDeviation");
+                _DivOneRatingsDeviation = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivOneRatingsDeviation");
+                OnDivOneRatingsDeviationChanged();
+            }
+        }
+        private global::System.Double _DivOneRatingsDeviation;
+        partial void OnDivOneRatingsDeviationChanging(global::System.Double value);
+        partial void OnDivOneRatingsDeviationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivTwoRatingsDeviation
+        {
+            get
+            {
+                return _DivTwoRatingsDeviation;
+            }
+            set
+            {
+                OnDivTwoRatingsDeviationChanging(value);
+                ReportPropertyChanging("DivTwoRatingsDeviation");
+                _DivTwoRatingsDeviation = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivTwoRatingsDeviation");
+                OnDivTwoRatingsDeviationChanged();
+            }
+        }
+        private global::System.Double _DivTwoRatingsDeviation;
+        partial void OnDivTwoRatingsDeviationChanging(global::System.Double value);
+        partial void OnDivTwoRatingsDeviationChanged();
 
         #endregion
 
@@ -798,34 +980,46 @@ namespace TopCoder.Analysis.Data
         /// <param name="roundId">Initial value of the RoundId property.</param>
         /// <param name="coderId">Initial value of the CoderId property.</param>
         /// <param name="division">Initial value of the Division property.</param>
-        /// <param name="divisionRank">Initial value of the DivisionRank property.</param>
         /// <param name="points">Initial value of the Points property.</param>
         /// <param name="isRated">Initial value of the IsRated property.</param>
         /// <param name="numberOfRatings">Initial value of the NumberOfRatings property.</param>
         /// <param name="tc_Weight">Initial value of the Tc_Weight property.</param>
-        /// <param name="tc_KFactor">Initial value of the Tc_KFactor property.</param>
         /// <param name="tc_ExpectedRank">Initial value of the Tc_ExpectedRank property.</param>
         /// <param name="oldRating">Initial value of the OldRating property.</param>
         /// <param name="newRating">Initial value of the NewRating property.</param>
         /// <param name="oldVolatility">Initial value of the OldVolatility property.</param>
         /// <param name="newVolatility">Initial value of the NewVolatility property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Int32 divisionRank, global::System.Double points, global::System.Boolean isRated, global::System.Int32 numberOfRatings, global::System.Double tc_Weight, global::System.Double tc_KFactor, global::System.Double tc_ExpectedRank, global::System.Int32 oldRating, global::System.Int32 newRating, global::System.Int32 oldVolatility, global::System.Int32 newVolatility)
+        /// <param name="divisionPlace">Initial value of the DivisionPlace property.</param>
+        /// <param name="tc_ActualRank">Initial value of the Tc_ActualRank property.</param>
+        /// <param name="tc_ExpectedPerf">Initial value of the Tc_ExpectedPerf property.</param>
+        /// <param name="tc_ActualPerf">Initial value of the Tc_ActualPerf property.</param>
+        /// <param name="tc_Cap">Initial value of the Tc_Cap property.</param>
+        /// <param name="tc_NewRating">Initial value of the Tc_NewRating property.</param>
+        /// <param name="tc_NewVolatility">Initial value of the Tc_NewVolatility property.</param>
+        /// <param name="tc_KFactor">Initial value of the Tc_KFactor property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Double points, global::System.Boolean isRated, global::System.Int32 numberOfRatings, global::System.Double tc_Weight, global::System.Double tc_ExpectedRank, global::System.Int32 oldRating, global::System.Int32 newRating, global::System.Int32 oldVolatility, global::System.Int32 newVolatility, global::System.Int32 divisionPlace, global::System.Double tc_ActualRank, global::System.Double tc_ExpectedPerf, global::System.Double tc_ActualPerf, global::System.Double tc_Cap, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Double tc_KFactor)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
             roundResult.CoderId = coderId;
             roundResult.Division = division;
-            roundResult.DivisionRank = divisionRank;
             roundResult.Points = points;
             roundResult.IsRated = isRated;
             roundResult.NumberOfRatings = numberOfRatings;
             roundResult.Tc_Weight = tc_Weight;
-            roundResult.Tc_KFactor = tc_KFactor;
             roundResult.Tc_ExpectedRank = tc_ExpectedRank;
             roundResult.OldRating = oldRating;
             roundResult.NewRating = newRating;
             roundResult.OldVolatility = oldVolatility;
             roundResult.NewVolatility = newVolatility;
+            roundResult.DivisionPlace = divisionPlace;
+            roundResult.Tc_ActualRank = tc_ActualRank;
+            roundResult.Tc_ExpectedPerf = tc_ExpectedPerf;
+            roundResult.Tc_ActualPerf = tc_ActualPerf;
+            roundResult.Tc_Cap = tc_Cap;
+            roundResult.Tc_NewRating = tc_NewRating;
+            roundResult.Tc_NewVolatility = tc_NewVolatility;
+            roundResult.Tc_KFactor = tc_KFactor;
             return roundResult;
         }
 
@@ -910,30 +1104,6 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Division;
         partial void OnDivisionChanging(global::System.Int32 value);
         partial void OnDivisionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 DivisionRank
-        {
-            get
-            {
-                return _DivisionRank;
-            }
-            set
-            {
-                OnDivisionRankChanging(value);
-                ReportPropertyChanging("DivisionRank");
-                _DivisionRank = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DivisionRank");
-                OnDivisionRankChanged();
-            }
-        }
-        private global::System.Int32 _DivisionRank;
-        partial void OnDivisionRankChanging(global::System.Int32 value);
-        partial void OnDivisionRankChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1030,30 +1200,6 @@ namespace TopCoder.Analysis.Data
         private global::System.Double _Tc_Weight;
         partial void OnTc_WeightChanging(global::System.Double value);
         partial void OnTc_WeightChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Tc_KFactor
-        {
-            get
-            {
-                return _Tc_KFactor;
-            }
-            set
-            {
-                OnTc_KFactorChanging(value);
-                ReportPropertyChanging("Tc_KFactor");
-                _Tc_KFactor = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Tc_KFactor");
-                OnTc_KFactorChanged();
-            }
-        }
-        private global::System.Double _Tc_KFactor;
-        partial void OnTc_KFactorChanging(global::System.Double value);
-        partial void OnTc_KFactorChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1174,6 +1320,198 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _NewVolatility;
         partial void OnNewVolatilityChanging(global::System.Int32 value);
         partial void OnNewVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DivisionPlace
+        {
+            get
+            {
+                return _DivisionPlace;
+            }
+            set
+            {
+                OnDivisionPlaceChanging(value);
+                ReportPropertyChanging("DivisionPlace");
+                _DivisionPlace = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivisionPlace");
+                OnDivisionPlaceChanged();
+            }
+        }
+        private global::System.Int32 _DivisionPlace;
+        partial void OnDivisionPlaceChanging(global::System.Int32 value);
+        partial void OnDivisionPlaceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_ActualRank
+        {
+            get
+            {
+                return _Tc_ActualRank;
+            }
+            set
+            {
+                OnTc_ActualRankChanging(value);
+                ReportPropertyChanging("Tc_ActualRank");
+                _Tc_ActualRank = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_ActualRank");
+                OnTc_ActualRankChanged();
+            }
+        }
+        private global::System.Double _Tc_ActualRank;
+        partial void OnTc_ActualRankChanging(global::System.Double value);
+        partial void OnTc_ActualRankChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_ExpectedPerf
+        {
+            get
+            {
+                return _Tc_ExpectedPerf;
+            }
+            set
+            {
+                OnTc_ExpectedPerfChanging(value);
+                ReportPropertyChanging("Tc_ExpectedPerf");
+                _Tc_ExpectedPerf = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_ExpectedPerf");
+                OnTc_ExpectedPerfChanged();
+            }
+        }
+        private global::System.Double _Tc_ExpectedPerf;
+        partial void OnTc_ExpectedPerfChanging(global::System.Double value);
+        partial void OnTc_ExpectedPerfChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_ActualPerf
+        {
+            get
+            {
+                return _Tc_ActualPerf;
+            }
+            set
+            {
+                OnTc_ActualPerfChanging(value);
+                ReportPropertyChanging("Tc_ActualPerf");
+                _Tc_ActualPerf = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_ActualPerf");
+                OnTc_ActualPerfChanged();
+            }
+        }
+        private global::System.Double _Tc_ActualPerf;
+        partial void OnTc_ActualPerfChanging(global::System.Double value);
+        partial void OnTc_ActualPerfChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_Cap
+        {
+            get
+            {
+                return _Tc_Cap;
+            }
+            set
+            {
+                OnTc_CapChanging(value);
+                ReportPropertyChanging("Tc_Cap");
+                _Tc_Cap = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_Cap");
+                OnTc_CapChanged();
+            }
+        }
+        private global::System.Double _Tc_Cap;
+        partial void OnTc_CapChanging(global::System.Double value);
+        partial void OnTc_CapChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc_NewRating
+        {
+            get
+            {
+                return _Tc_NewRating;
+            }
+            set
+            {
+                OnTc_NewRatingChanging(value);
+                ReportPropertyChanging("Tc_NewRating");
+                _Tc_NewRating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_NewRating");
+                OnTc_NewRatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc_NewRating;
+        partial void OnTc_NewRatingChanging(global::System.Int32 value);
+        partial void OnTc_NewRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc_NewVolatility
+        {
+            get
+            {
+                return _Tc_NewVolatility;
+            }
+            set
+            {
+                OnTc_NewVolatilityChanging(value);
+                ReportPropertyChanging("Tc_NewVolatility");
+                _Tc_NewVolatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_NewVolatility");
+                OnTc_NewVolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc_NewVolatility;
+        partial void OnTc_NewVolatilityChanging(global::System.Int32 value);
+        partial void OnTc_NewVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc_KFactor
+        {
+            get
+            {
+                return _Tc_KFactor;
+            }
+            set
+            {
+                OnTc_KFactorChanging(value);
+                ReportPropertyChanging("Tc_KFactor");
+                _Tc_KFactor = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc_KFactor");
+                OnTc_KFactorChanged();
+            }
+        }
+        private global::System.Double _Tc_KFactor;
+        partial void OnTc_KFactorChanging(global::System.Double value);
+        partial void OnTc_KFactorChanged();
 
         #endregion
 

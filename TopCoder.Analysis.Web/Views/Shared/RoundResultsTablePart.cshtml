@@ -16,24 +16,31 @@
                 <th> Div </th>
                 <th class="round-col"> Div Coders </th>
 
+                <th> Place </th>
                 <th> Points </th>
                 <th> Rated Rounds </th>
                 
                 <th> Rat Old </th>
                 <th> Rat New </th>
-                <th> Rat Diff </th>
 
                 <th> Vol Old </th>
                 <th> Vol New </th>
-                <th> Vol Diff </th>
                 
-                <th> Rank </th>
+                <th> Act Rank </th>
                 <th> Exp Rank </th>
-                <th> Rank Diff </th>
+                <th> Act Perf </th>
+                <th> Exp Perf </th>
 
                 <th> CF </th>
                 <th> W </th>
-                <th> CF * W </th>
+                <th> K </th>
+                <th> Cap </th>
+
+                <th> Rat </th>
+                <th> Vol </th>
+                
+                <th> Rat Diff </th>
+                <th> Vol Diff </th>
 
             </tr>
         </thead>
@@ -49,24 +56,32 @@
                 <td> @rr.Division </td>
                 <td class="round-col"> @((rr.Division == 1) ? rr.Round.DivOneCodersCount : rr.Round.DivTwoCodersCount) </td>
                
-                <td> @ColorCoding.GoodBad(rr.Points, 1) </td>
+                <td> @rr.DivisionPlace </td>
+                <td> @ColorCoding.GoodBad(rr.Points, 0) </td>
                 <td> @rr.NumberOfRatings</td>
 
-                <td class="rat"> @ColorCoding.RatingClass(rr.OldRating) </td>
-                <td class="rat"> @ColorCoding.RatingClass(rr.NewRating) </td>
-                <td class="rat"> @ColorCoding.GoodBad(rr.RatingDiff, 0) </td>
+                <td> @ColorCoding.RatingClass(rr.OldRating) </td>
+                <td> @ColorCoding.RatingClass(rr.NewRating) </td>
 
-                <td class="vol"> @rr.OldVolatility </td>
-                <td class="vol"> @rr.NewVolatility </td>
-                <td class="vol"> @ColorCoding.GoodBad(rr.VolatilityDiff, 0) </td>
+                <td> @rr.OldVolatility </td>
+                <td> @rr.NewVolatility </td>
 
-                <td class="rank"> @rr.DivisionRank </td>
-                <td class="rank"> @rr.Tc_ExpectedRank.ToString("0.#") </td>
-                <td class="rank"> @ColorCoding.GoodBad(rr.Tc_RankDiff, 0) </td>
+                <td> @rr.Tc_ActualRank.ToString("0.##") </td>
+                <td> @rr.Tc_ExpectedRank.ToString("0.##") </td>
                 
-                <td class="wght"> @((rr.Division == 1 ? rr.Round.DivOneCompetitionFactor : rr.Round.DivTwoCompetitionFactor).ToString("0.#")) </td>
-                <td class="wght"> @rr.Tc_Weight.ToString("0.###") </td>
-                <td class="wght"> @rr.Tc_KFactor.ToString("0.#") </td>
+                <td> @rr.Tc_ActualPerf.ToString("0.##") </td>
+                <td> @rr.Tc_ExpectedPerf.ToString("0.##") </td>
+                
+                <td> @((rr.Division == 1 ? rr.Round.DivOneCompetitionFactor : rr.Round.DivTwoCompetitionFactor).ToString("0.#")) </td>
+                <td> @rr.Tc_Weight.ToString("0.###") </td>
+                <td> @rr.Tc_KFactor.ToString("0.##") </td>
+                <td> @rr.Tc_Cap.ToString("0.##") </td>
+
+                <td> @ColorCoding.RatingClass(rr.Tc_NewRating) </td>
+                <td> @rr.Tc_NewVolatility </td>
+                
+                <td> @(rr.Tc_NewRating - rr.NewRating) </td>
+                <td> @(rr.Tc_NewVolatility - rr.NewVolatility) </td>
 
             </tr>
         }   

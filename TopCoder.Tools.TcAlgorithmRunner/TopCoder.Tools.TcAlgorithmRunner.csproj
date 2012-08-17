@@ -91,10 +91,18 @@
     <Compile Include="Functions\Coder.cs" />
     <Compile Include="Functions\CompetitionFactorFunction.cs" />
     <Compile Include="Functions\CoderCompetitionWeightFunction.cs" />
+    <Compile Include="Functions\ActualRankFunction.cs" />
+    <Compile Include="Functions\CapFunction.cs" />
+    <Compile Include="Functions\NewVolatilityFunction.cs" />
+    <Compile Include="Functions\UpdateRuleFunction.cs" />
+    <Compile Include="Functions\NewRatingFunction.cs" />
+    <Compile Include="Functions\PerformanceFunction.cs" />
     <Compile Include="Functions\ExpectedRankFunction.cs" />
     <Compile Include="Functions\KFactorFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Algorithm\TcAlgorithm.cs" />
+    <Compile Include="Algorithm\RoundStatisticsAlgorithm.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TopCoder.Analysis.Data\TopCoder.Analysis.Data.csproj">
@@ -105,11 +113,6 @@
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Readme\MathNet.Numerics.authors.txt" />
-    <Content Include="App_Readme\MathNet.Numerics.copyright.txt" />
-    <Content Include="App_Readme\MathNet.Numerics.readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
