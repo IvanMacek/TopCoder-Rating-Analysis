@@ -496,12 +496,15 @@ namespace TopCoder.Analysis.Data
         /// <param name="globalCodersCount">Initial value of the GlobalCodersCount property.</param>
         /// <param name="globalRatingsMean">Initial value of the GlobalRatingsMean property.</param>
         /// <param name="globalRatingsDeviation">Initial value of the GlobalRatingsDeviation property.</param>
-        /// <param name="codersCount">Initial value of the CodersCount property.</param>
         /// <param name="divOneRatingsMean">Initial value of the DivOneRatingsMean property.</param>
         /// <param name="divTwoRatingsMean">Initial value of the DivTwoRatingsMean property.</param>
         /// <param name="divOneRatingsDeviation">Initial value of the DivOneRatingsDeviation property.</param>
         /// <param name="divTwoRatingsDeviation">Initial value of the DivTwoRatingsDeviation property.</param>
-        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Int32 codersCount, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation)
+        /// <param name="divOneTcRatingsDiffMean">Initial value of the DivOneTcRatingsDiffMean property.</param>
+        /// <param name="divTwoTcRatingsDiffMean">Initial value of the DivTwoTcRatingsDiffMean property.</param>
+        /// <param name="divOneTcVolatilityDiffMean">Initial value of the DivOneTcVolatilityDiffMean property.</param>
+        /// <param name="divTwoTcVolatilityDiffMean">Initial value of the DivTwoTcVolatilityDiffMean property.</param>
+        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation, global::System.Double divOneTcRatingsDiffMean, global::System.Double divTwoTcRatingsDiffMean, global::System.Double divOneTcVolatilityDiffMean, global::System.Double divTwoTcVolatilityDiffMean)
         {
             Round round = new Round();
             round.Id = id;
@@ -514,11 +517,14 @@ namespace TopCoder.Analysis.Data
             round.GlobalCodersCount = globalCodersCount;
             round.GlobalRatingsMean = globalRatingsMean;
             round.GlobalRatingsDeviation = globalRatingsDeviation;
-            round.CodersCount = codersCount;
             round.DivOneRatingsMean = divOneRatingsMean;
             round.DivTwoRatingsMean = divTwoRatingsMean;
             round.DivOneRatingsDeviation = divOneRatingsDeviation;
             round.DivTwoRatingsDeviation = divTwoRatingsDeviation;
+            round.DivOneTcRatingsDiffMean = divOneTcRatingsDiffMean;
+            round.DivTwoTcRatingsDiffMean = divTwoTcRatingsDiffMean;
+            round.DivOneTcVolatilityDiffMean = divOneTcVolatilityDiffMean;
+            round.DivTwoTcVolatilityDiffMean = divTwoTcVolatilityDiffMean;
             return round;
         }
 
@@ -774,30 +780,6 @@ namespace TopCoder.Analysis.Data
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 CodersCount
-        {
-            get
-            {
-                return _CodersCount;
-            }
-            set
-            {
-                OnCodersCountChanging(value);
-                ReportPropertyChanging("CodersCount");
-                _CodersCount = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CodersCount");
-                OnCodersCountChanged();
-            }
-        }
-        private global::System.Int32 _CodersCount;
-        partial void OnCodersCountChanging(global::System.Int32 value);
-        partial void OnCodersCountChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Double DivOneRatingsMean
         {
             get
@@ -888,6 +870,102 @@ namespace TopCoder.Analysis.Data
         private global::System.Double _DivTwoRatingsDeviation;
         partial void OnDivTwoRatingsDeviationChanging(global::System.Double value);
         partial void OnDivTwoRatingsDeviationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivOneTcRatingsDiffMean
+        {
+            get
+            {
+                return _DivOneTcRatingsDiffMean;
+            }
+            set
+            {
+                OnDivOneTcRatingsDiffMeanChanging(value);
+                ReportPropertyChanging("DivOneTcRatingsDiffMean");
+                _DivOneTcRatingsDiffMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivOneTcRatingsDiffMean");
+                OnDivOneTcRatingsDiffMeanChanged();
+            }
+        }
+        private global::System.Double _DivOneTcRatingsDiffMean;
+        partial void OnDivOneTcRatingsDiffMeanChanging(global::System.Double value);
+        partial void OnDivOneTcRatingsDiffMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivTwoTcRatingsDiffMean
+        {
+            get
+            {
+                return _DivTwoTcRatingsDiffMean;
+            }
+            set
+            {
+                OnDivTwoTcRatingsDiffMeanChanging(value);
+                ReportPropertyChanging("DivTwoTcRatingsDiffMean");
+                _DivTwoTcRatingsDiffMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivTwoTcRatingsDiffMean");
+                OnDivTwoTcRatingsDiffMeanChanged();
+            }
+        }
+        private global::System.Double _DivTwoTcRatingsDiffMean;
+        partial void OnDivTwoTcRatingsDiffMeanChanging(global::System.Double value);
+        partial void OnDivTwoTcRatingsDiffMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivOneTcVolatilityDiffMean
+        {
+            get
+            {
+                return _DivOneTcVolatilityDiffMean;
+            }
+            set
+            {
+                OnDivOneTcVolatilityDiffMeanChanging(value);
+                ReportPropertyChanging("DivOneTcVolatilityDiffMean");
+                _DivOneTcVolatilityDiffMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivOneTcVolatilityDiffMean");
+                OnDivOneTcVolatilityDiffMeanChanged();
+            }
+        }
+        private global::System.Double _DivOneTcVolatilityDiffMean;
+        partial void OnDivOneTcVolatilityDiffMeanChanging(global::System.Double value);
+        partial void OnDivOneTcVolatilityDiffMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivTwoTcVolatilityDiffMean
+        {
+            get
+            {
+                return _DivTwoTcVolatilityDiffMean;
+            }
+            set
+            {
+                OnDivTwoTcVolatilityDiffMeanChanging(value);
+                ReportPropertyChanging("DivTwoTcVolatilityDiffMean");
+                _DivTwoTcVolatilityDiffMean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivTwoTcVolatilityDiffMean");
+                OnDivTwoTcVolatilityDiffMeanChanged();
+            }
+        }
+        private global::System.Double _DivTwoTcVolatilityDiffMean;
+        partial void OnDivTwoTcVolatilityDiffMeanChanging(global::System.Double value);
+        partial void OnDivTwoTcVolatilityDiffMeanChanged();
 
         #endregion
 

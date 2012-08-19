@@ -18,32 +18,40 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
                 {
                     foreach (var div in new[] { 1, 2 })
                     {
-                        var divRoundResults = round.RoundResults.Where(x => x.Division == div).ToList();
-                        if (!divRoundResults.Any()) { continue; }
+                        var ratedDivRoundResults = round.RoundResults.Where(x => x.Division == div && x.IsRated).ToList();
+                        if (!ratedDivRoundResults.Any()) { continue; }
 
-                        var divN = divRoundResults.Count;
-                        var divRatings = divRoundResults.Select(x => x.OldRating).ToList();
+                        var divN = ratedDivRoundResults.Count;
+                        var divRatings = ratedDivRoundResults.Select(x => x.OldRating).ToList();
                         var divMean = divRatings.Average();
                         var divStdev = Math.Sqrt(divRatings.Sum(r => Math.Pow(r - divMean, 2)) / divN);
 
+                        var divRatingsDiffMean = ratedDivRoundResults.Average(x => Math.Abs(x.NewRating - x.Tc_NewRating));
+                        var divVolatilityDiffMean = ratedDivRoundResults.Average(x => Math.Abs(x.NewVolatility - x.Tc_NewVolatility));
+                        
                         if (div == 1)
                         {
                             round.DivOneCodersCount = divN;
                             round.DivOneRatingsMean = divMean;
                             round.DivOneRatingsDeviation = divStdev;
+                            round.DivOneTcRatingsDiffMean = divRatingsDiffMean;
+                            round.DivOneTcVolatilityDiffMean = divVolatilityDiffMean;
                         }
                         if (div == 2)
                         {
                             round.DivTwoCodersCount = divN;
                             round.DivTwoRatingsMean = divMean;
                             round.DivTwoRatingsDeviation = divStdev;
+                            round.DivTwoTcRatingsDiffMean = divRatingsDiffMean;
+                            round.DivTwoTcVolatilityDiffMean = divVolatilityDiffMean;
+                        }
+
+                        foreach (var rr in ratedDivRoundResults)
+                        {
+                            coders[rr.CoderId] = rr.NewRating;
                         }
                     }
 
-                    foreach (var rr in round.RoundResults)
-                    {
-                        coders[rr.CoderId] = rr.NewRating;
-                    }
 
                     var ratings = coders.Values;
                     var n = ratings.Count;

@@ -103,7 +103,7 @@
     </Compile>
     <Compile Include="Models\Coders\SingleModel.cs" />
     <Compile Include="Models\Coders\SearchModel.cs" />
-    <Compile Include="Models\Coders\Top100Model.cs" />
+    <Compile Include="Models\Coders\ListModel.cs" />
     <Compile Include="Models\Rounds\ListModel.cs" />
     <Compile Include="Models\Rounds\SingleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -203,7 +203,7 @@
     <Content Include="Views\Shared\CodersTablePart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Coders\Top100.cshtml" />
+    <Content Include="Views\Coders\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Coders\Single.cshtml" />

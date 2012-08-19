@@ -13,7 +13,7 @@
                 <th class="coder-col"> Coder </th>
                 <th class="round-col"> Round </th>
                 
-                <th> Div </th>
+                <th class="round-col"> Div </th>
                 <th class="round-col"> Div Coders </th>
 
                 <th> Place </th>
@@ -31,7 +31,6 @@
                 <th> Act Perf </th>
                 <th> Exp Perf </th>
 
-                <th> CF </th>
                 <th> W </th>
                 <th> K </th>
                 <th> Cap </th>
@@ -53,7 +52,7 @@
                 <td class="coder-col"> @Html.ActionLink(rr.Coder.Handle, "Single", "Coders", new { handle = rr.Coder.Handle }, null) </td>  
                 <td class="round-col"> @Html.ActionLink(rr.Round.Name, "Single", "Rounds", new { roundId = rr.Round.Id }, null) </td>
                
-                <td> @rr.Division </td>
+                <td class="round-col"> @rr.Division </td>
                 <td class="round-col"> @((rr.Division == 1) ? rr.Round.DivOneCodersCount : rr.Round.DivTwoCodersCount) </td>
                
                 <td> @rr.DivisionPlace </td>
@@ -66,16 +65,15 @@
                 <td> @rr.OldVolatility </td>
                 <td> @rr.NewVolatility </td>
 
-                <td> @rr.Tc_ActualRank.ToString("0.##") </td>
-                <td> @rr.Tc_ExpectedRank.ToString("0.##") </td>
+                <td> @rr.Tc_ActualRank.ToString("0.#") </td>
+                <td> @rr.Tc_ExpectedRank.ToString("0.###") </td>
                 
-                <td> @rr.Tc_ActualPerf.ToString("0.##") </td>
-                <td> @rr.Tc_ExpectedPerf.ToString("0.##") </td>
+                <td> @rr.Tc_ActualPerf.ToString("0.###") </td>
+                <td> @rr.Tc_ExpectedPerf.ToString("0.###") </td>
                 
-                <td> @((rr.Division == 1 ? rr.Round.DivOneCompetitionFactor : rr.Round.DivTwoCompetitionFactor).ToString("0.#")) </td>
                 <td> @rr.Tc_Weight.ToString("0.###") </td>
-                <td> @rr.Tc_KFactor.ToString("0.##") </td>
-                <td> @rr.Tc_Cap.ToString("0.##") </td>
+                <td> @rr.Tc_KFactor.ToString("0.###") </td>
+                <td> @rr.Tc_Cap.ToString("0.###") </td>
 
                 <td> @ColorCoding.RatingClass(rr.Tc_NewRating) </td>
                 <td> @rr.Tc_NewVolatility </td>

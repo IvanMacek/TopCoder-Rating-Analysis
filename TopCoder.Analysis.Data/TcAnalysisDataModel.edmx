@@ -71,7 +71,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="CodersCount" Type="int" Nullable="false" />
           <Property Name="DivOneCodersCount" Type="int" Nullable="false" />
           <Property Name="DivTwoCodersCount" Type="int" Nullable="false" />
           <Property Name="DivOneCompetitionFactor" Type="float" Nullable="false" />
@@ -83,6 +82,10 @@
           <Property Name="GlobalCodersCount" Type="int" Nullable="false" />
           <Property Name="GlobalRatingsMean" Type="float" Nullable="false" />
           <Property Name="GlobalRatingsDeviation" Type="float" Nullable="false" />
+          <Property Name="DivOneTcRatingsDiffMean" Type="float" Nullable="false" />
+          <Property Name="DivTwoTcRatingsDiffMean" Type="float" Nullable="false" />
+          <Property Name="DivOneTcVolatilityDiffMean" Type="float" Nullable="false" />
+          <Property Name="DivTwoTcVolatilityDiffMean" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Store.Coders" Multiplicity="1" />
@@ -217,11 +220,14 @@
           <Property Type="Int32" Name="GlobalCodersCount" Nullable="false" />
           <Property Type="Double" Name="GlobalRatingsMean" Nullable="false" />
           <Property Type="Double" Name="GlobalRatingsDeviation" Nullable="false" />
-          <Property Type="Int32" Name="CodersCount" Nullable="false" />
           <Property Type="Double" Name="DivOneRatingsMean" Nullable="false" />
           <Property Type="Double" Name="DivTwoRatingsMean" Nullable="false" />
           <Property Type="Double" Name="DivOneRatingsDeviation" Nullable="false" />
           <Property Type="Double" Name="DivTwoRatingsDeviation" Nullable="false" />
+          <Property Type="Double" Name="DivOneTcRatingsDiffMean" Nullable="false" />
+          <Property Type="Double" Name="DivTwoTcRatingsDiffMean" Nullable="false" />
+          <Property Type="Double" Name="DivOneTcVolatilityDiffMean" Nullable="false" />
+          <Property Type="Double" Name="DivTwoTcVolatilityDiffMean" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Type="Model.Coder" Role="Coder" Multiplicity="1" />
@@ -319,11 +325,14 @@
           <EntitySetMapping Name="Rounds">
             <EntityTypeMapping TypeName="Model.Round">
               <MappingFragment StoreEntitySet="Rounds">
+                <ScalarProperty Name="DivTwoTcVolatilityDiffMean" ColumnName="DivTwoTcVolatilityDiffMean" />
+                <ScalarProperty Name="DivOneTcVolatilityDiffMean" ColumnName="DivOneTcVolatilityDiffMean" />
+                <ScalarProperty Name="DivTwoTcRatingsDiffMean" ColumnName="DivTwoTcRatingsDiffMean" />
+                <ScalarProperty Name="DivOneTcRatingsDiffMean" ColumnName="DivOneTcRatingsDiffMean" />
                 <ScalarProperty Name="DivTwoRatingsDeviation" ColumnName="DivTwoRatingsDeviation" />
                 <ScalarProperty Name="DivOneRatingsDeviation" ColumnName="DivOneRatingsDeviation" />
                 <ScalarProperty Name="DivTwoRatingsMean" ColumnName="DivTwoRatingsMean" />
                 <ScalarProperty Name="DivOneRatingsMean" ColumnName="DivOneRatingsMean" />
-                <ScalarProperty Name="CodersCount" ColumnName="CodersCount" />
                 <ScalarProperty Name="GlobalRatingsDeviation" ColumnName="GlobalRatingsDeviation" />
                 <ScalarProperty Name="GlobalRatingsMean" ColumnName="GlobalRatingsMean" />
                 <ScalarProperty Name="GlobalCodersCount" ColumnName="GlobalCodersCount" />
@@ -360,22 +369,22 @@
       <Diagram Name="TcAnalysisDataModel">
         <EntityTypeShape EntityType="Model.Coder" Width="2" PointX="3.875" PointY="0.875" Height="2.9417936197916656" />
         <EntityTypeShape EntityType="Model.RoundResult" Width="2" PointX="7.125" PointY="1.125" Height="5.2494108072916656" />
-        <EntityTypeShape EntityType="Model.Round" Width="2" PointX="0.75" PointY="1.75" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="Model.Round" Width="2" PointX="0.75" PointY="1.75" Height="4.2879036458333326" />
         <AssociationConnector Association="Model.FK_CoderId" >
           <ConnectorPoint PointX="5.875" PointY="2.4708968098958328" />
           <ConnectorPoint PointX="7.125" PointY="2.4708968098958328" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_FirstRoundId" >
-          <ConnectorPoint PointX="2.75" PointY="3.1825152401495318" />
-          <ConnectorPoint PointX="3.875" PointY="3.1825152401495318" />
+          <ConnectorPoint PointX="2.75" PointY="3.1703407148791367" />
+          <ConnectorPoint PointX="3.875" PointY="3.1703407148791367" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_LastRoundId" >
-          <ConnectorPoint PointX="2.75" PointY="2.4037576200747659" />
-          <ConnectorPoint PointX="3.875" PointY="2.4037576200747659" />
+          <ConnectorPoint PointX="2.75" PointY="2.3976703574395684" />
+          <ConnectorPoint PointX="3.875" PointY="2.3976703574395684" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_RoundId" >
-          <ConnectorPoint PointX="2.75" PointY="4.5739957682291656" />
-          <ConnectorPoint PointX="7.125" PointY="4.5739957682291656" />
+          <ConnectorPoint PointX="2.75" PointY="4.9585986328124987" />
+          <ConnectorPoint PointX="7.125" PointY="4.9585986328124987" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

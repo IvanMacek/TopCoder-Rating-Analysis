@@ -1,18 +1,18 @@
 ﻿@model Tuple<int, TopCoder.Analysis.Web.Models.Rounds.SingleModel>
 @{
     var division = Model.Item1;
-    var results = Model.Item2.RoundResults;
+    var results = Model.Item2.RoundResults.Where(x => x.Division == division && x.IsRated).ToList();
         
-    var sortedDivResults = results.Where(x => x.Division == division).OrderByDescending(x => x.OldRating).ToList();
-    var bucketedDivRatings = results.Where(x => x.Division == division).GroupBy(x => x.OldRating / 100).Select(g => new { Bucket = g.Key * 100, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
-    var bucketedDivVols = results.Where(x => x.Division == division).GroupBy(x => x.OldVolatility / 20).Select(g => new { Bucket = g.Key * 20, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+    var sortedDivResults = results.OrderByDescending(x => x.OldRating).ToList();
+    var bucketedDivRatings = results.GroupBy(x => x.OldRating / 100).Select(g => new { Bucket = (g.Key + 1) * 100, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+    var bucketedDivVols = results.GroupBy(x => x.OldVolatility / 20).Select(g => new { Bucket = (g.Key + 1) * 20, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
 }
 
 <script type="text/javascript">
     $(function () {
 
         var erDataTable = [
-            @foreach (var rr in sortedDivResults.Select((x, i) => new { X = x, I = i })) {
+            @foreach (var rr in sortedDivResults.Select((x, i) => new { X = x, I = i + 1 })) {
                 <text> [@rr.I, @rr.I, @rr.X.Tc_ExpectedRank.ToString().Replace(",", ".")] </text>@(rr.X != sortedDivResults.Last() ? "," : string.Empty)
             }
         ];
@@ -31,7 +31,7 @@
 
         var div = @division;
         
-        var erChart = new google.visualization.ScatterChart(document.getElementById('erChart' + div));
+        var erChart = new google.visualization.LineChart(document.getElementById('erChart' + div));
 
         var erData = new google.visualization.DataTable();
         erData.addColumn('number', 'Index');
@@ -39,10 +39,10 @@
         erData.addColumn('number', 'Expected Rank');
         erData.addRows(erDataTable);
         
-        erChart.draw(erData, { pointSize: 1, title: 'Expected rank vs rank', height: 200, width: 1000 });
+        erChart.draw(erData, { title: 'Expected rank vs rank', height: 200, width: 1000 });
         
         
-        var ratChart = new google.visualization.AreaChart(document.getElementById('ratChart' + div));
+        var ratChart = new google.visualization.ColumnChart(document.getElementById('ratChart' + div));
 
         var ratData = new google.visualization.DataTable();
         ratData.addColumn('number', 'Rating');
@@ -52,7 +52,7 @@
         ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 1000 });
         
 
-        var volChart = new google.visualization.AreaChart(document.getElementById('volChart' + div));
+        var volChart = new google.visualization.ColumnChart(document.getElementById('volChart' + div));
 
         var volData = new google.visualization.DataTable();
         volData.addColumn('number', 'Volatility');

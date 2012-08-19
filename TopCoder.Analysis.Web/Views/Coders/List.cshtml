@@ -1,0 +1,88 @@
+﻿@model TopCoder.Analysis.Web.Models.Coders.ListModel
+@{
+    ViewBag.Title = "Coders";
+}
+@{
+    var results = Model.Coders.Select(x => new { x.Rating, x.Volatility, x.RoundsCount }).ToList();
+        
+    var bucketedRatings = results.GroupBy(x => x.Rating / 100).Select(g => new { Bucket = (g.Key + 1) * 100, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+    var bucketedVols = results.GroupBy(x => x.Volatility / 20).Select(g => new { Bucket = (g.Key + 1) * 20, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+    var bucketedRounds = results.GroupBy(x => x.RoundsCount / 10).Select(g => new { Bucket = (g.Key + 1) * 10, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+}
+
+<script type="text/javascript">
+    $(function () {
+      
+        var ratDataTable = [
+            @foreach (var x in bucketedRatings) {
+                <text> [@x.Bucket, @x.Count] </text>@(x != bucketedRatings.Last() ? "," : string.Empty)
+            }
+        ];
+     
+        var volDataTable = [
+            @foreach (var x in bucketedVols)
+            {
+                <text> [@x.Bucket, @x.Count] </text>@(x != bucketedVols.Last() ? "," : string.Empty)
+            }
+        ];
+        
+        var roundsDataTable = [
+            @foreach (var x in bucketedRounds)
+            {
+                <text> [@x.Bucket, @x.Count] </text>@(x != bucketedRounds.Last() ? "," : string.Empty)
+            }
+        ];
+        
+        var ratChart = new google.visualization.ColumnChart(document.getElementById('ratChart'));
+
+        var ratData = new google.visualization.DataTable();
+        ratData.addColumn('number', 'Rating');
+        ratData.addColumn('number', 'Count');
+        ratData.addRows(ratDataTable);
+        
+        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 600 });
+        
+
+        var volChart = new google.visualization.ColumnChart(document.getElementById('volChart'));
+
+        var volData = new google.visualization.DataTable();
+        volData.addColumn('number', 'Volatility');
+        volData.addColumn('number', 'Count');
+        volData.addRows(volDataTable);
+        
+        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 600 });
+
+
+        var roundsChart = new google.visualization.ColumnChart(document.getElementById('roundsChart'));
+
+        var roundsData = new google.visualization.DataTable();
+        roundsData.addColumn('number', 'Rated Rounds Count');
+        roundsData.addColumn('number', 'Count');
+        roundsData.addRows(roundsDataTable);
+        
+        roundsChart.draw(roundsData, { pointSize: 2, title: 'Rated Rounds Count distribution', height: 200, width: 600, vAxis: { logScale: true }});
+
+    });
+</script>
+
+
+<h2>Coders</h2>
+
+<div style="width: 50%; float: right;">
+    
+    <h3> Statistics </h3>
+    
+    <div id="ratChart" ></div>
+    <div id="volChart" ></div>
+    <div id="roundsChart" ></div>
+
+</div>
+
+<div style="width: 50%;">
+    
+    <h3> Top 100 </h3>
+    @{ Html.RenderPartial("CodersTablePart", Model.TcTop100Coders); }
+
+</div>
+
+

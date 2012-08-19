@@ -15,45 +15,52 @@
               ui: {
                 chartType: 'LineChart',
                 chartOptions: { pointSize: 1 },
-                chartView: { columns: [0, 2] },
+                chartView: { columns: [0, 1] },
                 minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
               }
             }
-        });
-
-        var codersPerRoundChart = new google.visualization.ChartWrapper({
-            chartType: 'ScatterChart',
-            containerId: 'codersPerRoundChart',
-            options: { pointSize: 1, title: 'Coders Per Round' },
-            view: { columns: [0, 1]}
         });
         
         var totalCodersChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'totalCodersChart',
-            options: { title: 'Total Coders' },
-            view: { columns: [0, 2]}
+            options: { title: 'Total Coders Registered' },
+            view: { columns: [0, 1]}
         });
         
         var cfChart = new google.visualization.ChartWrapper({
             chartType: 'ScatterChart',
             containerId: 'cfChart',
             options: { pointSize: 1, title: 'Competition Factor Per Round' },
-            view: { columns: [0, 3, 4]}
+            view: { columns: [0, 2, 3]}
         });
         
         var ratMeanChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'ratMeanChart',
-            options: { title: 'Ratings Mean Per Round' },
-            view: { columns: [0, 5]}
+            options: { title: 'Registered Coders Ratings Mean Per Round' },
+            view: { columns: [0, 4]}
         });
         
         var ratDevianceChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'ratDevianceChart',
-            options: { title: 'Ratings Standard Deviation Per Round' },
-            view: { columns: [0, 6]}
+            options: { title: 'Registered Coders Ratings Standard Deviation Per Round' },
+            view: { columns: [0, 5]}
+        });
+        
+        var ratDiffChart = new google.visualization.ChartWrapper({
+            chartType: 'ScatterChart',
+            containerId: 'ratDiffChart',
+            options: { pointSize: 1, title: 'Ratings Diff Mean' },
+            view: { columns: [0, 6, 7]}
+        });
+        
+        var volDiffChart = new google.visualization.ChartWrapper({
+            chartType: 'ScatterChart',
+            containerId: 'volDiffChart',
+            options: { pointSize: 1, title: 'Volatility Diff Mean' },
+            view: { columns: [0, 8, 9]}
         });
 
         var parseDate = function(input) {
@@ -63,40 +70,47 @@
 
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Round');
-        data.addColumn('number', 'Coders Per Round');
         data.addColumn('number', 'Total Coders');
         data.addColumn('number', 'Div 1 Competition Factor');
         data.addColumn('number', 'Div 2 Competition Factor');
         data.addColumn('number', 'Ratings Mean');
         data.addColumn('number', 'Ratings Standard Deviation');
+        data.addColumn('number', 'Div 1 Ratings Diff Mean');
+        data.addColumn('number', 'Div 2 Ratings Diff Mean');
+        data.addColumn('number', 'Div 1 Volatility Diff Mean');
+        data.addColumn('number', 'Div 2 Volatility Diff Mean');
         data.addRows([
-            @foreach (var r in Model.Rounds)
+                @foreach (var r in Model.Rounds)
             {
-                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.TotalCodersCount, @r.GlobalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", "."), @r.GlobalRatingsMean.ToString().Replace(",", "."), @r.GlobalRatingsDeviation.ToString().Replace(",", ".") ] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
+                <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.GlobalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", "."), @r.GlobalRatingsMean.ToString().Replace(",", "."), @r.GlobalRatingsDeviation.ToString().Replace(",", "."), 
+                @r.DivOneTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivTwoTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivOneTcVolatilityDiffMean.ToString().Replace(",", "."), @r.DivTwoTcVolatilityDiffMean.ToString().Replace(",", ".") ] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
             }
         ]);
 
         dashboard
-            .bind(control, codersPerRoundChart)
             .bind(control, totalCodersChart)
             .bind(control, cfChart)
             .bind(control, ratMeanChart)
-            .bind(control, ratDevianceChart);
+            .bind(control, ratDevianceChart)
+            .bind(control, ratDiffChart)
+            .bind(control, volDiffChart);
+        
         dashboard.draw(data);
     });
 </script>
 
 <h2>Rounds List</h2>
 
-<div id="dashboard" style="width: 64%; float: right;">
-    <div id="control" style=" width: 50%; height: 50px; margin: auto;"></div>
-    <div id="totalCodersChart" style="height: 200px;"></div>
-    <div id="codersPerRoundChart" style="height: 200px;"></div>
-    <div id="cfChart" style="height: 200px;"></div>
-    <div id="ratMeanChart" style="height: 200px;"></div>
-    <div id="ratDevianceChart" style="height: 200px;"></div>
+<div id="dashboard">
+    <div id="control" style="margin: auto; height: 50px; width: 50%;"></div>
+    <div id="cfChart" style="width: 50%; height: 200px; float: right;"></div>
+    <div id="totalCodersChart" style="width: 50%; height: 200px;"></div>
+    <div id="ratDevianceChart" style="width: 50%; height: 200px; float: right;"></div>
+    <div id="ratMeanChart" style="width: 50%; height: 200px;"></div>
+    <div id="volDiffChart" style="width: 50%; height: 200px; float: right;"></div>
+    <div id="ratDiffChart" style="width: 50%; height: 200px;"></div>
 </div>
 
-<div style="width: 35%;">
+<div>
     @{ Html.RenderPartial("RoundsTablePart", Model.Rounds); }
 </div>

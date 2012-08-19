@@ -31,12 +31,14 @@ namespace TopCoder.Analysis.Web.Controllers
             return View(model);
         }
 
-        public ViewResult Top100()
+        public ViewResult List()
         {
-            var model = new Top100Model();
+            var model = new ListModel();
 
             using (var db = new TcAnalysisDataModel())
             {
+                model.Coders = db.Coders.ToList();
+
                 model.TcTop100Coders =
                     (from coder in db.Coders.Include("FirstRound").Include("LastRound")
                      orderby coder.Rating descending
