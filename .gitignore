@@ -3,3 +3,4 @@ obj
 *.suo
 *.user
 /_ReSharper.TopCoder
+/TopCoder.Analysis.Web/TopCoder.Analysis.Web.Publish.xml

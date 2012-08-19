@@ -15,6 +15,20 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
                 var rounds = db.Rounds.OrderBy(r => r.Date).ToList();
                 foreach (var round in rounds)
                 {
+                    var unratedDivRoundResults = round.RoundResults.Where(x => !x.IsRated).ToList();
+                    foreach (var rr in unratedDivRoundResults)
+                    {
+                        rr.Tc_Weight = 0;
+                        rr.Tc_KFactor = 0;
+                        rr.Tc_ActualRank = 0;
+                        rr.Tc_ExpectedRank = 0;
+                        rr.Tc_ActualPerf = 0;
+                        rr.Tc_ExpectedPerf = 0;
+                        rr.Tc_Cap = 0;
+                        rr.Tc_NewRating = 0;
+                        rr.Tc_NewVolatility = 0;
+                    }
+
                     foreach (var div in new[] { 1, 2 })
                     {
                         var ratedDivRoundResults = round.RoundResults.Where(x => x.Division == div && x.IsRated).ToList();
@@ -23,53 +37,38 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
 
                         if (!codersInDiv.Any()) { continue; }
 
-                        var cf = new CompetitionFactorFunction().Calculate(codersInDiv);
-                        if (div == 1) { round.DivOneCompetitionFactor = cf; }
-                        if (div == 2) { round.DivTwoCompetitionFactor = cf; }
-
+                        //var cf = new CompetitionFactorFunction().Calculate(codersInDiv);
+                        //if (div == 1) { round.DivOneCompetitionFactor = cf; }
+                        //if (div == 2) { round.DivTwoCompetitionFactor = cf; }
                         foreach (var rr in ratedDivRoundResults)
                         {
-                            var w = new CoderCompetitionWeightFunction().Calculate(rr.OldRating, rr.NumberOfRatings - 1);
-                            rr.Tc_Weight = w;
+                            //var w = new CoderCompetitionWeightFunction().Calculate(rr.OldRating, rr.NumberOfRatings - 1);
+                            //rr.Tc_Weight = w;
 
-                            var k = new KFactorFunction().Calculate((div == 1) ? round.DivOneCompetitionFactor : round.DivTwoCompetitionFactor, rr.Tc_Weight);
-                            rr.Tc_KFactor = k;
+                            //var k = new KFactorFunction().Calculate((div == 1) ? round.DivOneCompetitionFactor : round.DivTwoCompetitionFactor, rr.Tc_Weight);
+                            //rr.Tc_KFactor = k;
 
-                            var ar = new ActualRankFunction().Calculate(rr.Points, scoresInDiv);
-                            rr.Tc_ActualRank = ar;
+                            //var ar = new ActualRankFunction().Calculate(rr.Points, scoresInDiv);
+                            //rr.Tc_ActualRank = ar;
 
-                            var er = new ExpectedRankFunction().Calculate(new Functions.Coder(rr.OldRating, rr.OldVolatility), codersInDiv);
-                            rr.Tc_ExpectedRank = er;
+                            //var er = new ExpectedRankFunction().Calculate(new Functions.Coder(rr.OldRating, rr.OldVolatility), codersInDiv);
+                            //rr.Tc_ExpectedRank = er;
 
-                            var aperf = new PerformanceFunction().Calculate(rr.Tc_ActualRank, codersInDiv.Count);
-                            rr.Tc_ActualPerf = aperf;
+                            //var aperf = new PerformanceFunction().Calculate(rr.Tc_ActualRank, codersInDiv.Count);
+                            //rr.Tc_ActualPerf = aperf;
 
-                            var eperf = new PerformanceFunction().Calculate(rr.Tc_ExpectedRank, codersInDiv.Count);
-                            rr.Tc_ExpectedPerf = eperf;
+                            //var eperf = new PerformanceFunction().Calculate(rr.Tc_ExpectedRank, codersInDiv.Count);
+                            //rr.Tc_ExpectedPerf = eperf;
 
-                            var cap = new CapFunction().Calculate(rr.NumberOfRatings - 1);
-                            rr.Tc_Cap = cap;
+                            //var cap = new CapFunction().Calculate(rr.NumberOfRatings - 1);
+                            //rr.Tc_Cap = cap;
 
-                            var updatedRating = new UpdateRuleFunction().Calculate(rr.OldRating, rr.Tc_ExpectedPerf, rr.Tc_ActualPerf, rr.Tc_KFactor);
-                            var newRating = new NewRatingFunction().Calculate(rr.OldRating, updatedRating, rr.Tc_Cap);
-                            rr.Tc_NewRating = newRating;
+                            //var updatedRating = new UpdateRuleFunction().Calculate(rr.OldRating, rr.Tc_ExpectedPerf, rr.Tc_ActualPerf, rr.Tc_KFactor);
+                            //var newRating = new NewRatingFunction().Calculate(rr.OldRating, updatedRating, rr.Tc_Cap);
+                            //rr.Tc_NewRating = newRating;
 
                             var newVolatility = new NewVolatilityFunction().Calculate(rr.OldRating, rr.OldVolatility, rr.Tc_NewRating, rr.Tc_Weight, rr.NumberOfRatings - 1);
                             rr.Tc_NewVolatility = newVolatility;
-                        }
-
-                        var unratedDivRoundResults = round.RoundResults.Where(x => x.Division == div && !x.IsRated).ToList();
-                        foreach (var rr in unratedDivRoundResults)
-                        {
-                            rr.Tc_Weight = 0;
-                            rr.Tc_KFactor = 0;
-                            rr.Tc_ActualRank = 0;
-                            rr.Tc_ExpectedRank = 0;
-                            rr.Tc_ActualPerf = 0;
-                            rr.Tc_ExpectedPerf = 0;
-                            rr.Tc_Cap = 0;
-                            rr.Tc_NewRating = 0;
-                            rr.Tc_NewVolatility = 0;
                         }
                     }
 
