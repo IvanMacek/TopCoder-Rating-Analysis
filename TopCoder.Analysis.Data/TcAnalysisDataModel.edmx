@@ -37,6 +37,9 @@
           <Property Name="RoundsCount" Type="int" Nullable="false" />
           <Property Name="Rating" Type="int" Nullable="false" />
           <Property Name="Volatility" Type="int" Nullable="false" />
+          <Property Name="Tc2_Rating" Type="int" Nullable="false" />
+          <Property Name="Tc2_Volatility" Type="int" Nullable="false" />
+          <Property Name="Tc2_RoundsCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RoundResults">
           <Key>
@@ -63,6 +66,11 @@
           <Property Name="Tc_Cap" Type="float" Nullable="false" />
           <Property Name="Tc_NewRating" Type="int" Nullable="false" />
           <Property Name="Tc_NewVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc2_OldRating" Type="int" Nullable="false" />
+          <Property Name="Tc2_NewRating" Type="int" Nullable="false" />
+          <Property Name="Tc2_OldVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc2_NewVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc2_NumberOfRatings" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rounds">
           <Key>
@@ -174,6 +182,9 @@
           <NavigationProperty Name="LastRound" Relationship="Model.FK_LastRoundId" FromRole="Coder" ToRole="Round" />
           <Property Type="Int32" Name="Rating" Nullable="false" />
           <Property Type="Int32" Name="Volatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_Volatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_RoundsCount" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_Rating" Nullable="false" />
         </EntityType>
         <EntityType Name="RoundResult">
           <Key>
@@ -202,6 +213,11 @@
           <Property Type="Int32" Name="Tc_NewRating" Nullable="false" />
           <Property Type="Int32" Name="Tc_NewVolatility" Nullable="false" />
           <Property Type="Double" Name="Tc_KFactor" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_OldRating" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_NewRating" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_OldVolatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_NewVolatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc2_NumberOfRatings" Nullable="false" />
         </EntityType>
         <EntityType Name="Round">
           <Key>
@@ -286,6 +302,9 @@
           <EntitySetMapping Name="Coders">
             <EntityTypeMapping TypeName="Model.Coder">
               <MappingFragment StoreEntitySet="Coders">
+                <ScalarProperty Name="Tc2_Rating" ColumnName="Tc2_Rating" />
+                <ScalarProperty Name="Tc2_RoundsCount" ColumnName="Tc2_RoundsCount" />
+                <ScalarProperty Name="Tc2_Volatility" ColumnName="Tc2_Volatility" />
                 <ScalarProperty Name="Volatility" ColumnName="Volatility" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
                 <ScalarProperty Name="RoundsCount" ColumnName="RoundsCount" />
@@ -299,6 +318,11 @@
           <EntitySetMapping Name="RoundResults">
             <EntityTypeMapping TypeName="Model.RoundResult">
               <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="Tc2_NumberOfRatings" ColumnName="Tc2_NumberOfRatings" />
+                <ScalarProperty Name="Tc2_NewVolatility" ColumnName="Tc2_NewVolatility" />
+                <ScalarProperty Name="Tc2_OldVolatility" ColumnName="Tc2_OldVolatility" />
+                <ScalarProperty Name="Tc2_NewRating" ColumnName="Tc2_NewRating" />
+                <ScalarProperty Name="Tc2_OldRating" ColumnName="Tc2_OldRating" />
                 <ScalarProperty Name="Tc_KFactor" ColumnName="Tc_KFactor" />
                 <ScalarProperty Name="Tc_NewVolatility" ColumnName="Tc_NewVolatility" />
                 <ScalarProperty Name="Tc_NewRating" ColumnName="Tc_NewRating" />
@@ -367,24 +391,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="TcAnalysisDataModel">
-        <EntityTypeShape EntityType="Model.Coder" Width="2" PointX="3.875" PointY="0.875" Height="2.9417936197916656" />
+        <EntityTypeShape EntityType="Model.Coder" Width="2" PointX="3.875" PointY="0.875" Height="3.5186979166666656" />
         <EntityTypeShape EntityType="Model.RoundResult" Width="2" PointX="7.125" PointY="1.125" Height="5.2494108072916656" />
         <EntityTypeShape EntityType="Model.Round" Width="2" PointX="0.75" PointY="1.75" Height="4.2879036458333326" />
         <AssociationConnector Association="Model.FK_CoderId" >
-          <ConnectorPoint PointX="5.875" PointY="2.4708968098958328" />
-          <ConnectorPoint PointX="7.125" PointY="2.4708968098958328" />
+          <ConnectorPoint PointX="5.875" PointY="2.7593489583333333" />
+          <ConnectorPoint PointX="7.125" PointY="2.7593489583333333" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_FirstRoundId" >
-          <ConnectorPoint PointX="2.75" PointY="3.1703407148791367" />
-          <ConnectorPoint PointX="3.875" PointY="3.1703407148791367" />
+          <ConnectorPoint PointX="2.75" PointY="3.458031955487237" />
+          <ConnectorPoint PointX="3.875" PointY="3.458031955487237" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_LastRoundId" >
-          <ConnectorPoint PointX="2.75" PointY="2.3976703574395684" />
-          <ConnectorPoint PointX="3.875" PointY="2.3976703574395684" />
+          <ConnectorPoint PointX="2.75" PointY="2.5415159777436185" />
+          <ConnectorPoint PointX="3.875" PointY="2.5415159777436185" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_RoundId" >
-          <ConnectorPoint PointX="2.75" PointY="4.9585986328124987" />
-          <ConnectorPoint PointX="7.125" PointY="4.9585986328124987" />
+          <ConnectorPoint PointX="2.75" PointY="5.6316536458333326" />
+          <ConnectorPoint PointX="7.125" PointY="5.6316536458333326" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

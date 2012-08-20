@@ -40,7 +40,7 @@
         ratData.addColumn('number', 'Count');
         ratData.addRows(ratDataTable);
         
-        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 600 });
+        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 450 });
         
 
         var volChart = new google.visualization.ColumnChart(document.getElementById('volChart'));
@@ -50,7 +50,7 @@
         volData.addColumn('number', 'Count');
         volData.addRows(volDataTable);
         
-        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 600 });
+        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 450 });
 
 
         var roundsChart = new google.visualization.ColumnChart(document.getElementById('roundsChart'));
@@ -60,7 +60,7 @@
         roundsData.addColumn('number', 'Count');
         roundsData.addRows(roundsDataTable);
         
-        roundsChart.draw(roundsData, { pointSize: 2, title: 'Rated Rounds Count distribution', height: 200, width: 600, vAxis: { logScale: true }});
+        roundsChart.draw(roundsData, { pointSize: 2, title: 'Rated Rounds Count distribution', height: 200, width: 450, vAxis: { logScale: true }});
 
     });
 </script>
@@ -68,20 +68,26 @@
 
 <h2>Coders</h2>
 
-<div style="width: 50%; float: right;">
+<div>
     
     <h3> Statistics </h3>
     
-    <div id="ratChart" ></div>
-    <div id="volChart" ></div>
-    <div id="roundsChart" ></div>
+    <div id="ratChart" style="float: left;"></div>
+    <div id="volChart" style="float: left;"></div>
+    <div id="roundsChart" style="float: left;"></div>
 
 </div>
 
-<div style="width: 50%;">
+<div style="width: 49%; float: right;">
     
-    <h3> Top 100 </h3>
-    @{ Html.RenderPartial("CodersTablePart", Model.TcTop100Coders); }
+    <h3 > TC2 Top 20 </h3>
+    @{ Html.RenderPartial("CodersTablePart", Model.Tc2Top20Coders); }
+</div>
+
+<div style="width: 49%;">
+
+    <h3 > Top 20 </h3>
+    @{ Html.RenderPartial("CodersTablePart", Model.TcTop20Coders); }
 
 </div>
 

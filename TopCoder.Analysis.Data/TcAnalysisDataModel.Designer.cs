@@ -178,7 +178,10 @@ namespace TopCoder.Analysis.Data
         /// <param name="roundsCount">Initial value of the RoundsCount property.</param>
         /// <param name="rating">Initial value of the Rating property.</param>
         /// <param name="volatility">Initial value of the Volatility property.</param>
-        public static Coder CreateCoder(global::System.Int32 id, global::System.String handle, global::System.Int32 firstRoundId, global::System.Int32 lastRoundId, global::System.Int32 roundsCount, global::System.Int32 rating, global::System.Int32 volatility)
+        /// <param name="tc2_Volatility">Initial value of the Tc2_Volatility property.</param>
+        /// <param name="tc2_RoundsCount">Initial value of the Tc2_RoundsCount property.</param>
+        /// <param name="tc2_Rating">Initial value of the Tc2_Rating property.</param>
+        public static Coder CreateCoder(global::System.Int32 id, global::System.String handle, global::System.Int32 firstRoundId, global::System.Int32 lastRoundId, global::System.Int32 roundsCount, global::System.Int32 rating, global::System.Int32 volatility, global::System.Int32 tc2_Volatility, global::System.Int32 tc2_RoundsCount, global::System.Int32 tc2_Rating)
         {
             Coder coder = new Coder();
             coder.Id = id;
@@ -188,6 +191,9 @@ namespace TopCoder.Analysis.Data
             coder.RoundsCount = roundsCount;
             coder.Rating = rating;
             coder.Volatility = volatility;
+            coder.Tc2_Volatility = tc2_Volatility;
+            coder.Tc2_RoundsCount = tc2_RoundsCount;
+            coder.Tc2_Rating = tc2_Rating;
             return coder;
         }
 
@@ -365,6 +371,78 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Volatility;
         partial void OnVolatilityChanging(global::System.Int32 value);
         partial void OnVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_Volatility
+        {
+            get
+            {
+                return _Tc2_Volatility;
+            }
+            set
+            {
+                OnTc2_VolatilityChanging(value);
+                ReportPropertyChanging("Tc2_Volatility");
+                _Tc2_Volatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_Volatility");
+                OnTc2_VolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_Volatility;
+        partial void OnTc2_VolatilityChanging(global::System.Int32 value);
+        partial void OnTc2_VolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_RoundsCount
+        {
+            get
+            {
+                return _Tc2_RoundsCount;
+            }
+            set
+            {
+                OnTc2_RoundsCountChanging(value);
+                ReportPropertyChanging("Tc2_RoundsCount");
+                _Tc2_RoundsCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_RoundsCount");
+                OnTc2_RoundsCountChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_RoundsCount;
+        partial void OnTc2_RoundsCountChanging(global::System.Int32 value);
+        partial void OnTc2_RoundsCountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_Rating
+        {
+            get
+            {
+                return _Tc2_Rating;
+            }
+            set
+            {
+                OnTc2_RatingChanging(value);
+                ReportPropertyChanging("Tc2_Rating");
+                _Tc2_Rating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_Rating");
+                OnTc2_RatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_Rating;
+        partial void OnTc2_RatingChanging(global::System.Int32 value);
+        partial void OnTc2_RatingChanged();
 
         #endregion
 
@@ -1075,7 +1153,12 @@ namespace TopCoder.Analysis.Data
         /// <param name="tc_NewRating">Initial value of the Tc_NewRating property.</param>
         /// <param name="tc_NewVolatility">Initial value of the Tc_NewVolatility property.</param>
         /// <param name="tc_KFactor">Initial value of the Tc_KFactor property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Double points, global::System.Boolean isRated, global::System.Int32 numberOfRatings, global::System.Double tc_Weight, global::System.Double tc_ExpectedRank, global::System.Int32 oldRating, global::System.Int32 newRating, global::System.Int32 oldVolatility, global::System.Int32 newVolatility, global::System.Int32 divisionPlace, global::System.Double tc_ActualRank, global::System.Double tc_ExpectedPerf, global::System.Double tc_ActualPerf, global::System.Double tc_Cap, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Double tc_KFactor)
+        /// <param name="tc2_OldRating">Initial value of the Tc2_OldRating property.</param>
+        /// <param name="tc2_NewRating">Initial value of the Tc2_NewRating property.</param>
+        /// <param name="tc2_OldVolatility">Initial value of the Tc2_OldVolatility property.</param>
+        /// <param name="tc2_NewVolatility">Initial value of the Tc2_NewVolatility property.</param>
+        /// <param name="tc2_NumberOfRatings">Initial value of the Tc2_NumberOfRatings property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Double points, global::System.Boolean isRated, global::System.Int32 numberOfRatings, global::System.Double tc_Weight, global::System.Double tc_ExpectedRank, global::System.Int32 oldRating, global::System.Int32 newRating, global::System.Int32 oldVolatility, global::System.Int32 newVolatility, global::System.Int32 divisionPlace, global::System.Double tc_ActualRank, global::System.Double tc_ExpectedPerf, global::System.Double tc_ActualPerf, global::System.Double tc_Cap, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Double tc_KFactor, global::System.Int32 tc2_OldRating, global::System.Int32 tc2_NewRating, global::System.Int32 tc2_OldVolatility, global::System.Int32 tc2_NewVolatility, global::System.Int32 tc2_NumberOfRatings)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
@@ -1098,6 +1181,11 @@ namespace TopCoder.Analysis.Data
             roundResult.Tc_NewRating = tc_NewRating;
             roundResult.Tc_NewVolatility = tc_NewVolatility;
             roundResult.Tc_KFactor = tc_KFactor;
+            roundResult.Tc2_OldRating = tc2_OldRating;
+            roundResult.Tc2_NewRating = tc2_NewRating;
+            roundResult.Tc2_OldVolatility = tc2_OldVolatility;
+            roundResult.Tc2_NewVolatility = tc2_NewVolatility;
+            roundResult.Tc2_NumberOfRatings = tc2_NumberOfRatings;
             return roundResult;
         }
 
@@ -1590,6 +1678,126 @@ namespace TopCoder.Analysis.Data
         private global::System.Double _Tc_KFactor;
         partial void OnTc_KFactorChanging(global::System.Double value);
         partial void OnTc_KFactorChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_OldRating
+        {
+            get
+            {
+                return _Tc2_OldRating;
+            }
+            set
+            {
+                OnTc2_OldRatingChanging(value);
+                ReportPropertyChanging("Tc2_OldRating");
+                _Tc2_OldRating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_OldRating");
+                OnTc2_OldRatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_OldRating;
+        partial void OnTc2_OldRatingChanging(global::System.Int32 value);
+        partial void OnTc2_OldRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_NewRating
+        {
+            get
+            {
+                return _Tc2_NewRating;
+            }
+            set
+            {
+                OnTc2_NewRatingChanging(value);
+                ReportPropertyChanging("Tc2_NewRating");
+                _Tc2_NewRating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_NewRating");
+                OnTc2_NewRatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_NewRating;
+        partial void OnTc2_NewRatingChanging(global::System.Int32 value);
+        partial void OnTc2_NewRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_OldVolatility
+        {
+            get
+            {
+                return _Tc2_OldVolatility;
+            }
+            set
+            {
+                OnTc2_OldVolatilityChanging(value);
+                ReportPropertyChanging("Tc2_OldVolatility");
+                _Tc2_OldVolatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_OldVolatility");
+                OnTc2_OldVolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_OldVolatility;
+        partial void OnTc2_OldVolatilityChanging(global::System.Int32 value);
+        partial void OnTc2_OldVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_NewVolatility
+        {
+            get
+            {
+                return _Tc2_NewVolatility;
+            }
+            set
+            {
+                OnTc2_NewVolatilityChanging(value);
+                ReportPropertyChanging("Tc2_NewVolatility");
+                _Tc2_NewVolatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_NewVolatility");
+                OnTc2_NewVolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_NewVolatility;
+        partial void OnTc2_NewVolatilityChanging(global::System.Int32 value);
+        partial void OnTc2_NewVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc2_NumberOfRatings
+        {
+            get
+            {
+                return _Tc2_NumberOfRatings;
+            }
+            set
+            {
+                OnTc2_NumberOfRatingsChanging(value);
+                ReportPropertyChanging("Tc2_NumberOfRatings");
+                _Tc2_NumberOfRatings = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc2_NumberOfRatings");
+                OnTc2_NumberOfRatingsChanged();
+            }
+        }
+        private global::System.Int32 _Tc2_NumberOfRatings;
+        partial void OnTc2_NumberOfRatingsChanging(global::System.Int32 value);
+        partial void OnTc2_NumberOfRatingsChanged();
 
         #endregion
 

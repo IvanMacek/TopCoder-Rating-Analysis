@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using MathNet.Numerics.Distributions;
+using MathNet.Numerics;
 
 namespace TopCoder.Tools.TcAlgorithmRunner.Functions
 {
     public class ExpectedRankFunction
     {
-        private static readonly Normal _StdNormalDistribution = Normal.WithMeanStdDev(0, 1);
-
         public double Calculate(Coder coder, IEnumerable<Coder> opponents)
         {
             var r = coder.R;
@@ -18,7 +16,7 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Functions
             var wpSum = opponents.Sum(x =>
             {
                 var rankDiff = (x.R - r) / Math.Sqrt(x.V * x.V + v * v);
-                var wp = _StdNormalDistribution.CumulativeDistribution(rankDiff);
+                var wp = 0.5 * (1 + SpecialFunctions.Erf(Constants.Sqrt1Over2 * rankDiff));
                 return wp;
             });
 

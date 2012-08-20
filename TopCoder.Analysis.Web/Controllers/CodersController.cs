@@ -39,11 +39,18 @@ namespace TopCoder.Analysis.Web.Controllers
             {
                 model.Coders = db.Coders.ToList();
 
-                model.TcTop100Coders =
+                model.TcTop20Coders =
                     (from coder in db.Coders.Include("FirstRound").Include("LastRound")
                      orderby coder.Rating descending
                      select coder 
-                    ).Take(100)
+                    ).Take(20)
+                     .ToList();
+
+                model.Tc2Top20Coders =
+                    (from coder in db.Coders.Include("FirstRound").Include("LastRound")
+                     orderby coder.Tc2_Rating descending
+                     select coder
+                    ).Take(20)
                      .ToList();
             }
 

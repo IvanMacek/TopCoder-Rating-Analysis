@@ -13,10 +13,12 @@
                 <th> Coder handle </th>  
                 <th> Rating </th>  
                 <th> Volatility </th>  
-                <th> First round </th>  
-                <th> Last round </th>  
                 <th> Rounds count </th>  
                 <th> Age </th>  
+
+                <th> TC2 Rating </th>  
+                <th> TC2 Volatility </th>  
+                <th> TC2 Rounds count </th>  
             </tr>
         </thead>
 
@@ -28,10 +30,12 @@
                 <td> @Html.ActionLink(coder.Handle, "Single", "Coders", new { handle = coder.Handle }, null) </td>  
                 <td class="rating"> @ColorCoding.RatingClass(coder.Rating) </td>  
                 <td> @coder.Volatility </td>  
-                <td> @coder.FirstRound.Name <br/> @coder.FirstRound.Date.ToShortDateString() </td>  
-                <td> @coder.LastRound.Name <br/> @coder.LastRound.Date.ToShortDateString() </td>  
                 <td> @coder.RoundsCount </td>  
                 <td> @age.TotalDays </td>  
+                
+                <td class="rating"> @ColorCoding.RatingClass(coder.Tc2_Rating) </td>  
+                <td> @coder.Tc2_Volatility </td>  
+                <td> @coder.Tc2_RoundsCount </td>  
             </tr>
         }   
         </tbody>

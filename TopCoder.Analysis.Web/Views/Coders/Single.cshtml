@@ -24,14 +24,14 @@
             chartType: 'LineChart',
             containerId: 'ratingsChart',
             options: { title: 'Ratings' },
-            view: { columns: [0, 1]}
+            view: { columns: [0, 1, 4]}
         });
         
         var volatilityChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'volatilityChart',
             options: { title: 'Volatility' },
-            view: { columns: [0, 2]}
+            view: { columns: [0, 2, 5]}
         });
         
         var weightChart = new google.visualization.ChartWrapper({
@@ -51,10 +51,12 @@
         data.addColumn('number', 'Rating');
         data.addColumn('number', 'Volatility');
         data.addColumn('number', 'Competition Weight');
+        data.addColumn('number', 'Rating 2');
+        data.addColumn('number', 'Volatility 2');
         data.addRows([
             @foreach (var rr in Model.RoundResults.Where(r => r.IsRated))
             {
-                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.Tc_Weight.ToString().Replace(",", ".")] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
+                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.Tc_Weight.ToString().Replace(",", "."), @rr.Tc2_NewRating, @rr.Tc2_NewVolatility] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }
         ]);
 
