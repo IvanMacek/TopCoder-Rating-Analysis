@@ -39,7 +39,7 @@
         erData.addColumn('number', 'Expected Rank');
         erData.addRows(erDataTable);
         
-        erChart.draw(erData, { title: 'Expected rank vs rank', height: 200, width: 1000 });
+        erChart.draw(erData, { title: 'Expected rank vs rank', height: 200, width: 700 });
         
         
         var ratChart = new google.visualization.ColumnChart(document.getElementById('ratChart' + div));
@@ -49,7 +49,7 @@
         ratData.addColumn('number', 'Count');
         ratData.addRows(ratDataTable);
         
-        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 1000 });
+        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 700 });
         
 
         var volChart = new google.visualization.ColumnChart(document.getElementById('volChart' + div));
@@ -59,13 +59,13 @@
         volData.addColumn('number', 'Count');
         volData.addRows(volDataTable);
         
-        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 1000 });
+        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 700 });
 
     });
 </script>
 
+<div id="volChart@(division)" style="float: right;" ></div>
 <div id="ratChart@(division)" ></div>
-<div id="volChart@(division)" ></div>
 <div id="erChart@(division)" ></div>
 
 @{ Html.RenderPartial("RoundResultsTablePart", results); }

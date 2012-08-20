@@ -16,6 +16,8 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
                 var rounds = db.Rounds.OrderBy(r => r.Date).ToList();
                 foreach (var round in rounds)
                 {
+                    round.NewRatingsDiffSum = 0;
+
                     foreach (var div in new[] { 1, 2 })
                     {
                         var ratedDivRoundResults = round.RoundResults.Where(x => x.Division == div && x.IsRated).ToList();
@@ -28,6 +30,9 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
 
                         var divRatingsDiffMean = ratedDivRoundResults.Average(x => Math.Abs(x.NewRating - x.Tc_NewRating));
                         var divVolatilityDiffMean = ratedDivRoundResults.Average(x => Math.Abs(x.NewVolatility - x.Tc_NewVolatility));
+
+                        var divNewRatingsDiffSum = ratedDivRoundResults.Sum(x => x.NewRating - x.OldRating);
+                        round.NewRatingsDiffSum += divNewRatingsDiffSum;
                         
                         if (div == 1)
                         {

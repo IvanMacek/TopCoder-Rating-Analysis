@@ -7,9 +7,9 @@ namespace TopCoder.Tools.TcAlgorithmRunner
         public static void Main(string[] args)
         {
             //new TcAlgorithm().Run();
-            new Tc2Algorithm().Run();
+            //new Tc2Algorithm().Run();
             
-            //new RoundStatisticsAlgorithm().Run();
+            new RoundStatisticsAlgorithm().Run();
 
         }
     }

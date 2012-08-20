@@ -582,7 +582,8 @@ namespace TopCoder.Analysis.Data
         /// <param name="divTwoTcRatingsDiffMean">Initial value of the DivTwoTcRatingsDiffMean property.</param>
         /// <param name="divOneTcVolatilityDiffMean">Initial value of the DivOneTcVolatilityDiffMean property.</param>
         /// <param name="divTwoTcVolatilityDiffMean">Initial value of the DivTwoTcVolatilityDiffMean property.</param>
-        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation, global::System.Double divOneTcRatingsDiffMean, global::System.Double divTwoTcRatingsDiffMean, global::System.Double divOneTcVolatilityDiffMean, global::System.Double divTwoTcVolatilityDiffMean)
+        /// <param name="newRatingsDiffSum">Initial value of the NewRatingsDiffSum property.</param>
+        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation, global::System.Double divOneTcRatingsDiffMean, global::System.Double divTwoTcRatingsDiffMean, global::System.Double divOneTcVolatilityDiffMean, global::System.Double divTwoTcVolatilityDiffMean, global::System.Int32 newRatingsDiffSum)
         {
             Round round = new Round();
             round.Id = id;
@@ -603,6 +604,7 @@ namespace TopCoder.Analysis.Data
             round.DivTwoTcRatingsDiffMean = divTwoTcRatingsDiffMean;
             round.DivOneTcVolatilityDiffMean = divOneTcVolatilityDiffMean;
             round.DivTwoTcVolatilityDiffMean = divTwoTcVolatilityDiffMean;
+            round.NewRatingsDiffSum = newRatingsDiffSum;
             return round;
         }
 
@@ -1044,6 +1046,30 @@ namespace TopCoder.Analysis.Data
         private global::System.Double _DivTwoTcVolatilityDiffMean;
         partial void OnDivTwoTcVolatilityDiffMeanChanging(global::System.Double value);
         partial void OnDivTwoTcVolatilityDiffMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NewRatingsDiffSum
+        {
+            get
+            {
+                return _NewRatingsDiffSum;
+            }
+            set
+            {
+                OnNewRatingsDiffSumChanging(value);
+                ReportPropertyChanging("NewRatingsDiffSum");
+                _NewRatingsDiffSum = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NewRatingsDiffSum");
+                OnNewRatingsDiffSumChanged();
+            }
+        }
+        private global::System.Int32 _NewRatingsDiffSum;
+        partial void OnNewRatingsDiffSumChanging(global::System.Int32 value);
+        partial void OnNewRatingsDiffSumChanged();
 
         #endregion
 

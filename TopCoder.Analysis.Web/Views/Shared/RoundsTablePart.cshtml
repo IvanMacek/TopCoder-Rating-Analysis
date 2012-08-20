@@ -1,46 +1,54 @@
 ﻿@using TopCoder.Analysis.Data
-@model IEnumerable<Round>
-
-@if (Model.Any())
+@model Tuple<bool, IEnumerable<Round>>
+@{
+    var isLongVersion = Model.Item1;
+    var rounds = Model.Item2;
+}
+@if (rounds.Any())
 {
     <table>
         <thead>
             <tr>
                 <th> Row count: </th>  
-                <th> @Model.Count() </th>  
+                <th> @rounds.Count() </th>  
             </tr>
             <tr>
                 <th> Name </th>  
                 <th> Date </th>  
-
-                <th> D1 Coders </th>  
-                <th> D1 Rat Mean </th>  
-                <th> D1 Rat StdDev </th>  
-                <th> D1 CF </th>  
-                <th> D1 TC Rat Diff </th>  
-                <th> D1 TC Vol Diff </th>  
-
-                <th> D2 Coders </th>  
-                <th> D2 Rat Mean </th>  
-                <th> D2 Rat StdDev </th>  
-                <th> D2 CF </th>  
-                <th> D2 TC Rat Diff </th>  
-                <th> D2 TC Vol Diff </th> 
                 
-                <th> GL Coders </th>  
-                <th> GL Rat Mean </th>  
-                <th> GL Rat StdDev </th>  
-                
+            @if (isLongVersion)
+            {
+                <th> D1 Coders </th>
+                <th> D1 Rat Mean </th>
+                <th> D1 Rat StdDev </th>
+                <th> D1 CF </th>
+                <th> D1 TC Rat Diff </th>
+                <th> D1 TC Vol Diff </th>
+
+                <th> D2 Coders </th>
+                <th> D2 Rat Mean </th>
+                <th> D2 Rat StdDev </th>
+                <th> D2 CF </th>
+                <th> D2 TC Rat Diff </th>
+                <th> D2 TC Vol Diff </th>
+
+                <th> GL Coders </th>
+                <th> GL Rat Mean </th>
+                <th> GL Rat StdDev </th>
+            }
+            
             </tr>
         </thead>
 
         <tbody>
-        @foreach (var round in Model)
+        @foreach (var round in rounds)
         {
             <tr>
                 <td> @Html.ActionLink(round.Name, "Single", "Rounds", new { roundId = round.Id }, null) </td>  
                 <td> @round.Date.ToShortDateString() </td>
-
+                
+            @if (isLongVersion)
+            {
                 <td> @round.DivOneCodersCount </td>  
                 <td> @round.DivOneRatingsMean.ToString("0.###") </td>  
                 <td> @round.DivOneRatingsDeviation.ToString("0.###") </td>  
@@ -58,6 +66,8 @@
                 <td> @round.GlobalCodersCount </td>  
                 <td> @round.GlobalRatingsMean.ToString("0.###") </td>  
                 <td> @round.GlobalRatingsDeviation.ToString("0.###") </td>  
+            }
+                
             </tr>
         }   
         </tbody>

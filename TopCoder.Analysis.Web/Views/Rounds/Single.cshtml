@@ -13,7 +13,7 @@
 
 <h2>Round @Model.Round.Name</h2>
 
-@{ Html.RenderPartial("RoundsTablePart", new [] { Model.Round }); }
+@{ Html.RenderPartial("RoundsTablePart", Tuple.Create(true, new [] { Model.Round }.AsEnumerable())); }
 
 <div id="tabs">
     <ul>

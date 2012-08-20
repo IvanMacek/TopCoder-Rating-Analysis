@@ -52,15 +52,29 @@
         var ratDiffChart = new google.visualization.ChartWrapper({
             chartType: 'ScatterChart',
             containerId: 'ratDiffChart',
-            options: { pointSize: 1, title: 'Ratings Diff Mean' },
+            options: { pointSize: 1, title: 'TC2 Ratings Diff Mean' },
             view: { columns: [0, 6, 7]}
         });
         
         var volDiffChart = new google.visualization.ChartWrapper({
             chartType: 'ScatterChart',
             containerId: 'volDiffChart',
-            options: { pointSize: 1, title: 'Volatility Diff Mean' },
+            options: { pointSize: 1, title: 'TC2 Volatility Diff Mean' },
             view: { columns: [0, 8, 9]}
+        });
+        
+        var ratDiffSumChart = new google.visualization.ChartWrapper({
+            chartType: 'ScatterChart',
+            containerId: 'ratDiffSumChart',
+            options: { pointSize: 1, title: 'New Ratings Diff Sum' },
+            view: { columns: [0, 10]}
+        });
+        
+        var ratDiffSumRelChart = new google.visualization.ChartWrapper({
+            chartType: 'ScatterChart',
+            containerId: 'ratDiffSumRelChart',
+            options: { pointSize: 1, title: 'New Ratings Diff Sum Relative to Coder Count' },
+            view: { columns: [0, 11]}
         });
 
         var parseDate = function(input) {
@@ -79,11 +93,14 @@
         data.addColumn('number', 'Div 2 Ratings Diff Mean');
         data.addColumn('number', 'Div 1 Volatility Diff Mean');
         data.addColumn('number', 'Div 2 Volatility Diff Mean');
+        data.addColumn('number', 'New Ratings Diff Sum');
+        data.addColumn('number', 'New Ratings Diff Sum Rel');
         data.addRows([
                 @foreach (var r in Model.Rounds)
             {
                 <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.GlobalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", "."), @r.GlobalRatingsMean.ToString().Replace(",", "."), @r.GlobalRatingsDeviation.ToString().Replace(",", "."), 
-                @r.DivOneTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivTwoTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivOneTcVolatilityDiffMean.ToString().Replace(",", "."), @r.DivTwoTcVolatilityDiffMean.ToString().Replace(",", ".") ] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
+                @r.DivOneTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivTwoTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivOneTcVolatilityDiffMean.ToString().Replace(",", "."), @r.DivTwoTcVolatilityDiffMean.ToString().Replace(",", "."),
+                @r.NewRatingsDiffSum, @(((double)r.NewRatingsDiffSum / r.GlobalCodersCount).ToString().Replace(",", ".")) ] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
             }
         ]);
 
@@ -93,7 +110,9 @@
             .bind(control, ratMeanChart)
             .bind(control, ratDevianceChart)
             .bind(control, ratDiffChart)
-            .bind(control, volDiffChart);
+            .bind(control, volDiffChart)
+            .bind(control, ratDiffSumChart)
+            .bind(control, ratDiffSumRelChart);
         
         dashboard.draw(data);
     });
@@ -101,16 +120,21 @@
 
 <h2>Rounds List</h2>
 
-<div id="dashboard">
+<div id="dashboard" style="width: 80%; float: right;">
     <div id="control" style="margin: auto; height: 50px; width: 50%;"></div>
-    <div id="cfChart" style="width: 50%; height: 200px; float: right;"></div>
-    <div id="totalCodersChart" style="width: 50%; height: 200px;"></div>
-    <div id="ratDevianceChart" style="width: 50%; height: 200px; float: right;"></div>
-    <div id="ratMeanChart" style="width: 50%; height: 200px;"></div>
-    <div id="volDiffChart" style="width: 50%; height: 200px; float: right;"></div>
-    <div id="ratDiffChart" style="width: 50%; height: 200px;"></div>
+    <div id="cfChart" style="width: 48%; height: 200px; float: right;"></div>
+    <div id="totalCodersChart" style="width: 48%; height: 200px;"></div>
+    <div id="ratDevianceChart" style="width: 48%; height: 200px; float: right;"></div>
+    <div id="ratMeanChart" style="width: 48%; height: 200px;"></div>
+    
+    <div id="ratDiffSumRelChart" style="width: 48%; height: 200px; float: right;"></div>
+    <div id="ratDiffSumChart" style="width: 48%; height: 200px;"></div>
+    
+    <div id="volDiffChart" style="width: 48%; height: 200px; float: right;"></div>
+    <div id="ratDiffChart" style="width: 48%; height: 200px;"></div>
+
 </div>
 
-<div>
-    @{ Html.RenderPartial("RoundsTablePart", Model.Rounds); }
+<div style="width: 17%;">
+    @{ Html.RenderPartial("RoundsTablePart", Tuple.Create(false, Model.Rounds.AsEnumerable())); }
 </div>

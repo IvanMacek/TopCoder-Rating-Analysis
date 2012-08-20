@@ -94,6 +94,7 @@
           <Property Name="DivTwoTcRatingsDiffMean" Type="float" Nullable="false" />
           <Property Name="DivOneTcVolatilityDiffMean" Type="float" Nullable="false" />
           <Property Name="DivTwoTcVolatilityDiffMean" Type="float" Nullable="false" />
+          <Property Name="NewRatingsDiffSum" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Store.Coders" Multiplicity="1" />
@@ -244,6 +245,7 @@
           <Property Type="Double" Name="DivTwoTcRatingsDiffMean" Nullable="false" />
           <Property Type="Double" Name="DivOneTcVolatilityDiffMean" Nullable="false" />
           <Property Type="Double" Name="DivTwoTcVolatilityDiffMean" Nullable="false" />
+          <Property Type="Int32" Name="NewRatingsDiffSum" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Type="Model.Coder" Role="Coder" Multiplicity="1" />
@@ -349,6 +351,7 @@
           <EntitySetMapping Name="Rounds">
             <EntityTypeMapping TypeName="Model.Round">
               <MappingFragment StoreEntitySet="Rounds">
+                <ScalarProperty Name="NewRatingsDiffSum" ColumnName="NewRatingsDiffSum" />
                 <ScalarProperty Name="DivTwoTcVolatilityDiffMean" ColumnName="DivTwoTcVolatilityDiffMean" />
                 <ScalarProperty Name="DivOneTcVolatilityDiffMean" ColumnName="DivOneTcVolatilityDiffMean" />
                 <ScalarProperty Name="DivTwoTcRatingsDiffMean" ColumnName="DivTwoTcRatingsDiffMean" />
