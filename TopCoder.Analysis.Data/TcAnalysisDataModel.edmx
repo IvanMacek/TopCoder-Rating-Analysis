@@ -40,6 +40,9 @@
           <Property Name="Tc2_Rating" Type="int" Nullable="false" />
           <Property Name="Tc2_Volatility" Type="int" Nullable="false" />
           <Property Name="Tc2_RoundsCount" Type="int" Nullable="false" />
+          <Property Name="Tc3_Rating" Type="int" Nullable="false" />
+          <Property Name="Tc3_Volatility" Type="int" Nullable="false" />
+          <Property Name="Tc3_RoundsCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RoundResults">
           <Key>
@@ -71,6 +74,11 @@
           <Property Name="Tc2_OldVolatility" Type="int" Nullable="false" />
           <Property Name="Tc2_NewVolatility" Type="int" Nullable="false" />
           <Property Name="Tc2_NumberOfRatings" Type="int" Nullable="false" />
+          <Property Name="Tc3_OldRating" Type="int" Nullable="false" />
+          <Property Name="Tc3_NewRating" Type="int" Nullable="false" />
+          <Property Name="Tc3_OldVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc3_NewVolatility" Type="int" Nullable="false" />
+          <Property Name="Tc3_ExpectedRank" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Rounds">
           <Key>
@@ -95,6 +103,10 @@
           <Property Name="DivOneTcVolatilityDiffMean" Type="float" Nullable="false" />
           <Property Name="DivTwoTcVolatilityDiffMean" Type="float" Nullable="false" />
           <Property Name="NewRatingsDiffSum" Type="int" Nullable="false" />
+          <Property Name="DivOneKendalTauDist" Type="float" Nullable="false" />
+          <Property Name="DivTwoKendalTauDist" Type="float" Nullable="false" />
+          <Property Name="Tc3_DivOneKendalTauDist" Type="float" Nullable="false" />
+          <Property Name="Tc3_DivTwoKendalTauDist" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Role="Coders" Type="Model.Store.Coders" Multiplicity="1" />
@@ -186,6 +198,9 @@
           <Property Type="Int32" Name="Tc2_Volatility" Nullable="false" />
           <Property Type="Int32" Name="Tc2_RoundsCount" Nullable="false" />
           <Property Type="Int32" Name="Tc2_Rating" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_Rating" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_Volatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_RoundsCount" Nullable="false" />
         </EntityType>
         <EntityType Name="RoundResult">
           <Key>
@@ -219,6 +234,11 @@
           <Property Type="Int32" Name="Tc2_OldVolatility" Nullable="false" />
           <Property Type="Int32" Name="Tc2_NewVolatility" Nullable="false" />
           <Property Type="Int32" Name="Tc2_NumberOfRatings" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_OldRating" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_NewRating" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_OldVolatility" Nullable="false" />
+          <Property Type="Int32" Name="Tc3_NewVolatility" Nullable="false" />
+          <Property Type="Double" Name="Tc3_ExpectedRank" Nullable="false" />
         </EntityType>
         <EntityType Name="Round">
           <Key>
@@ -246,6 +266,10 @@
           <Property Type="Double" Name="DivOneTcVolatilityDiffMean" Nullable="false" />
           <Property Type="Double" Name="DivTwoTcVolatilityDiffMean" Nullable="false" />
           <Property Type="Int32" Name="NewRatingsDiffSum" Nullable="false" />
+          <Property Type="Double" Name="DivOneKendalTauDist" Nullable="false" />
+          <Property Type="Double" Name="DivTwoKendalTauDist" Nullable="false" />
+          <Property Type="Double" Name="Tc3_DivOneKendalTauDist" Nullable="false" />
+          <Property Type="Double" Name="Tc3_DivTwoKendalTauDist" Nullable="false" />
         </EntityType>
         <Association Name="FK_CoderId">
           <End Type="Model.Coder" Role="Coder" Multiplicity="1" />
@@ -304,6 +328,9 @@
           <EntitySetMapping Name="Coders">
             <EntityTypeMapping TypeName="Model.Coder">
               <MappingFragment StoreEntitySet="Coders">
+                <ScalarProperty Name="Tc3_RoundsCount" ColumnName="Tc3_RoundsCount" />
+                <ScalarProperty Name="Tc3_Volatility" ColumnName="Tc3_Volatility" />
+                <ScalarProperty Name="Tc3_Rating" ColumnName="Tc3_Rating" />
                 <ScalarProperty Name="Tc2_Rating" ColumnName="Tc2_Rating" />
                 <ScalarProperty Name="Tc2_RoundsCount" ColumnName="Tc2_RoundsCount" />
                 <ScalarProperty Name="Tc2_Volatility" ColumnName="Tc2_Volatility" />
@@ -320,6 +347,11 @@
           <EntitySetMapping Name="RoundResults">
             <EntityTypeMapping TypeName="Model.RoundResult">
               <MappingFragment StoreEntitySet="RoundResults">
+                <ScalarProperty Name="Tc3_ExpectedRank" ColumnName="Tc3_ExpectedRank" />
+                <ScalarProperty Name="Tc3_NewVolatility" ColumnName="Tc3_NewVolatility" />
+                <ScalarProperty Name="Tc3_OldVolatility" ColumnName="Tc3_OldVolatility" />
+                <ScalarProperty Name="Tc3_NewRating" ColumnName="Tc3_NewRating" />
+                <ScalarProperty Name="Tc3_OldRating" ColumnName="Tc3_OldRating" />
                 <ScalarProperty Name="Tc2_NumberOfRatings" ColumnName="Tc2_NumberOfRatings" />
                 <ScalarProperty Name="Tc2_NewVolatility" ColumnName="Tc2_NewVolatility" />
                 <ScalarProperty Name="Tc2_OldVolatility" ColumnName="Tc2_OldVolatility" />
@@ -351,6 +383,10 @@
           <EntitySetMapping Name="Rounds">
             <EntityTypeMapping TypeName="Model.Round">
               <MappingFragment StoreEntitySet="Rounds">
+                <ScalarProperty Name="Tc3_DivTwoKendalTauDist" ColumnName="Tc3_DivTwoKendalTauDist" />
+                <ScalarProperty Name="Tc3_DivOneKendalTauDist" ColumnName="Tc3_DivOneKendalTauDist" />
+                <ScalarProperty Name="DivTwoKendalTauDist" ColumnName="DivTwoKendalTauDist" />
+                <ScalarProperty Name="DivOneKendalTauDist" ColumnName="DivOneKendalTauDist" />
                 <ScalarProperty Name="NewRatingsDiffSum" ColumnName="NewRatingsDiffSum" />
                 <ScalarProperty Name="DivTwoTcVolatilityDiffMean" ColumnName="DivTwoTcVolatilityDiffMean" />
                 <ScalarProperty Name="DivOneTcVolatilityDiffMean" ColumnName="DivOneTcVolatilityDiffMean" />
@@ -395,11 +431,11 @@
     <Diagrams>
       <Diagram Name="TcAnalysisDataModel">
         <EntityTypeShape EntityType="Model.Coder" Width="2" PointX="3.875" PointY="0.875" Height="3.5186979166666656" />
-        <EntityTypeShape EntityType="Model.RoundResult" Width="2" PointX="7.125" PointY="1.125" Height="5.2494108072916656" />
+        <EntityTypeShape EntityType="Model.RoundResult" Width="2" PointX="7.125" PointY="1.125" Height="7.1724251302083335" />
         <EntityTypeShape EntityType="Model.Round" Width="2" PointX="0.75" PointY="1.75" Height="4.2879036458333326" />
         <AssociationConnector Association="Model.FK_CoderId" >
-          <ConnectorPoint PointX="5.875" PointY="2.7593489583333333" />
-          <ConnectorPoint PointX="7.125" PointY="2.7593489583333333" />
+          <ConnectorPoint PointX="5.875" PointY="3.0478011067708328" />
+          <ConnectorPoint PointX="7.125" PointY="3.0478011067708328" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_FirstRoundId" >
           <ConnectorPoint PointX="2.75" PointY="3.458031955487237" />
@@ -410,8 +446,8 @@
           <ConnectorPoint PointX="3.875" PointY="2.5415159777436185" />
         </AssociationConnector>
         <AssociationConnector Association="Model.FK_RoundId" >
-          <ConnectorPoint PointX="2.75" PointY="5.6316536458333326" />
-          <ConnectorPoint PointX="7.125" PointY="5.6316536458333326" />
+          <ConnectorPoint PointX="2.75" PointY="6.400859375" />
+          <ConnectorPoint PointX="7.125" PointY="6.400859375" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

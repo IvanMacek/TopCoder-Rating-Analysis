@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Coder " + Model.Coder.Handle;
 }
+@{
+    var bucketedActPerf = Model.RoundResults.GroupBy(x => (int)(x.Tc_ActualPerf / 0.1)).Select(g => new { Bucket = (g.Key + 1) * 0.1, Count = g.Count() }).ToList();
+}
+
 <script type="text/javascript">
     $(function () {
         var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
@@ -24,14 +28,14 @@
             chartType: 'LineChart',
             containerId: 'ratingsChart',
             options: { title: 'Ratings' },
-            view: { columns: [0, 1, 4]}
+            view: { columns: [0, 1, 4, 6]}
         });
         
         var volatilityChart = new google.visualization.ChartWrapper({
             chartType: 'LineChart',
             containerId: 'volatilityChart',
             options: { title: 'Volatility' },
-            view: { columns: [0, 2, 5]}
+            view: { columns: [0, 2, 5, 7]}
         });
         
         var weightChart = new google.visualization.ChartWrapper({
@@ -53,10 +57,12 @@
         data.addColumn('number', 'Competition Weight');
         data.addColumn('number', 'Rating 2');
         data.addColumn('number', 'Volatility 2');
+        data.addColumn('number', 'Rating 3');
+        data.addColumn('number', 'Volatility 3');
         data.addRows([
             @foreach (var rr in Model.RoundResults.Where(r => r.IsRated))
             {
-                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.Tc_Weight.ToString().Replace(",", "."), @rr.Tc2_NewRating, @rr.Tc2_NewVolatility] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
+                <text> [parseDate('@rr.Round.Date.ToString("yyyy-MM-dd")'), @rr.NewRating, @rr.NewVolatility, @rr.Tc_Weight.ToString().Replace(",", "."), @rr.Tc2_NewRating, @rr.Tc2_NewVolatility, @rr.Tc3_NewRating, @rr.Tc3_NewVolatility] </text>@(rr != Model.RoundResults.Last() ? "," : string.Empty)
             }
         ]);
 
@@ -66,6 +72,21 @@
             .bind(control, weightChart);
         
         dashboard.draw(data);
+        
+         var actPerfDataTable = [
+            @foreach (var x in bucketedActPerf) {
+                <text> [@x.Bucket.ToString().Replace(",", "."), @x.Count] </text>@(x != bucketedActPerf.Last() ? "," : string.Empty)
+            }
+        ];
+        
+        var actPerfChart = new google.visualization.ColumnChart(document.getElementById('actPerfChart'));
+
+        var actPerfData = new google.visualization.DataTable();
+        actPerfData.addColumn('number', 'Actual Performance');
+        actPerfData.addColumn('number', 'Count');
+        actPerfData.addRows(actPerfDataTable);
+        
+        actPerfChart.draw(actPerfData, { pointSize: 2, title: 'Actual Performance distribution' });
     });
 </script>
 
@@ -86,6 +107,7 @@
     <div id="control" style="width: 50%; height: 40px; margin: auto;"></div>
     <div id="volatilityChart" style="width: 50%; height: 200px; float: right;"></div>
     <div id="ratingsChart" style="width: 50%; height: 200px;"></div>
+    <div id="actPerfChart" style="width: 50%; height: 200px; float: right;"></div>
     <div id="weightChart" style="width: 50%; height: 200px;"></div>
 </div>
 

@@ -33,6 +33,26 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
 
                         var divNewRatingsDiffSum = ratedDivRoundResults.Sum(x => x.NewRating - x.OldRating);
                         round.NewRatingsDiffSum += divNewRatingsDiffSum;
+
+                        var kendalTauDist = 
+                            (from xi in ratedDivRoundResults.Select((x, i) => new { val = x, idx = i })
+                             from xj in ratedDivRoundResults.Select((x, i) => new { val = x, idx = i })
+                             where xi.idx < xj.idx
+                             where (xi.val.Tc_ActualRank < xj.val.Tc_ActualRank && xi.val.Tc_ExpectedRank > xj.val.Tc_ExpectedRank
+                                 || xi.val.Tc_ActualRank > xj.val.Tc_ActualRank && xi.val.Tc_ExpectedRank < xj.val.Tc_ExpectedRank)
+                             select 1
+                            ).Count() 
+                            / (divN * (divN - 1) / 2.0);
+
+                        var tc3KendalTauDist =
+                            (from xi in ratedDivRoundResults.Select((x, i) => new { val = x, idx = i })
+                             from xj in ratedDivRoundResults.Select((x, i) => new { val = x, idx = i })
+                             where xi.idx < xj.idx
+                             where (xi.val.Tc_ActualRank < xj.val.Tc_ActualRank && xi.val.Tc3_ExpectedRank > xj.val.Tc3_ExpectedRank)
+                                || (xi.val.Tc_ActualRank > xj.val.Tc_ActualRank && xi.val.Tc3_ExpectedRank < xj.val.Tc3_ExpectedRank)
+                             select 1
+                            ).Count() 
+                            / (divN * (divN - 1) / 2.0);
                         
                         if (div == 1)
                         {
@@ -41,6 +61,8 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
                             round.DivOneRatingsDeviation = divStdev;
                             round.DivOneTcRatingsDiffMean = divRatingsDiffMean;
                             round.DivOneTcVolatilityDiffMean = divVolatilityDiffMean;
+                            round.DivOneKendalTauDist = kendalTauDist;
+                            round.Tc3_DivOneKendalTauDist = tc3KendalTauDist;
                         }
                         if (div == 2)
                         {
@@ -49,6 +71,8 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Algorithm
                             round.DivTwoRatingsDeviation = divStdev;
                             round.DivTwoTcRatingsDiffMean = divRatingsDiffMean;
                             round.DivTwoTcVolatilityDiffMean = divVolatilityDiffMean;
+                            round.DivTwoKendalTauDist = kendalTauDist;
+                            round.Tc3_DivTwoKendalTauDist = tc3KendalTauDist;
                         }
 
                         foreach (var rr in ratedDivRoundResults)

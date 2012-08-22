@@ -8,8 +8,8 @@ namespace TopCoder.Tools.TcAlgorithmRunner.Functions
 
         public double Calculate(double rank, int codersCount)
         {
-            var val = (rank - 0.5)/codersCount;
-            var norminv = _StdNormalDistribution.InverseCumulativeDistribution(val);
+            var normRank = (rank - 0.5) / codersCount;
+            var norminv = _StdNormalDistribution.InverseCumulativeDistribution(normRank);
             return -norminv;
         }
     }

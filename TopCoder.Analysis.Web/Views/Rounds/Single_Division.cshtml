@@ -13,7 +13,7 @@
 
         var erDataTable = [
             @foreach (var rr in sortedDivResults.Select((x, i) => new { X = x, I = i + 1 })) {
-                <text> [@rr.I, @rr.I, @rr.X.Tc_ExpectedRank.ToString().Replace(",", ".")] </text>@(rr.X != sortedDivResults.Last() ? "," : string.Empty)
+                <text> [@rr.I, @rr.I, @rr.X.Tc_ExpectedRank.ToString().Replace(",", "."), @rr.X.Tc3_ExpectedRank.ToString().Replace(",", ".")] </text>@(rr.X != sortedDivResults.Last() ? "," : string.Empty)
             }
         ];
       
@@ -37,9 +37,10 @@
         erData.addColumn('number', 'Index');
         erData.addColumn('number', 'Rank from sorted rating');
         erData.addColumn('number', 'Expected Rank');
+        erData.addColumn('number', 'TC3 Expected Rank');
         erData.addRows(erDataTable);
         
-        erChart.draw(erData, { title: 'Expected rank vs rank', height: 200, width: 700 });
+        erChart.draw(erData, { pointSize: 1, title: 'Expected rank vs rank', height: 200, width: 700 });
         
         
         var ratChart = new google.visualization.ColumnChart(document.getElementById('ratChart' + div));
@@ -49,7 +50,7 @@
         ratData.addColumn('number', 'Count');
         ratData.addRows(ratDataTable);
         
-        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 700 });
+        ratChart.draw(ratData, { pointSize: 1, title: 'Ratings distribution', height: 200, width: 700 });
         
 
         var volChart = new google.visualization.ColumnChart(document.getElementById('volChart' + div));
@@ -59,7 +60,7 @@
         volData.addColumn('number', 'Count');
         volData.addRows(volDataTable);
         
-        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 700 });
+        volChart.draw(volData, { pointSize: 1, title: 'Volatility distribution', height: 200, width: 700 });
 
     });
 </script>

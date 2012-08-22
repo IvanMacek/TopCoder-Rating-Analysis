@@ -5,6 +5,8 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using TopCoder.Tools.EloRunner.Elo;
+
 namespace TopCoder.Tools.EloRunner.Tests
 {
     [TestClass]

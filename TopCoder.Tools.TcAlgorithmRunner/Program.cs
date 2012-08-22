@@ -8,6 +8,7 @@ namespace TopCoder.Tools.TcAlgorithmRunner
         {
             //new TcAlgorithm().Run();
             //new Tc2Algorithm().Run();
+            //new Tc3Algorithm().Run();
             
             new RoundStatisticsAlgorithm().Run();
 

@@ -52,6 +52,13 @@ namespace TopCoder.Analysis.Web.Controllers
                      select coder
                     ).Take(20)
                      .ToList();
+
+                model.Tc3Top20Coders =
+                    (from coder in db.Coders.Include("FirstRound").Include("LastRound")
+                     orderby coder.Tc3_Rating descending
+                     select coder
+                    ).Take(20)
+                     .ToList();
             }
 
             return View(model);

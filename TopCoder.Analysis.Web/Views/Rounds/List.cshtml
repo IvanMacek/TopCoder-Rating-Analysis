@@ -76,6 +76,20 @@
             options: { pointSize: 1, title: 'New Ratings Diff Sum Relative to Coder Count' },
             view: { columns: [0, 11]}
         });
+        
+        var div1KendalChart = new google.visualization.ChartWrapper({
+            chartType: 'ScatterChart',
+            containerId: 'div1KendalChart',
+            options: { pointSize: 1, title: 'Div1 Kendal Tau Distance Per Round' },
+            view: { columns: [0, 12, 14]}
+        });
+        
+        var div2KendalChart = new google.visualization.ChartWrapper({
+            chartType: 'ScatterChart',
+            containerId: 'div2KendalChart',
+            options: { pointSize: 1, title: 'Div2 Kendal Tau Distance Per Round' },
+            view: { columns: [0, 13, 15]}
+        });
 
         var parseDate = function(input) {
             var parts = input.match( /(\d+)/g );
@@ -95,12 +109,17 @@
         data.addColumn('number', 'Div 2 Volatility Diff Mean');
         data.addColumn('number', 'New Ratings Diff Sum');
         data.addColumn('number', 'New Ratings Diff Sum Rel');
+        data.addColumn('number', 'Div 1 Kendal');
+        data.addColumn('number', 'Div 2 Kendal');
+        data.addColumn('number', 'TC3 Div 1 Kendal');
+        data.addColumn('number', 'TC3 Div 2 Kendal');
         data.addRows([
                 @foreach (var r in Model.Rounds)
             {
                 <text> [parseDate('@r.Date.ToString("yyyy-MM-dd")'), @r.GlobalCodersCount, @r.DivOneCompetitionFactor.ToString().Replace(",", "."), @r.DivTwoCompetitionFactor.ToString().Replace(",", "."), @r.GlobalRatingsMean.ToString().Replace(",", "."), @r.GlobalRatingsDeviation.ToString().Replace(",", "."), 
                 @r.DivOneTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivTwoTcRatingsDiffMean.ToString().Replace(",", "."), @r.DivOneTcVolatilityDiffMean.ToString().Replace(",", "."), @r.DivTwoTcVolatilityDiffMean.ToString().Replace(",", "."),
-                @r.NewRatingsDiffSum, @(((double)r.NewRatingsDiffSum / r.GlobalCodersCount).ToString().Replace(",", ".")) ] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
+                @r.NewRatingsDiffSum, @(((double)r.NewRatingsDiffSum / r.GlobalCodersCount).ToString().Replace(",", ".")),
+                @r.DivOneKendalTauDist.ToString().Replace(",", "."), @r.DivTwoKendalTauDist.ToString().Replace(",", "."), @r.Tc3_DivOneKendalTauDist.ToString().Replace(",", "."), @r.Tc3_DivTwoKendalTauDist.ToString().Replace(",", ".")] </text>@(r != Model.Rounds.Last() ? "," : string.Empty) 
             }
         ]);
 
@@ -112,7 +131,9 @@
             .bind(control, ratDiffChart)
             .bind(control, volDiffChart)
             .bind(control, ratDiffSumChart)
-            .bind(control, ratDiffSumRelChart);
+            .bind(control, ratDiffSumRelChart)
+            .bind(control, div1KendalChart)
+            .bind(control, div2KendalChart);
         
         dashboard.draw(data);
     });
@@ -133,6 +154,8 @@
     <div id="volDiffChart" style="width: 48%; height: 200px; float: right;"></div>
     <div id="ratDiffChart" style="width: 48%; height: 200px;"></div>
 
+    <div id="div2KendalChart" style="width: 48%; height: 200px; float: right;"></div>
+    <div id="div1KendalChart" style="width: 48%; height: 200px;"></div>
 </div>
 
 <div style="width: 17%;">

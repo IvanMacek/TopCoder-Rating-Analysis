@@ -3,26 +3,44 @@
     ViewBag.Title = "Coders";
 }
 @{
-    var results = Model.Coders.Select(x => new { x.Rating, x.Volatility, x.RoundsCount }).ToList();
+    var results = Model.Coders.Select(x => new { x.Rating, x.Volatility, x.RoundsCount, x.Tc3_Rating, x.Tc3_Volatility }).ToList();
         
-    var bucketedRatings = results.GroupBy(x => x.Rating / 100).Select(g => new { Bucket = (g.Key + 1) * 100, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
-    var bucketedVols = results.GroupBy(x => x.Volatility / 20).Select(g => new { Bucket = (g.Key + 1) * 20, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+    var bucketedRatings = results.GroupBy(x => x.Rating / 100).Select(g => new { Bucket = (g.Key + 1) * 100, Count = g.Count() }).ToList();
+    var bucketedVols = results.GroupBy(x => x.Volatility / 20).Select(g => new { Bucket = (g.Key + 1) * 20, Count = g.Count() }).ToList();
     var bucketedRounds = results.GroupBy(x => x.RoundsCount / 10).Select(g => new { Bucket = (g.Key + 1) * 10, Count = g.Count() }).OrderBy(x => x.Bucket).ToList();
+
+    var tc3BucketedRatings = results.GroupBy(x => x.Tc3_Rating / 100).Select(g => new { Bucket = (g.Key + 1) * 100, Count = g.Count() }).ToList();
+    var tc3BucketedVols = results.GroupBy(x => x.Tc3_Volatility / 20).Select(g => new { Bucket = (g.Key + 1) * 20, Count = g.Count() }).ToList();
+
+
+    var bucketsRats = 
+        bucketedRatings.Concat(tc3BucketedRatings).Select(x => x.Bucket).Distinct()
+            .GroupJoin(bucketedRatings, x => x, y => y.Bucket, (a, b) => new { Bucket = a, Count1 = (b.Any()) ? b.First().Count : 0, Count2 = 0 })
+            .GroupJoin(tc3BucketedRatings, x => x.Bucket, y => y.Bucket, (a, b) => new { a.Bucket, a.Count1, Count2 = (b.Any()) ? b.First().Count : 0 })
+            .ToList();
+            
+    var bucketsVols = 
+        bucketedVols.Concat(tc3BucketedVols).Select(x => x.Bucket).Distinct()
+            .GroupJoin(bucketedVols, x => x, y => y.Bucket, (a, b) => new { Bucket = a, Count1 = (b.Any()) ? b.First().Count : 0, Count2 = 0 })
+            .GroupJoin(tc3BucketedVols, x => x.Bucket, y => y.Bucket, (a, b) => new { a.Bucket, a.Count1, Count2 = (b.Any()) ? b.First().Count : 0 })
+            .ToList();
+    
+    
 }
 
 <script type="text/javascript">
     $(function () {
       
         var ratDataTable = [
-            @foreach (var x in bucketedRatings) {
-                <text> [@x.Bucket, @x.Count] </text>@(x != bucketedRatings.Last() ? "," : string.Empty)
+            @foreach (var x in bucketsRats) {
+                <text> [@x.Bucket, @x.Count1, @x.Count2] </text>@(x != bucketsRats.Last() ? "," : string.Empty)
             }
         ];
      
         var volDataTable = [
-            @foreach (var x in bucketedVols)
+            @foreach (var x in bucketsVols)
             {
-                <text> [@x.Bucket, @x.Count] </text>@(x != bucketedVols.Last() ? "," : string.Empty)
+                <text> [@x.Bucket, @x.Count1, @x.Count2] </text>@(x != bucketsVols.Last() ? "," : string.Empty)
             }
         ];
         
@@ -38,9 +56,10 @@
         var ratData = new google.visualization.DataTable();
         ratData.addColumn('number', 'Rating');
         ratData.addColumn('number', 'Count');
+        ratData.addColumn('number', 'Count TC3');
         ratData.addRows(ratDataTable);
         
-        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 200, width: 450 });
+        ratChart.draw(ratData, { pointSize: 2, title: 'Ratings distribution', height: 300, width: 650 });
         
 
         var volChart = new google.visualization.ColumnChart(document.getElementById('volChart'));
@@ -48,9 +67,10 @@
         var volData = new google.visualization.DataTable();
         volData.addColumn('number', 'Volatility');
         volData.addColumn('number', 'Count');
+        volData.addColumn('number', 'Count TC3');
         volData.addRows(volDataTable);
         
-        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 200, width: 450 });
+        volChart.draw(volData, { pointSize: 2, title: 'Volatility distribution', height: 300, width: 650 });
 
 
         var roundsChart = new google.visualization.ColumnChart(document.getElementById('roundsChart'));
@@ -60,7 +80,7 @@
         roundsData.addColumn('number', 'Count');
         roundsData.addRows(roundsDataTable);
         
-        roundsChart.draw(roundsData, { pointSize: 2, title: 'Rated Rounds Count distribution', height: 200, width: 450, vAxis: { logScale: true }});
+        roundsChart.draw(roundsData, { pointSize: 2, title: 'Rated Rounds Count distribution', height: 300, width: 650, vAxis: { logScale: true }});
 
     });
 </script>
@@ -72,9 +92,9 @@
     
     <h3> Statistics </h3>
     
+    <div id="volChart" style="float: right;"></div>
     <div id="ratChart" style="float: left;"></div>
-    <div id="volChart" style="float: left;"></div>
-    <div id="roundsChart" style="float: left;"></div>
+    <div id="roundsChart" ></div>
 
 </div>
 
@@ -84,11 +104,21 @@
     @{ Html.RenderPartial("CodersTablePart", Model.Tc2Top20Coders); }
 </div>
 
+
 <div style="width: 49%;">
 
     <h3 > Top 20 </h3>
     @{ Html.RenderPartial("CodersTablePart", Model.TcTop20Coders); }
 
 </div>
+
+<div style="width: 49%;">
+
+    <h3 > TC3 Top 20 </h3>
+    @{ Html.RenderPartial("CodersTablePart", Model.Tc3Top20Coders); }
+
+</div>
+
+
 
 

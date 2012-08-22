@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -123,7 +122,6 @@ namespace TopCoder.Analysis.Data
         private ObjectSet<Round> _Rounds;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -151,11 +149,11 @@ namespace TopCoder.Analysis.Data
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -181,7 +179,10 @@ namespace TopCoder.Analysis.Data
         /// <param name="tc2_Volatility">Initial value of the Tc2_Volatility property.</param>
         /// <param name="tc2_RoundsCount">Initial value of the Tc2_RoundsCount property.</param>
         /// <param name="tc2_Rating">Initial value of the Tc2_Rating property.</param>
-        public static Coder CreateCoder(global::System.Int32 id, global::System.String handle, global::System.Int32 firstRoundId, global::System.Int32 lastRoundId, global::System.Int32 roundsCount, global::System.Int32 rating, global::System.Int32 volatility, global::System.Int32 tc2_Volatility, global::System.Int32 tc2_RoundsCount, global::System.Int32 tc2_Rating)
+        /// <param name="tc3_Rating">Initial value of the Tc3_Rating property.</param>
+        /// <param name="tc3_Volatility">Initial value of the Tc3_Volatility property.</param>
+        /// <param name="tc3_RoundsCount">Initial value of the Tc3_RoundsCount property.</param>
+        public static Coder CreateCoder(global::System.Int32 id, global::System.String handle, global::System.Int32 firstRoundId, global::System.Int32 lastRoundId, global::System.Int32 roundsCount, global::System.Int32 rating, global::System.Int32 volatility, global::System.Int32 tc2_Volatility, global::System.Int32 tc2_RoundsCount, global::System.Int32 tc2_Rating, global::System.Int32 tc3_Rating, global::System.Int32 tc3_Volatility, global::System.Int32 tc3_RoundsCount)
         {
             Coder coder = new Coder();
             coder.Id = id;
@@ -194,11 +195,13 @@ namespace TopCoder.Analysis.Data
             coder.Tc2_Volatility = tc2_Volatility;
             coder.Tc2_RoundsCount = tc2_RoundsCount;
             coder.Tc2_Rating = tc2_Rating;
+            coder.Tc3_Rating = tc3_Rating;
+            coder.Tc3_Volatility = tc3_Volatility;
+            coder.Tc3_RoundsCount = tc3_RoundsCount;
             return coder;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -443,9 +446,80 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Tc2_Rating;
         partial void OnTc2_RatingChanging(global::System.Int32 value);
         partial void OnTc2_RatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_Rating
+        {
+            get
+            {
+                return _Tc3_Rating;
+            }
+            set
+            {
+                OnTc3_RatingChanging(value);
+                ReportPropertyChanging("Tc3_Rating");
+                _Tc3_Rating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_Rating");
+                OnTc3_RatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_Rating;
+        partial void OnTc3_RatingChanging(global::System.Int32 value);
+        partial void OnTc3_RatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_Volatility
+        {
+            get
+            {
+                return _Tc3_Volatility;
+            }
+            set
+            {
+                OnTc3_VolatilityChanging(value);
+                ReportPropertyChanging("Tc3_Volatility");
+                _Tc3_Volatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_Volatility");
+                OnTc3_VolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_Volatility;
+        partial void OnTc3_VolatilityChanging(global::System.Int32 value);
+        partial void OnTc3_VolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_RoundsCount
+        {
+            get
+            {
+                return _Tc3_RoundsCount;
+            }
+            set
+            {
+                OnTc3_RoundsCountChanging(value);
+                ReportPropertyChanging("Tc3_RoundsCount");
+                _Tc3_RoundsCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_RoundsCount");
+                OnTc3_RoundsCountChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_RoundsCount;
+        partial void OnTc3_RoundsCountChanging(global::System.Int32 value);
+        partial void OnTc3_RoundsCountChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -548,7 +622,6 @@ namespace TopCoder.Analysis.Data
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -583,7 +656,11 @@ namespace TopCoder.Analysis.Data
         /// <param name="divOneTcVolatilityDiffMean">Initial value of the DivOneTcVolatilityDiffMean property.</param>
         /// <param name="divTwoTcVolatilityDiffMean">Initial value of the DivTwoTcVolatilityDiffMean property.</param>
         /// <param name="newRatingsDiffSum">Initial value of the NewRatingsDiffSum property.</param>
-        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation, global::System.Double divOneTcRatingsDiffMean, global::System.Double divTwoTcRatingsDiffMean, global::System.Double divOneTcVolatilityDiffMean, global::System.Double divTwoTcVolatilityDiffMean, global::System.Int32 newRatingsDiffSum)
+        /// <param name="divOneKendalTauDist">Initial value of the DivOneKendalTauDist property.</param>
+        /// <param name="divTwoKendalTauDist">Initial value of the DivTwoKendalTauDist property.</param>
+        /// <param name="tc3_DivOneKendalTauDist">Initial value of the Tc3_DivOneKendalTauDist property.</param>
+        /// <param name="tc3_DivTwoKendalTauDist">Initial value of the Tc3_DivTwoKendalTauDist property.</param>
+        public static Round CreateRound(global::System.Int32 id, global::System.String name, global::System.DateTime date, global::System.Int32 divOneCodersCount, global::System.Int32 divTwoCodersCount, global::System.Double divOneCompetitionFactor, global::System.Double divTwoCompetitionFactor, global::System.Int32 globalCodersCount, global::System.Double globalRatingsMean, global::System.Double globalRatingsDeviation, global::System.Double divOneRatingsMean, global::System.Double divTwoRatingsMean, global::System.Double divOneRatingsDeviation, global::System.Double divTwoRatingsDeviation, global::System.Double divOneTcRatingsDiffMean, global::System.Double divTwoTcRatingsDiffMean, global::System.Double divOneTcVolatilityDiffMean, global::System.Double divTwoTcVolatilityDiffMean, global::System.Int32 newRatingsDiffSum, global::System.Double divOneKendalTauDist, global::System.Double divTwoKendalTauDist, global::System.Double tc3_DivOneKendalTauDist, global::System.Double tc3_DivTwoKendalTauDist)
         {
             Round round = new Round();
             round.Id = id;
@@ -605,11 +682,14 @@ namespace TopCoder.Analysis.Data
             round.DivOneTcVolatilityDiffMean = divOneTcVolatilityDiffMean;
             round.DivTwoTcVolatilityDiffMean = divTwoTcVolatilityDiffMean;
             round.NewRatingsDiffSum = newRatingsDiffSum;
+            round.DivOneKendalTauDist = divOneKendalTauDist;
+            round.DivTwoKendalTauDist = divTwoKendalTauDist;
+            round.Tc3_DivOneKendalTauDist = tc3_DivOneKendalTauDist;
+            round.Tc3_DivTwoKendalTauDist = tc3_DivTwoKendalTauDist;
             return round;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1070,9 +1150,104 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _NewRatingsDiffSum;
         partial void OnNewRatingsDiffSumChanging(global::System.Int32 value);
         partial void OnNewRatingsDiffSumChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivOneKendalTauDist
+        {
+            get
+            {
+                return _DivOneKendalTauDist;
+            }
+            set
+            {
+                OnDivOneKendalTauDistChanging(value);
+                ReportPropertyChanging("DivOneKendalTauDist");
+                _DivOneKendalTauDist = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivOneKendalTauDist");
+                OnDivOneKendalTauDistChanged();
+            }
+        }
+        private global::System.Double _DivOneKendalTauDist;
+        partial void OnDivOneKendalTauDistChanging(global::System.Double value);
+        partial void OnDivOneKendalTauDistChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double DivTwoKendalTauDist
+        {
+            get
+            {
+                return _DivTwoKendalTauDist;
+            }
+            set
+            {
+                OnDivTwoKendalTauDistChanging(value);
+                ReportPropertyChanging("DivTwoKendalTauDist");
+                _DivTwoKendalTauDist = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivTwoKendalTauDist");
+                OnDivTwoKendalTauDistChanged();
+            }
+        }
+        private global::System.Double _DivTwoKendalTauDist;
+        partial void OnDivTwoKendalTauDistChanging(global::System.Double value);
+        partial void OnDivTwoKendalTauDistChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc3_DivOneKendalTauDist
+        {
+            get
+            {
+                return _Tc3_DivOneKendalTauDist;
+            }
+            set
+            {
+                OnTc3_DivOneKendalTauDistChanging(value);
+                ReportPropertyChanging("Tc3_DivOneKendalTauDist");
+                _Tc3_DivOneKendalTauDist = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_DivOneKendalTauDist");
+                OnTc3_DivOneKendalTauDistChanged();
+            }
+        }
+        private global::System.Double _Tc3_DivOneKendalTauDist;
+        partial void OnTc3_DivOneKendalTauDistChanging(global::System.Double value);
+        partial void OnTc3_DivOneKendalTauDistChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc3_DivTwoKendalTauDist
+        {
+            get
+            {
+                return _Tc3_DivTwoKendalTauDist;
+            }
+            set
+            {
+                OnTc3_DivTwoKendalTauDistChanging(value);
+                ReportPropertyChanging("Tc3_DivTwoKendalTauDist");
+                _Tc3_DivTwoKendalTauDist = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_DivTwoKendalTauDist");
+                OnTc3_DivTwoKendalTauDistChanged();
+            }
+        }
+        private global::System.Double _Tc3_DivTwoKendalTauDist;
+        partial void OnTc3_DivTwoKendalTauDistChanging(global::System.Double value);
+        partial void OnTc3_DivTwoKendalTauDistChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1143,7 +1318,6 @@ namespace TopCoder.Analysis.Data
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1184,7 +1358,12 @@ namespace TopCoder.Analysis.Data
         /// <param name="tc2_OldVolatility">Initial value of the Tc2_OldVolatility property.</param>
         /// <param name="tc2_NewVolatility">Initial value of the Tc2_NewVolatility property.</param>
         /// <param name="tc2_NumberOfRatings">Initial value of the Tc2_NumberOfRatings property.</param>
-        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Double points, global::System.Boolean isRated, global::System.Int32 numberOfRatings, global::System.Double tc_Weight, global::System.Double tc_ExpectedRank, global::System.Int32 oldRating, global::System.Int32 newRating, global::System.Int32 oldVolatility, global::System.Int32 newVolatility, global::System.Int32 divisionPlace, global::System.Double tc_ActualRank, global::System.Double tc_ExpectedPerf, global::System.Double tc_ActualPerf, global::System.Double tc_Cap, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Double tc_KFactor, global::System.Int32 tc2_OldRating, global::System.Int32 tc2_NewRating, global::System.Int32 tc2_OldVolatility, global::System.Int32 tc2_NewVolatility, global::System.Int32 tc2_NumberOfRatings)
+        /// <param name="tc3_OldRating">Initial value of the Tc3_OldRating property.</param>
+        /// <param name="tc3_NewRating">Initial value of the Tc3_NewRating property.</param>
+        /// <param name="tc3_OldVolatility">Initial value of the Tc3_OldVolatility property.</param>
+        /// <param name="tc3_NewVolatility">Initial value of the Tc3_NewVolatility property.</param>
+        /// <param name="tc3_ExpectedRank">Initial value of the Tc3_ExpectedRank property.</param>
+        public static RoundResult CreateRoundResult(global::System.Int32 roundId, global::System.Int32 coderId, global::System.Int32 division, global::System.Double points, global::System.Boolean isRated, global::System.Int32 numberOfRatings, global::System.Double tc_Weight, global::System.Double tc_ExpectedRank, global::System.Int32 oldRating, global::System.Int32 newRating, global::System.Int32 oldVolatility, global::System.Int32 newVolatility, global::System.Int32 divisionPlace, global::System.Double tc_ActualRank, global::System.Double tc_ExpectedPerf, global::System.Double tc_ActualPerf, global::System.Double tc_Cap, global::System.Int32 tc_NewRating, global::System.Int32 tc_NewVolatility, global::System.Double tc_KFactor, global::System.Int32 tc2_OldRating, global::System.Int32 tc2_NewRating, global::System.Int32 tc2_OldVolatility, global::System.Int32 tc2_NewVolatility, global::System.Int32 tc2_NumberOfRatings, global::System.Int32 tc3_OldRating, global::System.Int32 tc3_NewRating, global::System.Int32 tc3_OldVolatility, global::System.Int32 tc3_NewVolatility, global::System.Double tc3_ExpectedRank)
         {
             RoundResult roundResult = new RoundResult();
             roundResult.RoundId = roundId;
@@ -1212,11 +1391,15 @@ namespace TopCoder.Analysis.Data
             roundResult.Tc2_OldVolatility = tc2_OldVolatility;
             roundResult.Tc2_NewVolatility = tc2_NewVolatility;
             roundResult.Tc2_NumberOfRatings = tc2_NumberOfRatings;
+            roundResult.Tc3_OldRating = tc3_OldRating;
+            roundResult.Tc3_NewRating = tc3_NewRating;
+            roundResult.Tc3_OldVolatility = tc3_OldVolatility;
+            roundResult.Tc3_NewVolatility = tc3_NewVolatility;
+            roundResult.Tc3_ExpectedRank = tc3_ExpectedRank;
             return roundResult;
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1824,9 +2007,128 @@ namespace TopCoder.Analysis.Data
         private global::System.Int32 _Tc2_NumberOfRatings;
         partial void OnTc2_NumberOfRatingsChanging(global::System.Int32 value);
         partial void OnTc2_NumberOfRatingsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_OldRating
+        {
+            get
+            {
+                return _Tc3_OldRating;
+            }
+            set
+            {
+                OnTc3_OldRatingChanging(value);
+                ReportPropertyChanging("Tc3_OldRating");
+                _Tc3_OldRating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_OldRating");
+                OnTc3_OldRatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_OldRating;
+        partial void OnTc3_OldRatingChanging(global::System.Int32 value);
+        partial void OnTc3_OldRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_NewRating
+        {
+            get
+            {
+                return _Tc3_NewRating;
+            }
+            set
+            {
+                OnTc3_NewRatingChanging(value);
+                ReportPropertyChanging("Tc3_NewRating");
+                _Tc3_NewRating = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_NewRating");
+                OnTc3_NewRatingChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_NewRating;
+        partial void OnTc3_NewRatingChanging(global::System.Int32 value);
+        partial void OnTc3_NewRatingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_OldVolatility
+        {
+            get
+            {
+                return _Tc3_OldVolatility;
+            }
+            set
+            {
+                OnTc3_OldVolatilityChanging(value);
+                ReportPropertyChanging("Tc3_OldVolatility");
+                _Tc3_OldVolatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_OldVolatility");
+                OnTc3_OldVolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_OldVolatility;
+        partial void OnTc3_OldVolatilityChanging(global::System.Int32 value);
+        partial void OnTc3_OldVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Tc3_NewVolatility
+        {
+            get
+            {
+                return _Tc3_NewVolatility;
+            }
+            set
+            {
+                OnTc3_NewVolatilityChanging(value);
+                ReportPropertyChanging("Tc3_NewVolatility");
+                _Tc3_NewVolatility = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_NewVolatility");
+                OnTc3_NewVolatilityChanged();
+            }
+        }
+        private global::System.Int32 _Tc3_NewVolatility;
+        partial void OnTc3_NewVolatilityChanging(global::System.Int32 value);
+        partial void OnTc3_NewVolatilityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Tc3_ExpectedRank
+        {
+            get
+            {
+                return _Tc3_ExpectedRank;
+            }
+            set
+            {
+                OnTc3_ExpectedRankChanging(value);
+                ReportPropertyChanging("Tc3_ExpectedRank");
+                _Tc3_ExpectedRank = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Tc3_ExpectedRank");
+                OnTc3_ExpectedRankChanged();
+            }
+        }
+        private global::System.Double _Tc3_ExpectedRank;
+        partial void OnTc3_ExpectedRankChanging(global::System.Double value);
+        partial void OnTc3_ExpectedRankChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1907,10 +2209,8 @@ namespace TopCoder.Analysis.Data
         }
 
         #endregion
-
     }
 
     #endregion
-
     
 }
