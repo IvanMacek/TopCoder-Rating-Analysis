@@ -188,9 +188,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TopCoder.Analysis.Data\TopCoder.Analysis.Data.csproj">
       <Project>{6EDFAAF5-5115-4381-AE84-86F1B91F91AD}</Project>
       <Name>TopCoder.Analysis.Data</Name>
